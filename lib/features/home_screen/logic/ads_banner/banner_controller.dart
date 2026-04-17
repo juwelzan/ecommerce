@@ -5,6 +5,7 @@ import 'package:ecommerce/shared/path/paths.dart';
 class BannerController with ChangeNotifier {
   int bannerIndex = 0;
   int index = 0;
+
   PageController pageController = PageController();
 
   List<Widget> banner = <Widget>[];
