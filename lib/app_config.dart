@@ -1,5 +1,5 @@
-import 'package:ecommerce/core/router/app_route.dart';
-import 'package:ecommerce/core/themes/logic/theme_controller.dart';
+
+
 import 'package:ecommerce/shared/path/paths.dart';
 
 class AppConfig extends StatelessWidget {

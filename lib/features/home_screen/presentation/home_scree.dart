@@ -27,6 +27,11 @@ class _HomeScreeState extends State<HomeScreen>
 
     super.initState();
   }
+NetworkCaller networkCaller = NetworkCaller(
+  headers: {
+    "Content-Type": "application/json",
+  },
+);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +49,9 @@ class _HomeScreeState extends State<HomeScreen>
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              networkCaller.get(url: "https://ecom-rs8e.onrender.com/api//products", unauthorized: (){});
+            },
             icon: Image.asset(
               Asset.appbarPhone,
               width: 27.w,
