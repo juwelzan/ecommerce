@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ecommerce/features/home_screen/model/banner_model.dart';
 import 'package:ecommerce/shared/path/paths.dart';
 
 class BannerController with ChangeNotifier {
@@ -8,7 +10,22 @@ class BannerController with ChangeNotifier {
 
   PageController pageController = PageController();
 
-  List<Widget> banner = <Widget>[];
+  List<Widget> banner = List.generate(BannerOfList.banner.length, (index) {
+    return Container(
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.r)),
+      child: ClipRRect(
+        borderRadius: .circular(15.r),
+        child: Image.network(
+
+          fit: BoxFit.cover,
+          height: 150.h,
+          width: double.infinity,
+           BannerOfList.banner[index].imgUrl.toString(),
+
+        ),
+      ),
+    );
+  });
 
   Timer? timer;
   void autoScrollBanner() {
@@ -23,7 +40,7 @@ class BannerController with ChangeNotifier {
         duration: Duration(milliseconds: 1000),
         curve: Curves.ease,
       );
-      index = (bannerIndex % 4);
+      index = (bannerIndex % BannerOfList.banner.length);
 
       notifyListeners();
     });
@@ -34,7 +51,8 @@ class BannerController with ChangeNotifier {
     autoScrollBanner();
     bannerIndex = inde;
 
-    index = (inde % 4);
+    index = (inde % BannerOfList.banner.length);
+
 
     notifyListeners();
   }

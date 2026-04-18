@@ -1,5 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce/features/home_screen/logic/ads_banner/banner_controller.dart';
 import 'package:ecommerce/shared/path/paths.dart';
+
+import '../model/banner_model.dart';
 
 class AdsBanner extends StatelessWidget {
   const AdsBanner({super.key});
@@ -11,22 +14,23 @@ class AdsBanner extends StatelessWidget {
         SizedBox(
           height: 150.h,
           width: double.infinity,
-          child: PageView.builder(
-            physics: ClampingScrollPhysics(),
-            controller: context.read<BannerController>().pageController,
-            onPageChanged: (value) =>
-                context.read<BannerController>().update(value),
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: EdgeInsets.only(left: 10.w, right: 10.w),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: context.theme.primaryColor,
-                    borderRadius: BorderRadius.circular(15.r),
-                  ),
-                ),
+          child: Consumer<BannerController>(
+
+            builder: (context, state,_) {
+              return PageView.builder(
+                physics: ClampingScrollPhysics(),
+                controller: context.read<BannerController>().pageController,
+                onPageChanged: (value) =>
+                    context.read<BannerController>().update(value),
+                itemBuilder: (context, index) {
+
+                  return Padding(
+                    padding: EdgeInsets.only(left: 10.w, right: 10.w),
+                    child: state.banner[index % BannerOfList.banner.length],
+                  );
+                },
               );
-            },
+            }
           ),
         ),
         Gap(h: 5.h),

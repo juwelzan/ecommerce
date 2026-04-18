@@ -17,7 +17,7 @@ class NetworkCaller {
       final uri = Uri.parse(url);
       final http.Response response = await http.get(uri, headers: headers);
       final int status = response.statusCode;
-      LoggerLog.logI(response.body);
+      // LoggerLog.logI(response.body);
 
 
       if (status == 200 || status == 201) {
