@@ -1,7 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ecommerce/shared/model/category_model.dart';
 import 'package:ecommerce/shared/path/paths.dart';
 
 class CategorieWidget extends StatelessWidget {
-  const CategorieWidget({super.key});
+  final CategoryModel data;
+  const CategorieWidget({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +19,17 @@ class CategorieWidget extends StatelessWidget {
                 color: context.theme.secondaryHeaderColor,
                 borderRadius: BorderRadius.circular(10.r),
               ),
-              child: Image.asset(
-                Asset.navbWish,
+              child: CachedNetworkImage(
+                imageUrl: data.icon!,
                 width: 45.w,
                 color: context.theme.primaryColor,
+                fit: .cover,
+                errorWidget: (context, url, error) =>
+                    Center(child: Icon(Icons.error)),
               ),
             ),
           ),
-          Text("Electronic 112", style: context.textTheme.titleSmall),
+          Text("${data.title}", style: context.textTheme.titleSmall),
         ],
       ),
     );

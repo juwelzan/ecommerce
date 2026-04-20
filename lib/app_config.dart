@@ -1,8 +1,7 @@
-
-
+import 'package:ecommerce/core/di/dependency_injection.dart';
+import 'package:ecommerce/features/home_screen/data/ads_danner_data.dart';
+import 'package:ecommerce/shared/network_data/get_categories_data.dart';
 import 'package:ecommerce/shared/path/paths.dart';
-
-import 'features/home_screen/model/banner_model.dart';
 
 class AppConfig extends StatefulWidget {
   const AppConfig({super.key});
@@ -12,32 +11,36 @@ class AppConfig extends StatefulWidget {
 }
 
 class _AppConfigState extends State<AppConfig> {
-  NetworkCaller networkCaller = NetworkCaller(headers: {
-    "Content-Type": "application/json",
-  });
+  NetworkCaller networkCaller = NetworkCaller(
+    headers: {"Content-Type": "application/json"},
+  );
   @override
   void initState() {
     getBanner();
     super.initState();
+    getIt<GetCategoriesData>().getAllCategori();
   }
+
   void getBanner() async {
     final NetworkResponse response = await networkCaller.get(
-        url: Urls.getSlideList, unauthorized: () {});
-    BannerOfList.bannerSeparate(response.body);
-    LoggerLog.logI(BannerOfList.banner.length.toString());
+      url: Urls.getSlideList,
+      unauthorized: () {},
+    );
+    AdsBannerData.bannerSeparate(response.body);
+    LoggerLog.logI(AdsBannerData.bannerData.length.toString());
   }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeController>(
       builder: (context, state, _) {
-        return MaterialApp(
-          navigatorKey: AppRoute.navigatorKey,
+        return MaterialApp.router(
           debugShowCheckedModeBanner: false,
-          initialRoute: SplashScreen.name,
-          onGenerateRoute: AppRoute.route,
+
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: state.themeMode,
+          routerConfig: AppRoute.goRouter,
         );
       },
     );

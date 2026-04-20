@@ -1,4 +1,5 @@
 import 'package:ecommerce/features/cart_screen/ui/cart_screen.dart';
+import 'package:ecommerce/features/category_screen/ui/category_screen.dart';
 import 'package:ecommerce/features/home_screen/presentation/home_scree.dart';
 import 'package:ecommerce/features/review_screen/ui/review_screen.dart';
 import 'package:ecommerce/shared/path/paths.dart';
@@ -14,7 +15,7 @@ class NavbarController with ChangeNotifier {
 
   final List<Widget> page = <Widget>[
     HomeScreen(),
-    CartScreen(),
+    CategoryScreen(),
     CartScreen(),
 
     ReviewScreen(),

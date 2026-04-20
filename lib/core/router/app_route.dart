@@ -1,31 +1,32 @@
+import 'package:ecommerce/features/home_screen/presentation/home_scree.dart';
 import 'package:ecommerce/shared/path/paths.dart';
+import 'package:go_router/go_router.dart';
 
 class AppRoute {
-  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-  static Route<dynamic> route(RouteSettings routers) {
-    Route route = fadeTransition(SizedBox());
-    switch (routers.name) {
-      case SplashScreen.name:
-        route = slideTransition(SplashScreen());
-
-      case MainScreen.name:
-        route = slideTransition(MainScreen());
-    }
-
-    return route;
-  }
-
-  static void push(String routeName) =>
-      navigatorKey.currentState?.pushNamed(routeName);
-
-  static void pushReplace(String routeName) => navigatorKey.currentState
-      ?.restorablePushNamedAndRemoveUntil(routeName, (route) => false);
-  static void pop(String routeName) => navigatorKey.currentState?.pop();
+  AppRoute._();
+  static GoRouter goRouter = GoRouter(
+    initialLocation: SplashScreen.name,
+    routes: [
+      GoRoute(
+        path: HomeScreen.name,
+        pageBuilder: (context, state) => fadeTransition(HomeScreen()),
+      ),
+      GoRoute(
+        path: SplashScreen.name,
+        pageBuilder: (context, state) => fadeTransition(SplashScreen()),
+      ),
+      GoRoute(
+        path: MainScreen.name,
+        pageBuilder: (context, state) => fadeTransition(MainScreen()),
+      ),
+    ],
+  );
 }
 
-Route slideTransition(Widget page) => PageRouteBuilder(
+dynamic slideTransition(Widget page) => CustomTransitionPage(
+  child: page,
   transitionDuration: Duration(milliseconds: 500),
-  pageBuilder: (context, animation, secondaryAnimation) => page,
+
   transitionsBuilder: (context, animation, secondaryAnimation, child) {
     final slide = Tween(
       begin: Offset(0, 1),
@@ -35,9 +36,10 @@ Route slideTransition(Widget page) => PageRouteBuilder(
   },
 );
 
-Route fadeTransition(Widget page) => PageRouteBuilder(
+dynamic fadeTransition(Widget page) => CustomTransitionPage(
+  child: page,
   transitionDuration: Duration(milliseconds: 500),
-  pageBuilder: (context, animation, secondaryAnimation) => page,
+
   transitionsBuilder: (context, animation, secondaryAnimation, child) {
     final fade = Tween(begin: 0.0, end: 1.0).animate(animation);
     return FadeTransition(opacity: fade, child: child);

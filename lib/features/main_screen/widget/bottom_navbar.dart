@@ -9,42 +9,50 @@ class BottomNavbar extends StatelessWidget {
       builder: (context, state, child) {
         return Container(
           height: 65.h,
-          padding: EdgeInsets.all(10.f),
+          width: double.infinity,
           decoration: BoxDecoration(
-            color: context.theme.primaryColorDark,
-            borderRadius: BorderRadius.circular(18.r),
+            color: Color(0xFFFAFAFA),
+            borderRadius: BorderRadius.circular(25),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              navBarIcon(
-                context,
-                img: Asset.navbHome,
-                isActive: state.pageIndex == 0,
-                screenIndex: 0,
-              ),
+          child: Container(
+            height: 65.h,
+            padding: EdgeInsets.all(10.f),
+            decoration: BoxDecoration(
+              color: Colors.deepPurple.withOpacity(0.6),
+              borderRadius: BorderRadius.circular(25),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                navBarIcon(
+                  context,
+                  img: Asset.navbHome,
+                  isActive: state.pageIndex == 0,
+                  screenIndex: 0,
+                ),
 
-              navBarIcon(
-                context,
-                img: Asset.navbCategory,
-                isActive: state.pageIndex == 1,
-                screenIndex: 1,
-              ),
+                navBarIcon(
+                  context,
+                  img: Asset.navbCategory,
+                  isActive: state.pageIndex == 1,
+                  screenIndex: 1,
+                ),
 
-              navBarIcon(
-                context,
-                img: Asset.navbCart,
-                isActive: state.pageIndex == 2,
-                screenIndex: 2,
-              ),
+                navBarIcon(
+                  context,
+                  img: Asset.navbCart,
+                  isActive: state.pageIndex == 2,
+                  screenIndex: 2,
+                ),
 
-              navBarIcon(
-                context,
-                img: Asset.navbWish,
-                isActive: state.pageIndex == 3,
-                screenIndex: 3,
-              ),
-            ],
+                navBarIcon(
+                  context,
+                  img: Asset.navbWish,
+                  isActive: state.pageIndex == 3,
+                  screenIndex: 3,
+                ),
+              ],
+            ),
           ),
         );
       },

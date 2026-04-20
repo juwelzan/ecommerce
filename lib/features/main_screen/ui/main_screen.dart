@@ -18,6 +18,31 @@ class _MainScreenState extends State<MainScreen> {
           return Stack(
             children: [
               Positioned.fill(
+                child: Container(
+                  decoration: BoxDecoration(color: Color(0xFFFAFAFA)),
+                  child: Column(
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        height: 600,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.deepPurple.withOpacity(0.7),
+                              Colors.deepPurple.withOpacity(0.4),
+                              Colors.deepPurple.withOpacity(0),
+                            ],
+                            begin: AlignmentGeometry.topCenter,
+                            end: AlignmentGeometry.bottomCenter,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              Positioned.fill(
                 child: PageView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: state.page.length,
@@ -29,13 +54,12 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               ),
 
-              if (state.pageIndex != 2)
-                Positioned(
-                  left: 10.w,
-                  right: 10.w,
-                  bottom: 25.h,
-                  child: BottomNavbar(),
-                ),
+              Positioned(
+                left: 10.w,
+                right: 10.w,
+                bottom: 25.h,
+                child: BottomNavbar(),
+              ),
             ],
           );
         },

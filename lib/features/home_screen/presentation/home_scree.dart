@@ -1,16 +1,17 @@
+import 'package:ecommerce/core/di/dependency_injection.dart';
 import 'package:ecommerce/core/package/gap/sliver_gap.dart';
-import 'package:ecommerce/features/home_screen/logic/ads_banner/banner_controller.dart';
+import 'package:ecommerce/features/home_screen/provider/ads_banner_provider.dart';
 import 'package:ecommerce/features/home_screen/widgets/ads_banner.dart';
 import 'package:ecommerce/features/home_screen/widgets/all_categories.dart';
 import 'package:ecommerce/features/home_screen/widgets/product_section.dart';
 import 'package:ecommerce/features/home_screen/widgets/search_field.dart';
 import 'package:ecommerce/features/home_screen/widgets/title_name.dart';
+import 'package:ecommerce/shared/network_data/get_categories_data.dart';
 import 'package:ecommerce/shared/path/paths.dart';
-import 'package:flutter_svg/svg.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-  static const String name = "HomeScreen";
+  static const String name = "/HomeScreen";
   @override
   State<HomeScreen> createState() => _HomeScreeState();
 }
@@ -22,22 +23,24 @@ class _HomeScreeState extends State<HomeScreen>
   @override
   void initState() {
     Future.microtask(() {
-      context.read<BannerController>().autoScrollBanner();
+      context.read<AdsBannerProvider>().autoScrollBanner();
     });
 
     super.initState();
   }
-NetworkCaller networkCaller = NetworkCaller(
-  headers: {
-    "Content-Type": "application/json",
-  },
-);
 
+  NetworkCaller networkCaller = NetworkCaller(
+    headers: {"Content-Type": "application/json"},
+  );
+  final getCategori = getIt<GetCategoriesData>();
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         title: SvgPicture.asset(Asset.navLogoSVG, width: 140.w),
         actions: [
           IconButton(
@@ -50,7 +53,10 @@ NetworkCaller networkCaller = NetworkCaller(
           ),
           IconButton(
             onPressed: () {
-              networkCaller.get(url: "https://ecom-rs8e.onrender.com/api//products", unauthorized: (){});
+              networkCaller.get(
+                url: "https://ecom-rs8e.onrender.com/api//products",
+                unauthorized: () {},
+              );
             },
             icon: Image.asset(
               Asset.appbarPhone,

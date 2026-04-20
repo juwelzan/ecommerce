@@ -1,4 +1,3 @@
-
 import 'package:ecommerce/shared/path/paths.dart';
 
 class CartScreen extends StatefulWidget {
@@ -22,7 +21,9 @@ class _CartScreenState extends State<CartScreen>
         context.read<NavbarController>().nextScreen(0);
       },
       child: Scaffold(
+        backgroundColor: Colors.transparent,
         appBar: AppBar(
+          backgroundColor: Colors.transparent,
           leadingWidth: 100.w,
           leading: Row(
             children: [

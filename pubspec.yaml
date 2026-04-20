@@ -42,6 +42,8 @@ dependencies:
   http: ^1.6.0
   logger:
   cached_network_image:
+  go_router: ^17.2.1
+  get_it: ^9.2.1
 
 dev_dependencies:
   flutter_test:
