@@ -1,13 +1,12 @@
+import 'package:ecommerce/core/di/dependency_injection.dart';
 import 'package:ecommerce/shared/model/category_model.dart';
 import 'package:ecommerce/shared/path/paths.dart';
 
 class GetCategoriesData {
-  NetworkCaller networkCaller = NetworkCaller(
-    headers: {"Content-Type": "application/json"},
-  );
+  final controller = getIt<NetworkCaller>();
   final List<CategoryModel> allCategory = <CategoryModel>[];
   Future<void> getAllCategori() async {
-    final decodeData = await networkCaller.get(
+    final decodeData = await controller.get(
       url: Urls.getCategories,
       unauthorized: () {},
     );

@@ -1,10 +1,9 @@
 part of 'network_caller.dart';
 
-
 class NetworkResponse {
   final int statusCode;
   final bool isSuccess;
-  final dynamic  body;
+  final dynamic body;
   final String? errrorM;
   NetworkResponse({
     required this.statusCode,
@@ -12,4 +11,6 @@ class NetworkResponse {
     this.body,
     this.errrorM,
   });
+
+  void operator [](String other) {}
 }

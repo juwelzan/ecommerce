@@ -1,5 +1,5 @@
-import 'package:ecommerce/features/product/widget/prodact_widget.dart';
 import 'package:ecommerce/shared/path/paths.dart';
+import 'package:ecommerce/shared/widget/prodact_widget.dart';
 
 class ProductSection extends StatelessWidget {
   const ProductSection({super.key});
