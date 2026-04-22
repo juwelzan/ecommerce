@@ -1,6 +1,7 @@
 import 'package:ecommerce/core/di/dependency_injection.dart';
 import 'package:ecommerce/features/home_screen/data/ads_danner_data.dart';
 import 'package:ecommerce/shared/network_data/get_categories_data.dart';
+import 'package:ecommerce/shared/network_data/get_product_data.dart';
 import 'package:ecommerce/shared/path/paths.dart';
 
 class AppConfig extends StatefulWidget {
@@ -19,6 +20,7 @@ class _AppConfigState extends State<AppConfig> {
     getBanner();
     super.initState();
     getIt<GetCategoriesData>().getAllCategori();
+    getIt<GetProductData>().getProduct();
   }
 
   void getBanner() async {

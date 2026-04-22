@@ -6,13 +6,11 @@ class ProductDetails {
       description,
       createdAt,
       updatedAt,
-      regularprice,
-      currentprice,
-      photo,
-      quantity;
+      photo;
 
   final Categories? categories;
   final Brand? brand;
+  final int? regularprice, currentprice, quantity;
 
   ProductDetails({
     this.id,

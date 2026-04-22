@@ -1,30 +1,28 @@
 class ProductModel {
-  final String? id, title, regularprice, currentprice, photo, quantity;
+  final String? id, title, slug, photo;
+  final int? regularprice, currentprice, quantity;
 
   ProductModel({
     this.id,
     this.title,
-
     this.regularprice,
     this.currentprice,
     this.quantity,
-
     this.photo,
+    this.slug,
   });
 
   factory ProductModel.formJson(Map<String, dynamic> json) {
-    final photo = json['photos']!;
+    final photo = List.from(json['photos']!);
+
     return ProductModel(
       id: json['_id'],
-
       currentprice: json['current_price'],
-
       quantity: json['quantity'],
       regularprice: json['regular_price'],
-
       title: json['title'],
-
-      photo: photo[0],
+      photo: photo.isEmpty ? null : photo.first,
+      slug: json['slug'],
     );
   }
 }

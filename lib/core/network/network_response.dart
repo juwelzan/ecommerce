@@ -11,6 +11,4 @@ class NetworkResponse {
     this.body,
     this.errrorM,
   });
-
-  void operator [](String other) {}
 }
