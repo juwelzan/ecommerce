@@ -11,7 +11,7 @@ class NavbarController with ChangeNotifier {
   int pageIndex = 0;
 
   void nextScreen(int pagendex) {
-    pageController.jumpToPage(pagendex);
+    _page(pagendex);
     pageIndex = pagendex;
     if (pagendex == 0) {
       pageRoute.clear();
@@ -20,6 +20,7 @@ class NavbarController with ChangeNotifier {
       pageRoute.add(pagendex);
     }
     lastpage = pagendex;
+    LoggerLog.logI("$pageRoute");
     notifyListeners();
   }
 
@@ -35,12 +36,21 @@ class NavbarController with ChangeNotifier {
     notifyListeners();
   }
 
+  void _page(int i) {
+    pageController.jumpToPage(i);
+  }
+
   void back() {
     if (lastpage != null && lastpage == pageRoute.last) {
       pageRoute.removeLast();
-      nextScreen(pageRoute.last);
-      lastpage = pageRoute.last;
+      pageRoute.isEmpty ? _page(0) : _page(pageRoute.last);
+      if (pageRoute.isEmpty) {
+        pageRoute.add(0);
+      } else {
+        lastpage = pageRoute.last;
+      }
     }
+    LoggerLog.logI("$pageRoute");
     notifyListeners();
   }
 }
