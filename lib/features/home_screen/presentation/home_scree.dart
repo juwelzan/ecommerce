@@ -1,6 +1,5 @@
 import 'package:ecommerce/core/di/dependency_injection.dart';
 import 'package:ecommerce/core/package/gap/sliver_gap.dart';
-import 'package:ecommerce/features/home_screen/provider/ads_banner_provider.dart';
 import 'package:ecommerce/features/home_screen/widgets/ads_banner.dart';
 import 'package:ecommerce/features/home_screen/widgets/all_categories.dart';
 import 'package:ecommerce/features/home_screen/widgets/product_section.dart';
@@ -22,16 +21,11 @@ class _HomeScreeState extends State<HomeScreen>
   bool get wantKeepAlive => true;
   @override
   void initState() {
-    Future.microtask(() {
-      context.read<AdsBannerProvider>().autoScrollBanner();
-    });
+    Future.microtask(() {});
 
     super.initState();
   }
 
-  NetworkCaller networkCaller = NetworkCaller(
-    headers: {"Content-Type": "application/json"},
-  );
   final getCategori = getIt<GetCategoriesData>();
   @override
   Widget build(BuildContext context) {
@@ -52,12 +46,7 @@ class _HomeScreeState extends State<HomeScreen>
             ),
           ),
           IconButton(
-            onPressed: () {
-              networkCaller.get(
-                url: "https://ecom-rs8e.onrender.com/api//products",
-                unauthorized: () {},
-              );
-            },
+            onPressed: () {},
             icon: Image.asset(
               Asset.appbarPhone,
               width: 27.w,
@@ -89,7 +78,15 @@ class _HomeScreeState extends State<HomeScreen>
             ),
           ),
           SliverGap(h: 10.h),
-          SliverToBoxAdapter(child: RepaintBoundary(child: TitleName())),
+          SliverToBoxAdapter(
+            child: RepaintBoundary(
+              child: TitleName(
+                onTap: () {
+                  context.read<NavbarController>().nextScreen(1);
+                },
+              ),
+            ),
+          ),
           SliverGap(h: 10.h),
 
           AllCategories(),

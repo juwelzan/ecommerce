@@ -16,10 +16,8 @@ class _CartScreenState extends State<CartScreen>
     super.build(context);
     return PopScope(
       canPop: false,
-      onPopInvokedWithResult: (didPop, result) {
-        print(result);
-        context.read<NavbarController>().nextScreen(0);
-      },
+      onPopInvokedWithResult: (didPop, result) =>
+          context.read<NavbarController>().back(),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(

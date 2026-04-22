@@ -5,6 +5,11 @@ class ReviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) =>
+          context.read<NavbarController>().back(),
+      child: Scaffold(),
+    );
   }
 }

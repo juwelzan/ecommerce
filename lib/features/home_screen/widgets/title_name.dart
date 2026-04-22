@@ -1,7 +1,9 @@
 import 'package:ecommerce/shared/path/paths.dart';
 
 class TitleName extends StatelessWidget {
-  const TitleName({super.key});
+  final String? title;
+  final VoidCallback? onTap;
+  const TitleName({super.key, this.title, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -12,14 +14,11 @@ class TitleName extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           RepaintBoundary(
-            child: Text(
-              "All Categories",
-              style: context.textTheme.headlineLarge,
-            ),
+            child: Text("$title", style: context.textTheme.headlineLarge),
           ),
           RepaintBoundary(
             child: TextButton(
-              onPressed: () {},
+              onPressed: onTap,
               child: Text("See All", style: context.textTheme.headlineMedium),
             ),
           ),

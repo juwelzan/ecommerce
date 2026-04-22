@@ -13,11 +13,14 @@ class AllCategories extends StatelessWidget {
         height: 100.h,
         child: RepaintBoundary(
           child: ListView.builder(
-            itemCount: 5,
+            itemCount: getCategori.allCategory.length > 10
+                ? 10
+                : getCategori.allCategory.length,
             physics: BouncingScrollPhysics(),
             scrollDirection: .horizontal,
             itemBuilder: (context, index) {
               final data = getCategori.allCategory;
+
               return CategorieWidget(data: data[index]);
             },
           ),

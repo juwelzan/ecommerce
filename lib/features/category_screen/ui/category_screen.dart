@@ -8,16 +8,21 @@ class CategoryScreen extends StatelessWidget {
   final controller = getIt<GetCategoriesData>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: GridView.builder(
-        itemCount: controller.allCategory.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) =>
+          context.read<NavbarController>().back(),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: GridView.builder(
+          itemCount: controller.allCategory.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+          ),
+          itemBuilder: (context, index) {
+            return CategorieWidget(data: controller.allCategory[index]);
+          },
         ),
-        itemBuilder: (context, index) {
-          return CategorieWidget(data: controller.allCategory[index]);
-        },
       ),
     );
   }
