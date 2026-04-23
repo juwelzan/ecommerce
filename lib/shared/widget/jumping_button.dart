@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class JumpingButton extends StatefulWidget {
-  final double? height, width, verticalPadding, horizontalPaddinng;
+  final double? height, width;
   final BorderRadiusGeometry? borderRadius;
-  final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? margin, padding;
   final BoxBorder? border;
   final List<BoxShadow>? boxShadow;
   final Color? color;
@@ -21,8 +21,7 @@ class JumpingButton extends StatefulWidget {
     this.height,
     this.width,
     this.borderRadius,
-    this.verticalPadding,
-    this.horizontalPaddinng,
+
     this.border,
     this.boxShadow,
     this.color,
@@ -33,6 +32,7 @@ class JumpingButton extends StatefulWidget {
     this.onTap,
     this.margin,
     this.isLoding = false,
+    this.padding,
   });
 
   @override
@@ -64,35 +64,39 @@ class _JumpingButtonState extends State<JumpingButton> {
             child: AnimatedOpacity(
               duration: Duration(milliseconds: 100),
               opacity: isClick ? 0.3 : 1,
-              child: widget.isLoding
-                  ? Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Lottie.asset(Asset.lottieLoading, width: 30),
-                    )
-                  : child,
+              child: child,
             ),
           );
         },
 
-        child: Container(
-          height: widget.height,
-          width: widget.width,
-          margin: widget.margin ?? .all(7),
-          padding: EdgeInsets.symmetric(
-            horizontal: widget.horizontalPaddinng ?? 18,
-            vertical: widget.verticalPadding ?? 8,
-          ),
-          decoration: BoxDecoration(
-            color: widget.color ?? Colors.deepPurple,
-            borderRadius: widget.borderRadius ?? BorderRadius.circular(10),
-            border: widget.border,
-            boxShadow: widget.boxShadow,
-            gradient: widget.gradient,
-          ),
-          child: childWidget(
-            child: widget.child,
-            label: widget.label,
-            style: widget.style,
+        child: SizedBox(
+          width: widget.width ?? MediaQuery.of(context).size.width,
+          height: widget.height ?? 65,
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 500),
+            height: widget.isLoding ? 60 : (widget.height ?? 60),
+            width: widget.isLoding
+                ? 60
+                : (widget.width ?? MediaQuery.of(context).size.width),
+            margin: widget.margin ?? const .all(7),
+            padding: widget.padding ?? const .all(10),
+            decoration: BoxDecoration(
+              color: widget.color ?? Colors.deepPurple,
+              borderRadius: widget.borderRadius ?? BorderRadius.circular(10),
+              border: widget.border,
+              boxShadow: widget.boxShadow,
+              gradient: widget.gradient,
+            ),
+            child: AnimatedSwitcher(
+              duration: Duration(milliseconds: 500),
+              child: widget.isLoding
+                  ? Lottie.asset(Asset.lottieLoading, width: 30)
+                  : childWidget(
+                      child: widget.child,
+                      label: widget.label,
+                      style: widget.style,
+                    ),
+            ),
           ),
         ),
       ),
@@ -102,21 +106,17 @@ class _JumpingButtonState extends State<JumpingButton> {
 
 Widget childWidget({String? label, Widget? child, TextStyle? style}) {
   if (label != null) {
-    return Center(
-      child: Text(
-        label,
-        textAlign: .center,
-        style: style ?? TextStyle(fontSize: 18, fontWeight: .bold),
-      ),
+    return Text(
+      label,
+      textAlign: .center,
+      style: style ?? TextStyle(fontSize: 18, fontWeight: .bold),
     );
   } else if (child != null) {
-    return Center(child: child);
+    return child;
   } else if (label != null && child != null) {
-    return Center(
-      child: Text(
-        label,
-        style: style ?? TextStyle(fontSize: 18, fontWeight: .bold),
-      ),
+    return Text(
+      label,
+      style: style ?? TextStyle(fontSize: 18, fontWeight: .bold),
     );
   }
 

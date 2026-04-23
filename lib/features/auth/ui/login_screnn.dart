@@ -11,6 +11,7 @@ class LoginScrenn extends StatefulWidget {
 
 class _LoginScrennState extends State<LoginScrenn> {
   ValueNotifier<bool> isShowPass = ValueNotifier<bool>(false);
+  ValueNotifier<bool> isShowPasslod = ValueNotifier<bool>(false);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,11 +59,18 @@ class _LoginScrennState extends State<LoginScrenn> {
                               },
                               width: 50,
                               height: 40,
-                              verticalPadding: 0,
-                              horizontalPaddinng: 0,
+                              padding: EdgeInsets.all(0),
                               color: Colors.transparent,
                               child: Center(
-                                child: Icon(Icons.visibility, size: 30),
+                                child: value
+                                    ? SvgPicture.asset(
+                                        Asset.visibilityOn,
+                                        width: 20,
+                                      )
+                                    : SvgPicture.asset(
+                                        Asset.visibilityOff,
+                                        width: 20,
+                                      ),
                               ),
                             ),
                           );
@@ -73,8 +81,7 @@ class _LoginScrennState extends State<LoginScrenn> {
                           JumpingButton(
                             label: "Forget Password",
                             color: Colors.transparent,
-                            verticalPadding: 0,
-                            horizontalPaddinng: 0,
+                            padding: .all(0),
                             style: TextStyle(),
                           ),
                         ],
@@ -82,15 +89,25 @@ class _LoginScrennState extends State<LoginScrenn> {
                     ],
                   ),
 
-                  JumpingButton(
-                    label: "Log In",
-                    width: double.infinity,
-                    height: 50,
-                    isLoding: false,
+                  ValueListenableBuilder(
+                    valueListenable: isShowPasslod,
+                    builder: (context, value, child) {
+                      return JumpingButton(
+                        label: "Log In",
+                        width: double.infinity,
+                        height: 50,
+                        isLoding: value,
+                        onTap: () {
+                          isShowPasslod.value = !isShowPasslod.value;
+                        },
+                      );
+                    },
                   ),
                 ],
               ),
             ),
+
+            SizedBox(height: 40),
           ],
         ),
       ),

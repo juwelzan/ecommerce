@@ -25,4 +25,6 @@ class Asset {
   static const String svgDelete = "assets/svg/trash.svg";
   static const String svgTaka = "assets/svg/bangladeshi-taka-sign.svg";
   static const String jpegAppleWhite = "assets/ios17/iphone-17-white918.jpeg";
+  static const String visibilityOn = "assets/svg/eye.svg";
+  static const String visibilityOff = "assets/svg/eye-crossed.svg";
 }
