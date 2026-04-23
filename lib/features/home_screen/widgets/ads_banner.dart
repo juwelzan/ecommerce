@@ -20,9 +20,19 @@ class AdsBanner extends StatelessWidget {
             itemBuilder: (context, index) {
               return Padding(
                 padding: EdgeInsets.only(left: 10.w, right: 10.w),
-                child: GestureDetector(
-                  child: AdsBannerData
-                      .bannerImge[index % AdsBannerData.bannerData.length],
+                child: Consumer<AdsBannerProvider>(
+                  builder: (context, state, child) {
+                    double defarench = (state.effectValue - index).abs();
+                    double scale = 1 - (defarench * 0.3);
+                    return Transform.scale(
+                      scale: scale.clamp(0.7, 1),
+                      child: GestureDetector(
+                        child:
+                            AdsBannerData.bannerImge[index %
+                                AdsBannerData.bannerData.length],
+                      ),
+                    );
+                  },
                 ),
               );
             },
@@ -63,7 +73,7 @@ class AdsBanner extends StatelessWidget {
                             children: [
                               TweenAnimationBuilder(
                                 tween: Tween<double>(begin: 0, end: 24.w),
-                                duration: Duration(seconds: 5),
+                                duration: Duration(milliseconds: 5100),
                                 builder: (context, value, child) {
                                   return Container(
                                     height: 10.h,

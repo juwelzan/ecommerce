@@ -7,6 +7,7 @@ class AdsBannerProvider extends ChangeNotifier {
   int bannerIndex = 0;
   int index = 0;
   bool isChange = false;
+  double effectValue = 0;
 
   Timer? timer;
   void autoScrollBanner() {
@@ -25,8 +26,14 @@ class AdsBannerProvider extends ChangeNotifier {
       notifyListeners();
     });
     pageController.addListener(() {
-      print("object");
+      effectValue = pageController.page ?? 0;
+      notifyListeners();
     });
+  }
+
+  int m = 1;
+  void tigger() {
+    print(++m);
   }
 
   void update(int inde) {
@@ -52,7 +59,7 @@ class AdsBannerProvider extends ChangeNotifier {
   }
 }
 
-PageController pageController = PageController(viewportFraction: 0.88);
+PageController pageController = PageController();
 
 void _animateToBanner(int index, VoidCallback onTap) {
   pageController
