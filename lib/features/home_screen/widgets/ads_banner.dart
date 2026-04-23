@@ -12,22 +12,18 @@ class AdsBanner extends StatelessWidget {
         SizedBox(
           height: 150.h,
           width: double.infinity,
-          child: Consumer<AdsBannerProvider>(
-            builder: (context, state, _) {
-              return PageView.builder(
-                physics: ClampingScrollPhysics(),
-                controller: context.read<AdsBannerProvider>().pageController,
-                onPageChanged: (value) =>
-                    context.read<AdsBannerProvider>().update(value),
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.only(left: 10.w, right: 10.w),
-                    child: GestureDetector(
-                      child: AdsBannerData
-                          .bannerImge[index % AdsBannerData.bannerData.length],
-                    ),
-                  );
-                },
+          child: PageView.builder(
+            physics: ClampingScrollPhysics(),
+            controller: pageController,
+            onPageChanged: (value) =>
+                context.read<AdsBannerProvider>().update(value),
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: EdgeInsets.only(left: 10.w, right: 10.w),
+                child: GestureDetector(
+                  child: AdsBannerData
+                      .bannerImge[index % AdsBannerData.bannerData.length],
+                ),
               );
             },
           ),

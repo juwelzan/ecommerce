@@ -6,36 +6,41 @@ import 'package:ecommerce/shared/path/paths.dart';
 class AdsBannerProvider extends ChangeNotifier {
   int bannerIndex = 0;
   int index = 0;
-
-  PageController pageController = PageController(viewportFraction: 0.84);
+  bool isChange = false;
 
   Timer? timer;
   void autoScrollBanner() {
     timer?.cancel();
 
+    if (AdsBannerData.bannerData.isEmpty) return;
     timer = Timer.periodic(Duration(seconds: 5), (timer) {
+      isChange = true;
       bannerIndex++;
       if (!pageController.hasClients) return;
 
-      pageController.animateToPage(
-        bannerIndex,
-        duration: Duration(milliseconds: 1000),
-        curve: Curves.ease,
-      );
+      _animateToBanner(bannerIndex, () {
+        isChange = false;
+      });
       index = (bannerIndex % AdsBannerData.bannerData.length);
-
       notifyListeners();
+    });
+    pageController.addListener(() {
+      print("object");
     });
   }
 
   void update(int inde) {
-    timer?.cancel();
-    autoScrollBanner();
-    bannerIndex = inde;
+    if (!isChange) {
+      timer?.cancel();
+      _animateToBanner(inde, () {
+        autoScrollBanner();
+      });
+      bannerIndex = inde;
 
-    index = (inde % AdsBannerData.bannerData.length);
-
-    notifyListeners();
+      index = (inde % AdsBannerData.bannerData.length);
+      notifyListeners();
+      LoggerLog.logW("onChange");
+    }
   }
 
   @override
@@ -45,4 +50,16 @@ class AdsBannerProvider extends ChangeNotifier {
     super.dispose();
     notifyListeners();
   }
+}
+
+PageController pageController = PageController(viewportFraction: 0.88);
+
+void _animateToBanner(int index, VoidCallback onTap) {
+  pageController
+      .animateToPage(
+        index,
+        duration: Duration(milliseconds: 1000),
+        curve: Curves.ease,
+      )
+      .then((_) => onTap.call());
 }
