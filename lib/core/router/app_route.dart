@@ -1,3 +1,5 @@
+import 'package:ecommerce/features/auth/presentation/login_screen.dart';
+import 'package:ecommerce/features/auth/presentation/signup_screen.dart';
 import 'package:ecommerce/features/home_screen/presentation/home_scree.dart';
 import 'package:ecommerce/shared/path/paths.dart';
 import 'package:go_router/go_router.dart';
@@ -5,7 +7,7 @@ import 'package:go_router/go_router.dart';
 class AppRoute {
   AppRoute._();
   static GoRouter goRouter = GoRouter(
-    initialLocation: SplashScreen.name,
+    initialLocation: LoginScreen.name,
     routes: [
       GoRoute(
         path: HomeScreen.name,
@@ -18,6 +20,14 @@ class AppRoute {
       GoRoute(
         path: MainScreen.name,
         pageBuilder: (context, state) => fadeTransition(MainScreen()),
+      ),
+      GoRoute(
+        path: LoginScreen.name,
+        pageBuilder: (context, state) => fadeTransition(LoginScreen()),
+      ),
+      GoRoute(
+        path: SignupScreen.name,
+        pageBuilder: (context, state) => fadeTransition(SignupScreen()),
       ),
     ],
   );
