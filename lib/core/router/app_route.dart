@@ -1,5 +1,4 @@
-import 'package:ecommerce/features/auth/presentation/login_screen.dart';
-import 'package:ecommerce/features/auth/presentation/signup_screen.dart';
+import 'package:ecommerce/features/auth/ui/login_screnn.dart';
 import 'package:ecommerce/features/home_screen/presentation/home_scree.dart';
 import 'package:ecommerce/shared/path/paths.dart';
 import 'package:go_router/go_router.dart';
@@ -7,7 +6,7 @@ import 'package:go_router/go_router.dart';
 class AppRoute {
   AppRoute._();
   static GoRouter goRouter = GoRouter(
-    initialLocation: LoginScreen.name,
+    initialLocation: LoginScrenn.name,
     routes: [
       GoRoute(
         path: HomeScreen.name,
@@ -21,13 +20,13 @@ class AppRoute {
         path: MainScreen.name,
         pageBuilder: (context, state) => fadeTransition(MainScreen()),
       ),
+      // GoRoute(
+      //   path: LoginScreen.name,
+      //   pageBuilder: (context, state) => fadeTransition(LoginScreen()),
+      // ),
       GoRoute(
-        path: LoginScreen.name,
-        pageBuilder: (context, state) => fadeTransition(LoginScreen()),
-      ),
-      GoRoute(
-        path: SignupScreen.name,
-        pageBuilder: (context, state) => fadeTransition(SignupScreen()),
+        path: LoginScrenn.name,
+        pageBuilder: (context, state) => fadeTransition(LoginScrenn()),
       ),
     ],
   );
@@ -48,10 +47,14 @@ dynamic slideTransition(Widget page) => CustomTransitionPage(
 
 dynamic fadeTransition(Widget page) => CustomTransitionPage(
   child: page,
-  transitionDuration: Duration(milliseconds: 500),
+  transitionDuration: Duration(milliseconds: 600),
 
   transitionsBuilder: (context, animation, secondaryAnimation, child) {
     final fade = Tween(begin: 0.0, end: 1.0).animate(animation);
-    return FadeTransition(opacity: fade, child: child);
+    final scale = Tween(begin: 0.0, end: 1.0).animate(animation);
+    return FadeTransition(
+      opacity: fade,
+      child: ScaleTransition(scale: scale, child: child),
+    );
   },
 );

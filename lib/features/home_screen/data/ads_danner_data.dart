@@ -7,7 +7,8 @@ class AdsBannerData {
   static List<BannerModel> bannerData = <BannerModel>[];
   static List<Widget> bannerImge = <Widget>[];
 
-  static void bannerSeparate(Map<String, dynamic> data) {
+  static void bannerSeparate(Map<String, dynamic>? data) {
+    if (data == null) return;
     final results = data['data']?["results"] as List?;
     if (results == null) return;
     List<BannerModel> bannerList = results

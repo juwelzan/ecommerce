@@ -11,7 +11,7 @@ class GetCategoriesData {
       unauthorized: () {},
     );
 
-    final data = decodeData.body['data']?['results'] as List?;
+    final data = decodeData.body?['data']?['results'] as List?;
     List<CategoryModel> listOfData = data != null
         ? data.map((e) => CategoryModel.fromJson(e)).toList()
         : [];
