@@ -3,8 +3,10 @@ import 'package:ecommerce/features/home_screen/data/ads_danner_data.dart';
 import 'package:ecommerce/shared/network_data/get_categories_data.dart';
 import 'package:ecommerce/shared/network_data/get_product_data.dart';
 import 'package:ecommerce/shared/path/paths.dart';
+import 'package:flutter/widget_previews.dart';
 
 class AppConfig extends StatefulWidget {
+  @Preview()
   const AppConfig({super.key});
 
   @override
