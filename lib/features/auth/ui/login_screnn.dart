@@ -1,5 +1,6 @@
 import 'package:ecommerce/shared/path/paths.dart';
 import 'package:ecommerce/shared/widget/jumping_button.dart';
+import 'package:ecommerce/shared/widget/loding_button.dart';
 
 class LoginScrenn extends StatefulWidget {
   const LoginScrenn({super.key});
@@ -78,11 +79,13 @@ class _LoginScrennState extends State<LoginScrenn> {
                       ),
                       Row(
                         children: [
-                          JumpingButton(
-                            label: "Forget Password",
-                            color: Colors.transparent,
-                            padding: .all(0),
-                            style: TextStyle(),
+                          Expanded(
+                            child: JumpingButton(
+                              label: "Forget Password",
+                              color: Colors.transparent,
+                              padding: .all(0),
+                              style: TextStyle(),
+                            ),
                           ),
                         ],
                       ),
@@ -92,11 +95,9 @@ class _LoginScrennState extends State<LoginScrenn> {
                   ValueListenableBuilder(
                     valueListenable: isShowPasslod,
                     builder: (context, value, child) {
-                      return JumpingButton(
-                        label: "Log In",
-                        width: double.infinity,
-                        height: 50,
-                        isLoding: value,
+                      return LodingButton(
+                        isLoading: value,
+                        text: "Log In",
                         onTap: () {
                           isShowPasslod.value = !isShowPasslod.value;
                         },
