@@ -1,5 +1,4 @@
 import 'package:ecommerce/shared/path/paths.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class IncrementButton extends StatelessWidget {
   const IncrementButton({super.key});

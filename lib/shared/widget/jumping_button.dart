@@ -16,7 +16,7 @@ class JumpingButton extends StatelessWidget {
   final TextStyle? style;
   final Widget? child;
   final VoidCallback? onTap;
-  final bool isLoding;
+  final bool? isLoding;
   final Duration? duration;
 
   JumpingButton({
@@ -33,7 +33,7 @@ class JumpingButton extends StatelessWidget {
     this.style,
     this.onTap,
     this.margin,
-    this.isLoding = false,
+    this.isLoding,
     this.padding,
     this.lodingBGcolor,
     this.lodingBorder,
@@ -43,11 +43,13 @@ class JumpingButton extends StatelessWidget {
   ValueNotifier<bool> isClick = ValueNotifier(false);
 
   void onTaps() async {
-    isClick.value = true;
-    await Future.delayed(
-      Duration(milliseconds: 100),
-      () => isClick.value = false,
-    );
+    if (isLoding == null) {
+      isClick.value = true;
+      await Future.delayed(
+        Duration(milliseconds: 100),
+        () => isClick.value = false,
+      );
+    }
 
     if (onTap != null) onTap!();
   }
@@ -58,7 +60,7 @@ class JumpingButton extends StatelessWidget {
       valueListenable: isClick,
       builder: (context, isvalue, child) {
         return GestureDetector(
-          onTap: !isLoding ? onTap : null,
+          onTap: onTaps,
           child: TweenAnimationBuilder<double>(
             tween: Tween(begin: 1, end: isvalue ? 0.8 : 1),
             duration: Duration(milliseconds: 100),
@@ -79,35 +81,47 @@ class JumpingButton extends StatelessWidget {
                 padding: padding,
                 duration: duration ?? Duration(milliseconds: 300),
                 height: height ?? 60,
-                width: isLoding ? 60 : (width ?? constraints.maxWidth),
+                width: isLoding != null
+                    ? (isLoding! ? 60 : (width ?? constraints.maxWidth))
+                    : (width ?? constraints.maxWidth),
                 decoration: BoxDecoration(
-                  color: isLoding
-                      ? lodingBGcolor ?? Colors.transparent
+                  color: isLoding != null
+                      ? (isLoding!
+                            ? lodingBGcolor ?? Colors.transparent
+                            : color ?? Colors.deepPurple)
                       : color ?? Colors.deepPurple,
-                  borderRadius: isLoding
-                      ? BorderRadius.circular(100)
+                  borderRadius: isLoding != null
+                      ? (isLoding!
+                            ? BorderRadius.circular(100)
+                            : borderRadius ?? BorderRadius.circular(20))
                       : borderRadius ?? BorderRadius.circular(20),
 
-                  border: isLoding
-                      ? lodingBorder ??
-                            Border.all(color: Colors.black38, width: 2)
+                  border: isLoding != null
+                      ? (isLoding!
+                            ? lodingBorder ??
+                                  Border.all(color: Colors.black38, width: 2)
+                            : border)
                       : border,
                 ),
-                child: AnimatedCrossFade(
-                  firstChild: childWidget(
-                    child: child,
-                    label: label,
-                    style: style,
+                child: Center(
+                  child: AnimatedCrossFade(
+                    firstChild: childWidget(
+                      child: child,
+                      label: label,
+                      style: style,
+                    ),
+                    secondChild: Lottie.asset(
+                      Asset.lottieLoading,
+                      width: 30,
+                      height: 30,
+                    ),
+                    crossFadeState: isLoding != null
+                        ? (isLoding!
+                              ? CrossFadeState.showSecond
+                              : CrossFadeState.showFirst)
+                        : CrossFadeState.showFirst,
+                    duration: duration ?? Duration(milliseconds: 300),
                   ),
-                  secondChild: Lottie.asset(
-                    Asset.lottieLoading,
-                    width: 30,
-                    height: 30,
-                  ),
-                  crossFadeState: isLoding
-                      ? CrossFadeState.showSecond
-                      : CrossFadeState.showFirst,
-                  duration: duration ?? Duration(milliseconds: 300),
                 ),
               ),
             ),

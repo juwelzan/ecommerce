@@ -1,6 +1,5 @@
 import 'package:ecommerce/shared/path/paths.dart';
 import 'package:ecommerce/shared/widget/jumping_button.dart';
-import 'package:ecommerce/shared/widget/loding_button.dart';
 
 class LoginScrenn extends StatefulWidget {
   const LoginScrenn({super.key});
@@ -62,17 +61,19 @@ class _LoginScrennState extends State<LoginScrenn> {
                               height: 40,
                               padding: EdgeInsets.all(0),
                               color: Colors.transparent,
-                              child: Center(
-                                child: value
-                                    ? SvgPicture.asset(
-                                        Asset.visibilityOn,
-                                        width: 20,
-                                      )
-                                    : SvgPicture.asset(
-                                        Asset.visibilityOff,
-                                        width: 20,
-                                      ),
-                              ),
+                              label: "y",
+                              // child: Center(
+                              //   child: value
+                              //       ? SvgPicture.asset(
+                              //           Asset.visibilityOn,
+                              //           width: 20,
+                              //         )
+                              //       : SvgPicture.asset(
+                              //           Asset.visibilityOff,
+                              //           width: 20,
+                              //           color: Colors.black,
+                              //         ),
+                              // ),
                             ),
                           );
                         },
@@ -95,9 +96,9 @@ class _LoginScrennState extends State<LoginScrenn> {
                   ValueListenableBuilder(
                     valueListenable: isShowPasslod,
                     builder: (context, value, child) {
-                      return LodingButton(
-                        isLoading: value,
-                        text: "Log In",
+                      return JumpingButton(
+                        isLoding: value,
+                        label: "Log In",
                         onTap: () {
                           isShowPasslod.value = !isShowPasslod.value;
                         },
