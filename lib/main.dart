@@ -4,7 +4,7 @@ import 'package:ecommerce/shared/path/paths.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Init();
+  // await Init();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(

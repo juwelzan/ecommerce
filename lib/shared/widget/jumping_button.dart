@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class JumpingButton extends StatelessWidget {
-  final double? height, width;
+  final double? height;
+  final double? width;
+  final TextAlign? textAlign;
   final BorderRadiusGeometry? borderRadius;
   final EdgeInsetsGeometry? margin, padding;
   final BoxBorder? border, lodingBorder;
@@ -38,6 +40,7 @@ class JumpingButton extends StatelessWidget {
     this.lodingBGcolor,
     this.lodingBorder,
     this.duration,
+    this.textAlign,
   });
 
   ValueNotifier<bool> isClick = ValueNotifier(false);
@@ -83,7 +86,7 @@ class JumpingButton extends StatelessWidget {
                 height: height ?? 60,
                 width: isLoding != null
                     ? (isLoding! ? 60 : (width ?? constraints.maxWidth))
-                    : (width ?? constraints.maxWidth),
+                    : (width ?? constraints.minWidth),
                 decoration: BoxDecoration(
                   color: isLoding != null
                       ? (isLoding!
@@ -103,25 +106,23 @@ class JumpingButton extends StatelessWidget {
                             : border)
                       : border,
                 ),
-                child: Center(
-                  child: AnimatedCrossFade(
-                    firstChild: childWidget(
-                      child: child,
-                      label: label,
-                      style: style,
-                    ),
-                    secondChild: Lottie.asset(
-                      Asset.lottieLoading,
-                      width: 30,
-                      height: 30,
-                    ),
-                    crossFadeState: isLoding != null
-                        ? (isLoding!
-                              ? CrossFadeState.showSecond
-                              : CrossFadeState.showFirst)
-                        : CrossFadeState.showFirst,
-                    duration: duration ?? Duration(milliseconds: 300),
+                child: AnimatedCrossFade(
+                  firstChild: childWidget(
+                    child: child,
+                    label: label,
+                    style: style,
                   ),
+                  secondChild: Lottie.asset(
+                    Asset.lottieLoading,
+                    width: 30,
+                    height: 30,
+                  ),
+                  crossFadeState: isLoding != null
+                      ? (isLoding!
+                            ? CrossFadeState.showSecond
+                            : CrossFadeState.showFirst)
+                      : CrossFadeState.showFirst,
+                  duration: duration ?? Duration(milliseconds: 300),
                 ),
               ),
             ),
@@ -132,13 +133,18 @@ class JumpingButton extends StatelessWidget {
   }
 }
 
-Widget childWidget({String? label, Widget? child, TextStyle? style}) {
+Widget childWidget({
+  String? label,
+  Widget? child,
+  TextStyle? style,
+  TextAlign? textAlign,
+}) {
   if (child != null) {
     return child;
   } else if (label != null) {
     return Text(
       label,
-      textAlign: TextAlign.center,
+      textAlign: textAlign ?? TextAlign.center,
       style:
           style ??
           const TextStyle(

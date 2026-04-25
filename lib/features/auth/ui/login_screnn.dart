@@ -22,10 +22,9 @@ class _LoginScrennState extends State<LoginScrenn> {
         width: double.infinity,
 
         decoration: BoxDecoration(color: Color(0xFFFAFAFA)),
-        child: Column(
-          crossAxisAlignment: .center,
-          mainAxisAlignment: .center,
+        child: ListView(
           children: [
+            SizedBox(height: 100),
             SvgPicture.asset(Asset.logoSVG),
             SizedBox(height: 30),
             Container(
@@ -40,7 +39,6 @@ class _LoginScrennState extends State<LoginScrenn> {
                 boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 60)],
               ),
               child: Column(
-                mainAxisAlignment: .spaceAround,
                 children: <Widget>[
                   _textFild(labelText: "Email", hintText: "example@gmail.com"),
 
@@ -62,31 +60,19 @@ class _LoginScrennState extends State<LoginScrenn> {
                               padding: EdgeInsets.all(0),
                               color: Colors.transparent,
                               label: "y",
-                              // child: Center(
-                              //   child: value
-                              //       ? SvgPicture.asset(
-                              //           Asset.visibilityOn,
-                              //           width: 20,
-                              //         )
-                              //       : SvgPicture.asset(
-                              //           Asset.visibilityOff,
-                              //           width: 20,
-                              //           color: Colors.black,
-                              //         ),
-                              // ),
                             ),
                           );
                         },
                       ),
                       Row(
                         children: [
-                          Expanded(
-                            child: JumpingButton(
-                              label: "Forget Password",
-                              color: Colors.transparent,
-                              padding: .all(0),
-                              style: TextStyle(),
-                            ),
+                          JumpingButton(
+                            label: "Forget Password",
+                            width: 130,
+                            textAlign: .start,
+                            color: Colors.cyan,
+                            padding: .all(0),
+                            style: TextStyle(),
                           ),
                         ],
                       ),

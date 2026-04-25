@@ -23,7 +23,7 @@ class _HomeScreeState extends State<HomeScreen>
   @override
   void initState() {
     Future.microtask(() {
-      context.read<AdsBannerProvider>().autoScrollBanner();
+      // context.read<AdsBannerProvider>().autoScrollBanner();
     });
 
     super.initState();

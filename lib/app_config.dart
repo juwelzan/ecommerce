@@ -14,25 +14,25 @@ class AppConfig extends StatefulWidget {
 }
 
 class _AppConfigState extends State<AppConfig> {
-  NetworkCaller networkCaller = NetworkCaller(
-    headers: {"Content-Type": "application/json"},
-  );
-  @override
-  void initState() {
-    getBanner();
-    super.initState();
-    getIt<GetCategoriesData>().getAllCategori();
-    getIt<GetProductData>().getProduct();
-  }
+  // NetworkCaller networkCaller = NetworkCaller(
+  //   headers: {"Content-Type": "application/json"},
+  // );
+  // @override
+  // void initState() {
+  //   getBanner();
+  //   super.initState();
+  //   getIt<GetCategoriesData>().getAllCategori();
+  //   getIt<GetProductData>().getProduct();
+  // }
 
-  void getBanner() async {
-    final NetworkResponse response = await networkCaller.get(
-      url: Urls.getSlideList,
-      unauthorized: () {},
-    );
-    AdsBannerData.bannerSeparate(response.body);
-    LoggerLog.logI(AdsBannerData.bannerData.length.toString());
-  }
+  // void getBanner() async {
+  //   final NetworkResponse response = await networkCaller.get(
+  //     url: Urls.getSlideList,
+  //     unauthorized: () {},
+  //   );
+  //   AdsBannerData.bannerSeparate(response.body);
+  //   LoggerLog.logI(AdsBannerData.bannerData.length.toString());
+  // }
 
   @override
   Widget build(BuildContext context) {
