@@ -1,7 +1,3 @@
-import 'package:ecommerce/core/di/dependency_injection.dart';
-import 'package:ecommerce/features/home_screen/data/ads_danner_data.dart';
-import 'package:ecommerce/shared/network_data/get_categories_data.dart';
-import 'package:ecommerce/shared/network_data/get_product_data.dart';
 import 'package:ecommerce/shared/path/paths.dart';
 import 'package:flutter/widget_previews.dart';
 
@@ -39,6 +35,7 @@ class _AppConfigState extends State<AppConfig> {
     return Consumer<ThemeController>(
       builder: (context, state, _) {
         return MaterialApp.router(
+          scaffoldMessengerKey: globalContext,
           debugShowCheckedModeBanner: false,
 
           theme: AppTheme.lightTheme,
@@ -50,3 +47,6 @@ class _AppConfigState extends State<AppConfig> {
     );
   }
 }
+
+final GlobalKey<ScaffoldMessengerState> globalContext =
+    GlobalKey<ScaffoldMessengerState>();

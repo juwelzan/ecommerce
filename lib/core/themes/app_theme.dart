@@ -46,6 +46,17 @@ class AppTheme {
         borderRadius: BorderRadius.circular(10.r),
         borderSide: BorderSide(width: 3, color: AppColors.darkPrimary),
       ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(width: 2, color: Colors.redAccent),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(width: 1, color: Colors.redAccent),
+      ),
+      labelStyle: TextStyle(fontSize: 15),
+
+      errorStyle: TextStyle(fontSize: 13),
     ),
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(

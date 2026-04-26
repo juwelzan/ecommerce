@@ -1,6 +1,5 @@
 import 'package:ecommerce/core/di/dependency_injection.dart';
 import 'package:ecommerce/core/package/gap/sliver_gap.dart';
-import 'package:ecommerce/features/home_screen/provider/ads_banner_provider.dart';
 import 'package:ecommerce/features/home_screen/widgets/ads_banner.dart';
 import 'package:ecommerce/features/home_screen/widgets/all_categories.dart';
 import 'package:ecommerce/features/home_screen/widgets/product_section.dart';

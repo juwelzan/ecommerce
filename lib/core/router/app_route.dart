@@ -1,4 +1,5 @@
 import 'package:ecommerce/features/auth/ui/login_screnn.dart';
+import 'package:ecommerce/features/auth/ui/otp_verufy_screen.dart';
 import 'package:ecommerce/features/home_screen/presentation/home_scree.dart';
 import 'package:ecommerce/shared/path/paths.dart';
 import 'package:go_router/go_router.dart';
@@ -6,7 +7,7 @@ import 'package:go_router/go_router.dart';
 class AppRoute {
   AppRoute._();
   static GoRouter goRouter = GoRouter(
-    initialLocation: LoginScrenn.name,
+    initialLocation: OtpVerufyScreen.name,
     routes: [
       GoRoute(
         path: HomeScreen.name,
@@ -27,6 +28,10 @@ class AppRoute {
       GoRoute(
         path: LoginScrenn.name,
         pageBuilder: (context, state) => fadeTransition(LoginScrenn()),
+      ),
+      GoRoute(
+        path: OtpVerufyScreen.name,
+        pageBuilder: (context, state) => fadeTransition(OtpVerufyScreen()),
       ),
     ],
   );

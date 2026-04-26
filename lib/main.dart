@@ -1,4 +1,3 @@
-import 'package:ecommerce/core/di/dependency_injection.dart';
 import 'package:ecommerce/features/home_screen/provider/ads_banner_provider.dart';
 import 'package:ecommerce/shared/path/paths.dart';
 
