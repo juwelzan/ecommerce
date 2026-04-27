@@ -7,7 +7,7 @@ import 'package:go_router/go_router.dart';
 class AppRoute {
   AppRoute._();
   static GoRouter goRouter = GoRouter(
-    initialLocation: OtpVerufyScreen.name,
+    initialLocation: OtpVerifyScreen.name,
     routes: [
       GoRoute(
         path: HomeScreen.name,
@@ -30,8 +30,8 @@ class AppRoute {
         pageBuilder: (context, state) => fadeTransition(LoginScrenn()),
       ),
       GoRoute(
-        path: OtpVerufyScreen.name,
-        pageBuilder: (context, state) => fadeTransition(OtpVerufyScreen()),
+        path: OtpVerifyScreen.name,
+        pageBuilder: (context, state) => fadeTransition(OtpVerifyScreen()),
       ),
     ],
   );

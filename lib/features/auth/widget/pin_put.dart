@@ -55,18 +55,32 @@ class _OtpPinPutState extends State<OtpPinPut> {
   }
 
   void onChanged({required String value, required int index}) {
+    // 👉 Step 1: first empty box খুঁজো
+    int firstEmptyIndex = controller.indexWhere((c) => c.text.isEmpty);
+
+    // 👉 Step 2: skip prevent
+    if (value.isNotEmpty && firstEmptyIndex != -1 && index != firstEmptyIndex) {
+      controller[index].clear(); // ভুল input remove
+      focusNode[firstEmptyIndex].requestFocus(); // সঠিক box এ পাঠাও
+      return;
+    }
+
+    // 👉 Step 3: forward move
     if (value.isNotEmpty) {
       if (index < widget.length - 1) {
         focusNode[index + 1].requestFocus();
-        LoggerLog.logV("${index + 1}");
       } else {
-        focusNode[index].unfocus();
+        focusNode[index].unfocus(); // last হলে keyboard বন্ধ
       }
-    } else {
+    }
+    // 👉 Step 4: backspace
+    else {
       if (index > 0) {
         focusNode[index - 1].requestFocus();
       }
     }
+
+    // 👉 Step 5: full OTP return
     widget.onChanged(controller.map((t) => t.text).join());
   }
 
