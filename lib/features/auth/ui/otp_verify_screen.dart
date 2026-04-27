@@ -1,18 +1,20 @@
 import 'package:ecommerce/features/auth/widget/auth_widget.dart';
 import 'package:ecommerce/features/auth/widget/pin_put.dart';
+import 'package:ecommerce/shared/widget/jumping_button.dart';
 import 'package:flutter/material.dart';
 
-class OtpVerufyScreen extends StatelessWidget {
+class OtpVerifyScreen extends StatelessWidget {
   static const String name = "/OtpVerufyScreen";
-  const OtpVerufyScreen({super.key});
+  const OtpVerifyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    ValueNotifier<bool> isOk = ValueNotifier(false);
     return Scaffold(
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 20),
         children: [
-          SizedBox(height: 100),
+          SizedBox(height: 200),
           AuthWidget(
             title: "Enter OTP Code",
             titleSize: 30,
@@ -22,10 +24,27 @@ class OtpVerufyScreen extends StatelessWidget {
           ),
           OtpPinPut(
             length: 4,
+            isError: false,
+            isShowReset: false,
+
             onChanged: (value) {
               print(value);
             },
+            isDisable: (value) {
+              isOk.value = value;
+            },
           ),
+          SizedBox(height: 50),
+
+          ValueListenableBuilder(
+            valueListenable: isOk,
+            builder: (context, value, child) {
+              return Column(
+                children: [JumpingButton(isDisable: value, isLoding: false)],
+              );
+            },
+          ),
+          SizedBox(height: 50),
         ],
       ),
     );

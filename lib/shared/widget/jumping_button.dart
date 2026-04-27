@@ -18,7 +18,7 @@ class JumpingButton extends StatelessWidget {
   final TextStyle? style;
   final Widget? child;
   final VoidCallback? onTap;
-  final bool? isLoding;
+  final bool? isLoding, isDisable;
   final Duration? duration;
 
   JumpingButton({
@@ -42,6 +42,7 @@ class JumpingButton extends StatelessWidget {
     this.duration,
     this.textAlign,
     this.sidePadding,
+    this.isDisable = false,
   });
 
   ValueNotifier<bool> isClick = ValueNotifier(false);
@@ -64,7 +65,7 @@ class JumpingButton extends StatelessWidget {
       valueListenable: isClick,
       builder: (context, isvalue, chil) {
         return GestureDetector(
-          onTap: onTaps,
+          onTap: isDisable! ? null : onTaps,
           child: TweenAnimationBuilder<double>(
             tween: Tween(begin: 1, end: isvalue ? 0.8 : 1),
             duration: Duration(milliseconds: 100),
@@ -91,11 +92,13 @@ class JumpingButton extends StatelessWidget {
                       ? (isLoding! ? 60 : (width ?? constraints.maxWidth))
                       : (width ?? constraints.minWidth),
                   decoration: BoxDecoration(
-                    color: isLoding != null
-                        ? (isLoding!
-                              ? lodingBGcolor ?? Colors.transparent
-                              : color ?? Colors.deepPurple)
-                        : color ?? Colors.deepPurple,
+                    color: isDisable!
+                        ? Colors.grey
+                        : (isLoding != null
+                              ? (isLoding!
+                                    ? lodingBGcolor ?? Colors.transparent
+                                    : color ?? Colors.deepPurple)
+                              : color ?? Colors.deepPurple),
                     borderRadius: isLoding != null
                         ? (isLoding!
                               ? BorderRadius.circular(100)
@@ -130,6 +133,7 @@ class JumpingButton extends StatelessWidget {
                                     child: child,
                                     label: label,
                                     style: style,
+                                    isDisable: isDisable!,
                                   ),
                                 ))
                         : Center(
@@ -138,6 +142,7 @@ class JumpingButton extends StatelessWidget {
                               child: child,
                               label: label,
                               style: style,
+                              isDisable: isDisable!,
                             ),
                           ),
                   ),
@@ -156,6 +161,7 @@ Widget childWidget({
   Widget? child,
   TextStyle? style,
   TextAlign? textAlign,
+  required bool isDisable,
 }) {
   if (child != null) {
     return Center(child: child);
@@ -164,16 +170,37 @@ Widget childWidget({
       child: Text(
         label!,
         textAlign: textAlign ?? TextAlign.center,
-        style:
-            style ??
-            const TextStyle(
-              fontSize: 18,
-              color: Color(0xffFAFAFA),
-              fontWeight: FontWeight.bold,
-            ),
+        style: isDisable
+            ? TextStyle(
+                fontSize: 18,
+                color: Colors.grey.shade400,
+                fontWeight: FontWeight.bold,
+              )
+            : (style ??
+                  const TextStyle(
+                    fontSize: 18,
+                    color: Color(0xffFAFAFA),
+                    fontWeight: FontWeight.bold,
+                  )),
       ),
     );
   }
 
-  return const SizedBox(child: Text("data"));
+  return SizedBox(
+    child: Text(
+      "data",
+      style: isDisable
+          ? TextStyle(
+              fontSize: 18,
+              color: Colors.grey.shade400,
+              fontWeight: FontWeight.bold,
+            )
+          : (style ??
+                const TextStyle(
+                  fontSize: 18,
+                  color: Color(0xffFAFAFA),
+                  fontWeight: FontWeight.bold,
+                )),
+    ),
+  );
 }

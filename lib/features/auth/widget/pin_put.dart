@@ -5,13 +5,16 @@ import 'package:ecommerce/shared/path/paths.dart';
 class OtpPinPut extends StatefulWidget {
   final int length;
   final Function(String value) onChanged;
-  final bool? isError;
+  final Function(bool value) isDisable;
+  final bool? isError, isShowReset;
 
   const OtpPinPut({
     super.key,
     required this.length,
     required this.onChanged,
     this.isError = false,
+    required this.isDisable,
+    this.isShowReset = false,
   });
 
   @override
@@ -69,10 +72,13 @@ class _OtpPinPutState extends State<OtpPinPut> {
 
   void time() async {
     isTimerOn.value = true;
+    widget.isDisable.call(true);
     _timer = Timer.periodic(Duration(seconds: 1), (times) {
       timeValu.value = timeValu.value - 1;
       if (timeValu.value == 0) {
+        widget.isDisable.call(false);
         _timer.cancel();
+        timeValu.value = 30;
         isTimerOn.value = false;
       }
     });
@@ -110,20 +116,44 @@ class _OtpPinPutState extends State<OtpPinPut> {
             );
           }),
         ),
-        ListenableBuilder(
-          listenable: Listenable.merge([isTimerOn, timeValu]),
-          builder: (context, child) {
-            return Row(
-              mainAxisAlignment: .end,
-              crossAxisAlignment: .center,
-              children: [
-                !isTimerOn.value
-                    ? TextButton(onPressed: time, child: Text("resend"))
-                    : Text("${timeValu.value}"),
-              ],
-            );
-          },
-        ),
+        if (widget.isShowReset!)
+          ListenableBuilder(
+            listenable: Listenable.merge([isTimerOn, timeValu]),
+            builder: (context, child) {
+              return Row(
+                mainAxisAlignment: .end,
+                crossAxisAlignment: .center,
+                children: [
+                  AnimatedSwitcher(
+                    duration: Duration(milliseconds: 400),
+                    switchInCurve: Curves.easeIn,
+                    switchOutCurve: Curves.easeOut,
+                    transitionBuilder: (child, animation) {
+                      return FadeTransition(opacity: animation, child: child);
+                    },
+                    child: isTimerOn.value
+                        ? SizedBox(
+                            width: 70,
+                            child: Center(
+                              child: text(
+                                key: Key("timeron"),
+                                text: "${timeValu.value}",
+                              ),
+                            ),
+                          )
+                        : SizedBox(
+                            width: 70,
+                            child: text(
+                              key: Key("timeroff"),
+                              text: "resend",
+                              onTap: () => time(),
+                            ),
+                          ),
+                  ),
+                ],
+              );
+            },
+          ),
       ],
     );
   }
@@ -156,5 +186,20 @@ InputDecoration inputDecoration(bool isError) {
     fillColor: isError
         ? Colors.redAccent.withOpacity(0.15)
         : Colors.grey.shade50,
+  );
+}
+
+Widget text({required Key key, required String text, VoidCallback? onTap}) {
+  return Padding(
+    padding: const EdgeInsets.only(right: 10, top: 10),
+    child: GestureDetector(
+      onTap: onTap,
+      child: Text(
+        key: key,
+        textAlign: .center,
+        text,
+        style: TextStyle(fontSize: 18, color: Colors.deepPurpleAccent.shade200),
+      ),
+    ),
   );
 }

@@ -1,5 +1,5 @@
 import 'package:ecommerce/features/auth/ui/login_screnn.dart';
-import 'package:ecommerce/features/auth/ui/otp_verufy_screen.dart';
+import 'package:ecommerce/features/auth/ui/otp_verify_screen.dart';
 import 'package:ecommerce/features/home_screen/presentation/home_scree.dart';
 import 'package:ecommerce/shared/path/paths.dart';
 import 'package:go_router/go_router.dart';
