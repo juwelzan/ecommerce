@@ -44,6 +44,7 @@ dependencies:
   cached_network_image:
   go_router: ^17.2.1
   get_it: ^9.2.1
+  pinput: ^6.0.2
 
 
 dev_dependencies:

@@ -1,4 +1,3 @@
-import 'package:ecommerce/core/logger/logger.dart';
 import 'package:ecommerce/features/auth/widget/auth_widget.dart';
 import 'package:ecommerce/features/auth/widget/pin_put.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +20,10 @@ class OtpVerufyScreen extends StatelessWidget {
             subTitleSize: 20,
             logoSize: 120,
           ),
-          OtpInput(
-            onCompleted: (p0) {
-              LoggerLog.logI(p0);
+          OtpPinPut(
+            length: 4,
+            onChanged: (value) {
+              print(value);
             },
           ),
         ],
