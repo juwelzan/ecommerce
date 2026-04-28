@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:ecommerce/features/auth/widget/text_past_formatter.dart';
 import 'package:ecommerce/shared/path/paths.dart';
 
 class OtpPinPut extends StatefulWidget {
@@ -31,7 +32,32 @@ class _OtpPinPutState extends State<OtpPinPut> {
   @override
   void initState() {
     setController();
+    // clipeBoard();
     super.initState();
+  }
+
+  Future<void> clipeBoard() async {
+    final data = await Clipboard.getData('text/plain');
+    if (data != null && data.text != null) {
+      final text = data.text!.trim();
+      if (text.length == widget.length && int.tryParse(text) != null) {
+        handlePaste(text, 0);
+      }
+    }
+  }
+
+  void handlePaste(String value, int index) {
+    if (value.length > 1) {
+      for (int i = 0; i < widget.length; i++) {
+        if (i < value.length) {
+          controller[i].text = value[i];
+        } else {
+          controller[i].clear();
+        }
+      }
+      focusNode[widget.length - 1].unfocus();
+      setState(() {});
+    }
   }
 
   void setController() {
@@ -55,32 +81,18 @@ class _OtpPinPutState extends State<OtpPinPut> {
   }
 
   void onChanged({required String value, required int index}) {
-    // 👉 Step 1: first empty box খুঁজো
-    int firstEmptyIndex = controller.indexWhere((c) => c.text.isEmpty);
-
-    // 👉 Step 2: skip prevent
-    if (value.isNotEmpty && firstEmptyIndex != -1 && index != firstEmptyIndex) {
-      controller[index].clear(); // ভুল input remove
-      focusNode[firstEmptyIndex].requestFocus(); // সঠিক box এ পাঠাও
-      return;
-    }
-
-    // 👉 Step 3: forward move
     if (value.isNotEmpty) {
       if (index < widget.length - 1) {
         focusNode[index + 1].requestFocus();
       } else {
-        focusNode[index].unfocus(); // last হলে keyboard বন্ধ
+        focusNode[index].unfocus();
       }
-    }
-    // 👉 Step 4: backspace
-    else {
+    } else {
       if (index > 0) {
         focusNode[index - 1].requestFocus();
       }
     }
 
-    // 👉 Step 5: full OTP return
     widget.onChanged(controller.map((t) => t.text).join());
   }
 
@@ -96,6 +108,14 @@ class _OtpPinPutState extends State<OtpPinPut> {
         isTimerOn.value = false;
       }
     });
+  }
+
+  void onTab() {
+    int fastEmtyIndex = controller.indexWhere((i) => i.text.isEmpty);
+
+    if (fastEmtyIndex != -1) {
+      focusNode[fastEmtyIndex].requestFocus();
+    }
   }
 
   @override
@@ -117,11 +137,17 @@ class _OtpPinPutState extends State<OtpPinPut> {
                   maxLength: 1,
                   onChanged: (text) => onChanged(value: text, index: index),
                   showCursor: false,
+                  onTap: onTab,
 
                   inputFormatters: [
                     FilteringTextInputFormatter.digitsOnly,
 
                     LengthLimitingTextInputFormatter(1),
+                    TextPastFormatter(
+                      onPast: (v) {
+                        handlePaste(v, 0);
+                      },
+                    ),
                   ],
                   textInputAction: TextInputAction.go,
                   keyboardType: TextInputType.number,
