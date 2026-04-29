@@ -25,7 +25,7 @@ class OtpVerifyScreen extends StatelessWidget {
           OtpPinPut(
             length: 4,
             isError: false,
-            isShowReset: false,
+
             boxSize: 70,
 
             onChanged: (value) {

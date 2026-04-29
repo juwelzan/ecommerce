@@ -14,27 +14,29 @@ class AuthWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
 
-      children: [
-        SvgPicture.asset(Asset.logoSVG, width: logoSize ?? 130.w),
-        Gap(h: 20.h),
-        if (title != null)
-          Text(
-            title!,
-            style: context.textTheme.bodyLarge?.copyWith(fontSize: titleSize),
-          ),
-        if (subTitle != null)
-          Text(
-            subTitle!,
-            style: context.textTheme.bodySmall?.copyWith(
-              fontSize: subTitleSize,
+        children: [
+          SvgPicture.asset(Asset.logoSVG, width: logoSize ?? 130.w),
+          Gap(h: 20.h),
+          if (title != null)
+            Text(
+              title!,
+              style: context.textTheme.bodyLarge?.copyWith(fontSize: titleSize),
             ),
-          ),
-      ],
+          if (subTitle != null)
+            Text(
+              subTitle!,
+              style: context.textTheme.bodySmall?.copyWith(
+                fontSize: subTitleSize,
+              ),
+            ),
+        ],
+      ),
     );
   }
 }

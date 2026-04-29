@@ -44,15 +44,21 @@ class AppTheme {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10.r),
-        borderSide: BorderSide(width: 3, color: AppColors.darkPrimary),
+        borderSide: BorderSide(width: 3.5, color: AppColors.darkPrimary),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(width: 2, color: Colors.redAccent),
+        borderSide: BorderSide(
+          width: 3.5,
+          color: Colors.redAccent.withValues(alpha: 0.8),
+        ),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(width: 1, color: Colors.redAccent),
+        borderSide: BorderSide(
+          width: 2,
+          color: Colors.redAccent.withValues(alpha: 0.8),
+        ),
       ),
       labelStyle: TextStyle(fontSize: 15),
 

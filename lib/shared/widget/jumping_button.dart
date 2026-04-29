@@ -18,7 +18,7 @@ class JumpingButton extends StatelessWidget {
   final TextStyle? style;
   final Widget? child;
   final VoidCallback? onTap;
-  final bool? isLoding, isDisable;
+  final bool? isLoding, isDisable, isFileBoxShow;
   final Duration? duration;
 
   JumpingButton({
@@ -43,6 +43,7 @@ class JumpingButton extends StatelessWidget {
     this.textAlign,
     this.sidePadding,
     this.isDisable = false,
+    this.isFileBoxShow = false,
   });
 
   ValueNotifier<bool> isClick = ValueNotifier(false);
@@ -56,100 +57,113 @@ class JumpingButton extends StatelessWidget {
       );
     }
 
-    if (onTap != null) onTap!();
+    if (onTap != null) onTap!.call();
   }
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: isClick,
-      builder: (context, isvalue, chil) {
-        return GestureDetector(
-          onTap: isDisable! ? null : onTaps,
-          child: TweenAnimationBuilder<double>(
-            tween: Tween(begin: 1, end: isvalue ? 0.8 : 1),
-            duration: Duration(milliseconds: 100),
-            builder: (context, value, chil) {
-              return Transform.scale(
-                scale: value,
-                child: AnimatedOpacity(
-                  duration: Duration(milliseconds: 100),
-                  opacity: isvalue ? 0.3 : 1,
-                  child: chil,
-                ),
-              );
-            },
-
-            child: LayoutBuilder(
-              builder: (context, constraints) => Padding(
-                padding: sidePadding ?? const EdgeInsets.all(0),
-                child: AnimatedContainer(
-                  margin: margin,
-                  padding: padding,
-                  duration: duration ?? Duration(milliseconds: 300),
-                  height: height ?? 60,
-                  width: isLoding != null
-                      ? (isLoding! ? 60 : (width ?? constraints.maxWidth))
-                      : (width ?? constraints.minWidth),
-                  decoration: BoxDecoration(
-                    color: isDisable!
-                        ? Colors.grey
-                        : (isLoding != null
-                              ? (isLoding!
-                                    ? lodingBGcolor ?? Colors.transparent
-                                    : color ?? Colors.deepPurple)
-                              : color ?? Colors.deepPurple),
-                    borderRadius: isLoding != null
-                        ? (isLoding!
-                              ? BorderRadius.circular(100)
-                              : borderRadius ?? BorderRadius.circular(20))
-                        : borderRadius ?? BorderRadius.circular(20),
-
-                    border: isLoding != null
-                        ? (isLoding!
-                              ? lodingBorder ??
-                                    Border.all(color: Colors.black38, width: 2)
-                              : border)
-                        : border,
-                  ),
-                  child: AnimatedSwitcher(
-                    duration: duration ?? Duration(milliseconds: 200),
-                    transitionBuilder: (ca, animation) {
-                      return FadeTransition(opacity: animation, child: ca);
-                    },
-                    child: isLoding != null
-                        ? (isLoding!
-                              ? Center(
-                                  key: ValueKey("loading"),
-                                  child: Lottie.asset(
-                                    Asset.lottieLoading,
-                                    width: 30,
-                                    height: 30,
-                                  ),
-                                )
-                              : Center(
-                                  key: ValueKey("content"),
-                                  child: childWidget(
-                                    child: child,
-                                    label: label,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return ValueListenableBuilder(
+          valueListenable: isClick,
+          builder: (context, isvalue, chil) {
+            return GestureDetector(
+              onTap: isDisable! ? null : onTaps,
+              child: TweenAnimationBuilder<double>(
+                tween: Tween(begin: 1, end: isvalue ? 0.8 : 1),
+                duration: Duration(milliseconds: 100),
+                builder: (context, value, chil) {
+                  return Transform.scale(
+                    scale: value,
+                    child: AnimatedOpacity(
+                      duration: Duration(milliseconds: 100),
+                      opacity: isvalue ? 0.3 : 1,
+                      child: isFileBoxShow!
+                          ? chil
+                          : (label != null
+                                ? Text(
+                                    label!,
                                     style: style,
-                                    isDisable: isDisable!,
-                                  ),
-                                ))
-                        : Center(
-                            key: ValueKey("content"),
-                            child: childWidget(
-                              child: child,
-                              label: label,
-                              style: style,
-                              isDisable: isDisable!,
+                                    textAlign: textAlign,
+                                  )
+                                : child ?? SizedBox()),
+                    ),
+                  );
+                },
+
+                child: Padding(
+                  padding: sidePadding ?? const EdgeInsets.all(0),
+                  child: AnimatedContainer(
+                    margin: margin,
+                    padding: padding,
+                    duration: duration ?? Duration(milliseconds: 300),
+                    height: height ?? 60,
+                    width: isLoding != null
+                        ? (isLoding! ? 60 : (width ?? constraints.maxWidth))
+                        : (width ?? constraints.minWidth),
+                    decoration: BoxDecoration(
+                      color: isDisable!
+                          ? Colors.grey
+                          : (isLoding != null
+                                ? (isLoding!
+                                      ? lodingBGcolor ?? Colors.transparent
+                                      : color ?? Colors.deepPurple)
+                                : color ?? Colors.deepPurple),
+                      borderRadius: isLoding != null
+                          ? (isLoding!
+                                ? BorderRadius.circular(100)
+                                : borderRadius ?? BorderRadius.circular(20))
+                          : borderRadius ?? BorderRadius.circular(20),
+
+                      border: isLoding != null
+                          ? (isLoding!
+                                ? lodingBorder ??
+                                      Border.all(
+                                        color: Colors.black38,
+                                        width: 2,
+                                      )
+                                : border)
+                          : border,
+                    ),
+                    child: AnimatedSwitcher(
+                      duration: duration ?? Duration(milliseconds: 200),
+                      transitionBuilder: (ca, animation) {
+                        return FadeTransition(opacity: animation, child: ca);
+                      },
+                      child: isLoding != null
+                          ? (isLoding!
+                                ? Center(
+                                    key: ValueKey("loading"),
+                                    child: Lottie.asset(
+                                      Asset.lottieLoading,
+                                      width: 30,
+                                      height: 30,
+                                    ),
+                                  )
+                                : Center(
+                                    key: ValueKey("content"),
+                                    child: childWidget(
+                                      child: child,
+                                      label: label,
+                                      style: style,
+                                      isDisable: isDisable!,
+                                    ),
+                                  ))
+                          : Center(
+                              key: ValueKey("content"),
+                              child: childWidget(
+                                child: child,
+                                label: label,
+                                style: style,
+                                isDisable: isDisable!,
+                              ),
                             ),
-                          ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
+            );
+          },
         );
       },
     );
@@ -166,23 +180,21 @@ Widget childWidget({
   if (child != null) {
     return Center(child: child);
   } else if (label != null || child != null) {
-    return Center(
-      child: Text(
-        label!,
-        textAlign: textAlign ?? TextAlign.center,
-        style: isDisable
-            ? TextStyle(
-                fontSize: 18,
-                color: Colors.grey.shade400,
-                fontWeight: FontWeight.bold,
-              )
-            : (style ??
-                  const TextStyle(
-                    fontSize: 18,
-                    color: Color(0xffFAFAFA),
-                    fontWeight: FontWeight.bold,
-                  )),
-      ),
+    return Text(
+      label!,
+      textAlign: textAlign ?? TextAlign.center,
+      style: isDisable
+          ? TextStyle(
+              fontSize: 18,
+              color: Colors.grey.shade400,
+              fontWeight: FontWeight.bold,
+            )
+          : (style ??
+                const TextStyle(
+                  fontSize: 18,
+                  color: Color(0xffFAFAFA),
+                  fontWeight: FontWeight.bold,
+                )),
     );
   }
 

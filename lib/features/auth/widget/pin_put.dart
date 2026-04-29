@@ -6,6 +6,7 @@ class OtpPinPut extends StatefulWidget {
   final int length;
   final Function(String value) onChanged;
   final Function(bool value) isDisable;
+  final VoidCallback? onReset;
   final bool? isError, isShowReset;
   final double? boxSize;
   final TextStyle? textStyle;
@@ -19,6 +20,7 @@ class OtpPinPut extends StatefulWidget {
     this.isShowReset = false,
     this.boxSize,
     this.textStyle,
+    this.onReset,
   });
 
   @override
@@ -101,6 +103,7 @@ class _OtpPinPutState extends State<OtpPinPut> {
 
   void time() async {
     isTimerOn.value = true;
+    widget.onReset?.call();
     widget.isDisable.call(true);
     _timer = Timer.periodic(Duration(seconds: 1), (times) {
       timeValu.value = timeValu.value - 1;
