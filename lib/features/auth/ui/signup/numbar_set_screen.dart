@@ -1,8 +1,5 @@
-import 'package:ecommerce/features/auth/widget/auth_widget.dart';
-import 'package:ecommerce/features/auth/widget/text_field_eliment.dart';
+import 'package:ecommerce/features/auth/ui/signup/email_set_screen.dart';
 import 'package:ecommerce/shared/path/paths.dart';
-import 'package:ecommerce/shared/widget/dot_lottie_view_widget.dart';
-import 'package:ecommerce/shared/widget/jumping_button.dart';
 
 class NumbarSetScreen extends StatefulWidget {
   static const String name = "/NumbarSetScreen";
@@ -22,7 +19,7 @@ class _NumbarSetScreenState extends State<NumbarSetScreen> {
           mainAxisAlignment: .center,
           children: [
             SizedBox(height: 80),
-            Center(child: DotLottieViewWidget()),
+            Center(child: DotLottieViewWidget(path: Asset.phoneNumberLottie)),
 
             AuthWidget(
               showIcon: false,
@@ -43,8 +40,17 @@ class _NumbarSetScreenState extends State<NumbarSetScreen> {
             SizedBox(height: 80),
             JumpingButton(
               width: double.infinity,
+              scale: 0.95,
               isFileBoxShow: true,
+              opacity: 1,
               margin: EdgeInsets.symmetric(horizontal: 20),
+              child: SvgPicture.asset(Asset.googleIconSVG),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EmailSetScreen()),
+                );
+              },
             ),
           ],
         ),

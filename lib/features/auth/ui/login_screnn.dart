@@ -1,6 +1,4 @@
-import 'package:ecommerce/features/auth/widget/auth_widget.dart';
 import 'package:ecommerce/shared/path/paths.dart';
-import 'package:ecommerce/shared/widget/jumping_button.dart';
 
 class LoginScrenn extends StatefulWidget {
   const LoginScrenn({super.key});

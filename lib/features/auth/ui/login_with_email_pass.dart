@@ -1,8 +1,5 @@
-import 'package:ecommerce/features/auth/widget/auth_widget.dart';
 import 'package:ecommerce/features/auth/widget/i_have_an_account.dart';
-import 'package:ecommerce/features/auth/widget/text_field_eliment.dart';
 import 'package:ecommerce/shared/path/paths.dart';
-import 'package:ecommerce/shared/widget/jumping_button.dart';
 
 class LoginWithEmailPass extends StatefulWidget {
   static const String name = "/LoginWithEmailPass";

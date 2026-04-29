@@ -1,6 +1,5 @@
 import 'package:ecommerce/features/auth/presentation/login_screen.dart';
 import 'package:ecommerce/features/auth/presentation/signup_screen.dart';
-import 'package:ecommerce/features/auth/widget/auth_widget.dart';
 import 'package:ecommerce/features/auth/widget/login_with_card.dart';
 import 'package:ecommerce/shared/path/paths.dart';
 

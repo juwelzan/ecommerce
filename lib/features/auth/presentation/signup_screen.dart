@@ -1,4 +1,3 @@
-import 'package:ecommerce/features/auth/widget/auth_widget.dart';
 import 'package:ecommerce/features/auth/widget/i_have_an_account.dart';
 import 'package:ecommerce/features/auth/widget/login_with_card.dart';
 import 'package:ecommerce/shared/path/paths.dart';

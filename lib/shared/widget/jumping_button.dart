@@ -6,7 +6,7 @@ import 'package:lottie/lottie.dart';
 
 class JumpingButton extends StatelessWidget {
   final double? height;
-  final double? width;
+  final double? width, opacity, scale;
   final TextAlign? textAlign;
   final BorderRadiusGeometry? borderRadius;
   final EdgeInsetsGeometry? margin, padding, sidePadding;
@@ -44,6 +44,8 @@ class JumpingButton extends StatelessWidget {
     this.sidePadding,
     this.isDisable = false,
     this.isFileBoxShow = false,
+    this.opacity,
+    this.scale,
   });
 
   ValueNotifier<bool> isClick = ValueNotifier(false);
@@ -70,14 +72,17 @@ class JumpingButton extends StatelessWidget {
             return GestureDetector(
               onTap: isDisable! ? null : onTaps,
               child: TweenAnimationBuilder<double>(
-                tween: Tween(begin: 1, end: isvalue ? 0.8 : 1),
+                tween: Tween(
+                  begin: 1,
+                  end: isvalue ? scale?.clamp(0, 1) ?? 0.9 : 1,
+                ),
                 duration: Duration(milliseconds: 100),
                 builder: (context, value, chil) {
                   return Transform.scale(
                     scale: value,
                     child: AnimatedOpacity(
                       duration: Duration(milliseconds: 100),
-                      opacity: isvalue ? 0.3 : 1,
+                      opacity: isvalue ? opacity?.clamp(0, 1) ?? 0.3 : 1,
                       child: isFileBoxShow!
                           ? chil
                           : (label != null
