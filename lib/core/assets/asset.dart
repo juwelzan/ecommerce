@@ -27,4 +27,8 @@ class Asset {
   static const String jpegAppleWhite = "assets/ios17/iphone-17-white918.jpeg";
   static const String visibilityOn = "assets/svg/eye.svg";
   static const String visibilityOff = "assets/svg/eye-crossed.svg";
+  static const String waldLottie = "assets/lottie/Globe-Animation.lottie";
+  static const String emailLottie = "assets/lottie/Animated-Email.lottie";
+  static const String phoneNumberLottie = "assets/lottie/Number-Phone.lottie";
+  static const String userLottie = "assets/lottie/Users.lottie";
 }

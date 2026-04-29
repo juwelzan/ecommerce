@@ -1,4 +1,6 @@
 import 'package:ecommerce/features/auth/widget/auth_widget.dart';
+import 'package:ecommerce/features/auth/widget/i_have_an_account.dart';
+import 'package:ecommerce/features/auth/widget/text_field_eliment.dart';
 import 'package:ecommerce/shared/path/paths.dart';
 import 'package:ecommerce/shared/widget/jumping_button.dart';
 
@@ -11,6 +13,9 @@ class LoginWithEmailPass extends StatefulWidget {
 }
 
 class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +24,7 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
           mainAxisAlignment: .center,
           crossAxisAlignment: .center,
           children: [
+            SizedBox(height: 150),
             AuthWidget(
               title: "Welcome Back",
               subTitle: "enter your email & password",
@@ -30,19 +36,19 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
               child: Column(
                 children: [
                   TextFormField(
-                    decoration: _decoration(
+                    decoration: decorationEliment(
                       hintText: "email@example.com",
                       labelText: "Email",
                     ),
-                    style: _textStyle(),
+                    style: textStyleEliment(),
                   ),
                   SizedBox(height: 20),
                   TextFormField(
-                    decoration: _decoration(
+                    decoration: decorationEliment(
                       hintText: "0-9:A-Z:a-z:!*.etc",
                       labelText: "Password",
                     ),
-                    style: _textStyle(),
+                    style: textStyleEliment(),
                   ),
 
                   SizedBox(height: 10),
@@ -66,32 +72,19 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
               isFileBoxShow: true,
               margin: const EdgeInsets.symmetric(horizontal: 20),
             ),
+            SizedBox(height: 80),
+            IHaveAnAccount(),
+            SizedBox(height: 20),
           ],
         ),
       ),
     );
   }
-}
 
-InputDecoration _decoration({
-  bool? isError = false,
-  String? errorText,
-  String? labelText,
-  String? hintText,
-}) {
-  return InputDecoration(
-    filled: isError,
-    hintText: hintText,
-    hintStyle: TextStyle(fontSize: 20, color: Colors.black38),
-    labelText: labelText,
-    labelStyle: TextStyle(fontSize: 20, color: Colors.black38),
-    fillColor: isError! ? Colors.redAccent.withValues(alpha: 0.2) : null,
-    errorText: isError ? errorText : null,
-
-    // focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10),borderSide: BorderSide(width: 3.5,color: )),
-  );
-}
-
-TextStyle _textStyle() {
-  return TextStyle(fontSize: 20);
+  @override
+  void dispose() {
+    email.dispose();
+    password.dispose();
+    super.dispose();
+  }
 }

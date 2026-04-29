@@ -1,6 +1,7 @@
 import 'package:ecommerce/features/auth/ui/login_screnn.dart';
 import 'package:ecommerce/features/auth/ui/login_with_email_pass.dart';
 import 'package:ecommerce/features/auth/ui/otp_verify_screen.dart';
+import 'package:ecommerce/features/auth/ui/signup/numbar_set_screen.dart';
 import 'package:ecommerce/features/home_screen/presentation/home_scree.dart';
 import 'package:ecommerce/shared/path/paths.dart';
 import 'package:go_router/go_router.dart';
@@ -8,7 +9,7 @@ import 'package:go_router/go_router.dart';
 class AppRoute {
   AppRoute._();
   static GoRouter goRouter = GoRouter(
-    initialLocation: LoginWithEmailPass.name,
+    initialLocation: NumbarSetScreen.name,
     routes: [
       GoRoute(
         path: HomeScreen.name,
@@ -37,6 +38,10 @@ class AppRoute {
       GoRoute(
         path: LoginWithEmailPass.name,
         pageBuilder: (context, state) => fadeTransition(LoginWithEmailPass()),
+      ),
+      GoRoute(
+        path: NumbarSetScreen.name,
+        pageBuilder: (context, state) => fadeTransition(NumbarSetScreen()),
       ),
     ],
   );

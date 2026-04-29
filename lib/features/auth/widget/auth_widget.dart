@@ -3,6 +3,7 @@ import 'package:ecommerce/shared/path/paths.dart';
 class AuthWidget extends StatelessWidget {
   final String? title, subTitle;
   final double? titleSize, subTitleSize, logoSize;
+  final bool? showIcon;
   const AuthWidget({
     super.key,
     this.title,
@@ -10,6 +11,7 @@ class AuthWidget extends StatelessWidget {
     this.titleSize,
     this.subTitleSize,
     this.logoSize,
+    this.showIcon = true,
   });
 
   @override
@@ -21,7 +23,8 @@ class AuthWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
 
         children: [
-          SvgPicture.asset(Asset.logoSVG, width: logoSize ?? 130.w),
+          if (showIcon!)
+            SvgPicture.asset(Asset.logoSVG, width: logoSize ?? 130.w),
           Gap(h: 20.h),
           if (title != null)
             Text(
