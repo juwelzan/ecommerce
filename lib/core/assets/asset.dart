@@ -30,7 +30,7 @@ class Asset {
   static const String waldLottie = "assets/lottie/Globe-World.lottie";
   static const String emailLottie = "assets/lottie/Animated-Email.lottie";
   static const String phoneNumberLottie = "assets/lottie/Number-Phone.lottie";
-  static const String userLottie = "assets/lottie/Users.lottie";
+  static const String userLottie = "assets/lottie/usersearching.lottie";
   static const String passwordLottie =
       "assets/lottie/Password-Authentication.lottie";
 }

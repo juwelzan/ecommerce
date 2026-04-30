@@ -73,6 +73,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 Gap(h: 30.h),
                 IHaveAnAccount(),
                 Gap(h: 50.h),
+                Container(),
               ],
             ),
           ),
