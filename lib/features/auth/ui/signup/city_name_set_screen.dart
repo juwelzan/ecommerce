@@ -1,14 +1,13 @@
-import 'package:ecommerce/features/auth/ui/signup/password_set_screen.dart';
-import 'package:ecommerce/shared/path/paths.dart';
+import '../../../../shared/path/paths.dart';
 
-class EmailSetScreen extends StatefulWidget {
-  const EmailSetScreen({super.key});
+class CityNameSetScreen extends StatefulWidget {
+  const CityNameSetScreen({super.key});
 
   @override
-  State<EmailSetScreen> createState() => _EmailSetScreenState();
+  State<CityNameSetScreen> createState() => _CityNameSetScreenState();
 }
 
-class _EmailSetScreenState extends State<EmailSetScreen> {
+class _CityNameSetScreenState extends State<CityNameSetScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,23 +16,23 @@ class _EmailSetScreenState extends State<EmailSetScreen> {
           crossAxisAlignment: .center,
           mainAxisAlignment: .center,
           children: [
-            SizedBox(height: 80),
+            SizedBox(height: 100),
             Center(
-              child: LottiePlayer(path: Asset.emailLottie, w: 200, fit: .cover),
+              child: LottiePlayer(path: Asset.waldLottie, w: 350, fit: .cover),
             ),
 
             AuthWidget(
               showIcon: false,
-              title: "Email",
-              subTitle: "Enter your valid email",
+              title: "City",
+              subTitle: "Enter your city name",
             ),
             SizedBox(height: 40),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: TextFormField(
                 decoration: decorationEliment(
-                  labelText: "Email",
-                  hintText: "email@exampl.com",
+                  labelText: "City",
+                  hintText: "Dhaka",
                 ),
                 style: textStyleEliment(),
               ),
@@ -46,12 +45,6 @@ class _EmailSetScreenState extends State<EmailSetScreen> {
               opacity: 1,
               margin: EdgeInsets.symmetric(horizontal: 20),
               child: SvgPicture.asset(Asset.googleIconSVG),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => PasswordSetScreen()),
-                );
-              },
             ),
           ],
         ),

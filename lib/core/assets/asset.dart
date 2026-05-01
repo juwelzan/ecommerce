@@ -27,10 +27,9 @@ class Asset {
   static const String jpegAppleWhite = "assets/ios17/iphone-17-white918.jpeg";
   static const String visibilityOn = "assets/svg/eye.svg";
   static const String visibilityOff = "assets/svg/eye-crossed.svg";
-  static const String waldLottie = "assets/lottie/Globe-World.lottie";
-  static const String emailLottie = "assets/lottie/Animated-Email.lottie";
-  static const String phoneNumberLottie = "assets/lottie/Number-Phone.lottie";
-  static const String userLottie = "assets/lottie/usersearching.lottie";
-  static const String passwordLottie =
-      "assets/lottie/Password-Authentication.lottie";
+  static const String waldLottie = "assets/lottie/GlobeAnimation.json";
+  static const String emailLottie = "assets/lottie/Mail.json";
+  static const String phoneNumberLottie = "assets/lottie/PhoneCall.json";
+  static const String userLottie = "assets/lottie/Users.json";
+  static const String passwordLottie = "assets/lottie/moving_keys.json.json";
 }

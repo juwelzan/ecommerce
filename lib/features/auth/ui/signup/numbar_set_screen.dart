@@ -19,7 +19,13 @@ class _NumbarSetScreenState extends State<NumbarSetScreen> {
           mainAxisAlignment: .center,
           children: [
             SizedBox(height: 80),
-            Center(child: DotLottieViewWidget(path: Asset.phoneNumberLottie)),
+            Center(
+              child: LottiePlayer(
+                path: Asset.phoneNumberLottie,
+                h: 200,
+                w: 200,
+              ),
+            ),
 
             AuthWidget(
               showIcon: false,

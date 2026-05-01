@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/auth/ui/signup/confirm_passward_screen.dart';
 import 'package:ecommerce/shared/path/paths.dart';
 
 class PasswordSetScreen extends StatefulWidget {
@@ -16,8 +17,14 @@ class _PasswordSetScreenState extends State<PasswordSetScreen> {
           crossAxisAlignment: .center,
           mainAxisAlignment: .center,
           children: [
-            SizedBox(height: 80),
-            Center(child: DotLottieViewWidget(path: Asset.passwordLottie)),
+            SizedBox(height: 100),
+            Center(
+              child: LottiePlayer(
+                path: Asset.passwordLottie,
+                w: 350,
+                fit: .cover,
+              ),
+            ),
 
             AuthWidget(
               showIcon: false,
@@ -29,8 +36,8 @@ class _PasswordSetScreenState extends State<PasswordSetScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: TextFormField(
                 decoration: decorationEliment(
-                  labelText: "Phone",
-                  hintText: "01*********",
+                  labelText: "Password",
+                  hintText: "*********",
                 ),
                 style: textStyleEliment(),
               ),
@@ -43,6 +50,14 @@ class _PasswordSetScreenState extends State<PasswordSetScreen> {
               opacity: 1,
               margin: EdgeInsets.symmetric(horizontal: 20),
               child: SvgPicture.asset(Asset.googleIconSVG),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ConfirmPasswardScreen(),
+                  ),
+                );
+              },
             ),
           ],
         ),
