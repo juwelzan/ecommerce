@@ -14,6 +14,7 @@ export 'package:ecommerce/core/router/app_route.dart';
 export 'package:ecommerce/core/themes/app_theme.dart';
 export 'package:ecommerce/core/themes/logic/theme_controller.dart';
 export 'package:ecommerce/features/auth/widget/auth_widget.dart';
+export 'package:ecommerce/features/auth/widget/singnup_screen_model.dart';
 export 'package:ecommerce/features/auth/widget/text_field_eliment.dart';
 export 'package:ecommerce/features/cart_screen/widget/card_botton_box.dart';
 export 'package:ecommerce/features/cart_screen/widget/cart_container.dart';

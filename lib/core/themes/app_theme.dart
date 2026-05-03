@@ -40,16 +40,16 @@ class AppTheme {
     inputDecorationTheme: InputDecorationTheme(
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10.r),
-        borderSide: BorderSide(width: 2, color: AppColors.darkPrimary),
+        borderSide: BorderSide(width: 2.5, color: AppColors.darkPrimary),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10.r),
-        borderSide: BorderSide(width: 3.5, color: AppColors.darkPrimary),
+        borderSide: BorderSide(width: 3, color: AppColors.darkPrimary),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
         borderSide: BorderSide(
-          width: 3.5,
+          width: 3,
           color: Colors.redAccent.withValues(alpha: 0.8),
         ),
       ),

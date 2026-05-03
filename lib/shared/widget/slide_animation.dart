@@ -60,9 +60,9 @@ class _SlideAnimationState extends State<SlideAnimation>
 }
 
 class SlideController {
-  AnimationController? _controller;
-  void attach(AnimationController controller) {
-    _controller = controller;
+  AnimationController? controller;
+  void attach(AnimationController anicontroller) {
+    controller = anicontroller;
   }
 
   SlideController({
@@ -76,8 +76,8 @@ class SlideController {
   final Offset? offsetBegin, offsetEnd;
   final Opacitys? opacity;
 
-  void forward() => _controller?.forward();
-  void reverse() => _controller?.reverse();
+  void forward() => controller?.forward();
+  void reverse() => controller?.reverse();
 }
 
 extension SlideExtension on Widget {
