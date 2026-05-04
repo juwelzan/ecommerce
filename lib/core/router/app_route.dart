@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/auth/model/signup_model.dart';
 import 'package:ecommerce/features/auth/ui/login_screnn.dart';
 import 'package:ecommerce/features/auth/ui/login_with_email_pass.dart';
 import 'package:ecommerce/features/auth/ui/otp_verify_screen.dart';
@@ -46,20 +47,23 @@ class AppRoute {
       ),
       GoRoute(
         path: NumbarSetScreen.name,
-        builder: (context, state) => NumbarSetScreen(),
+        builder: (context, state) =>
+            NumbarSetScreen(signupModel: state.extra as SignupModel),
       ),
       GoRoute(
         path: CityNameSetScreen.name,
-        builder: (context, state) => CityNameSetScreen(),
+        builder: (context, state) =>
+            CityNameSetScreen(signupModel: state.extra as SignupModel),
       ),
       GoRoute(
         path: ConfirmPasswardScreen.name,
         builder: (context, state) =>
-            ConfirmPasswardScreen(pass: state.extra as String),
+            ConfirmPasswardScreen(signupModel: state.extra as SignupModel),
       ),
       GoRoute(
         path: EmailSetScreen.name,
-        builder: (context, state) => EmailSetScreen(),
+        builder: (context, state) =>
+            EmailSetScreen(signupModel: state.extra as SignupModel),
       ),
       GoRoute(
         path: NameSetScreen.name,
@@ -67,7 +71,8 @@ class AppRoute {
       ),
       GoRoute(
         path: PasswordSetScreen.name,
-        builder: (context, state) => PasswordSetScreen(),
+        builder: (context, state) =>
+            PasswordSetScreen(signupModel: state.extra as SignupModel),
       ),
     ],
   );

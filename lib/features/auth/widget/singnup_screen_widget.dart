@@ -14,7 +14,7 @@ class SingnupScreenModel extends StatefulWidget {
       hintText2,
       lable2;
 
-  final Function(String fastFild, String? secondFild)? onSubmitText;
+  final bool? Function(String fastFild, String? secondFild)? onSubmitText;
   final String? Function(String? value)? validator1;
   final String? Function(String? value)? validator2;
   final bool? isShowSecondFild;
@@ -173,13 +173,14 @@ class _SingnupScreenModelState extends State<SingnupScreenModel> {
                       ),
                     SizedBox(height: 40),
                     JumpingButton(
-                      width: double.infinity,
                       scale: 0.95,
+
+                      isLoding: false,
                       isFileBoxShow: true,
                       opacity: 1,
                       onTap: animationback,
 
-                      child: SvgPicture.asset(Asset.googleIconSVG),
+                      child: SvgPicture.asset(Asset.svgAdd),
                     ).slideMotion(controller: button),
                   ],
                 ),

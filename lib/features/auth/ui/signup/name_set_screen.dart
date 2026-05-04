@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/auth/model/signup_model.dart';
 import 'package:ecommerce/features/auth/ui/signup/email_set_screen.dart';
 import 'package:ecommerce/shared/path/paths.dart';
 import 'package:go_router/go_router.dart';
@@ -36,7 +37,10 @@ class NameSetScreen extends StatelessWidget {
         return null;
       },
       onSubmitText: (fastFild, secondFild) {
-        context.pushReplacement(EmailSetScreen.name);
+        context.pushReplacement(
+          EmailSetScreen.name,
+          extra: SignupModel(fastName: fastFild, lastName: secondFild),
+        );
       },
     );
   }

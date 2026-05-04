@@ -5,7 +5,7 @@ class Asset {
   static const String navLogoPNG = "$_baseUrl/logo/logo_nav.png";
   static const String logoSVG = "$_baseUrl/logo/logo.svg";
   static const String logoPNG = "$_baseUrl/logo/logo.png";
-  static const String lottieLoading = "$_baseUrl/lottie/gradient Spinner.json";
+  static const String lottieLoading = "assets/lottie/gradientSpinner.json";
   static const String lottieLoder = "$_baseUrl/lottie/loder.json";
   static const String googleIconSVG = "assets/svg/icons8-google.svg";
 

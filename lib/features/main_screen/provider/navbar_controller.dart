@@ -1,4 +1,3 @@
-import 'package:ecommerce/features/auth/presentation/login_screen.dart';
 import 'package:ecommerce/features/cart_screen/ui/cart_screen.dart';
 import 'package:ecommerce/features/category_screen/ui/category_screen.dart';
 import 'package:ecommerce/features/home_screen/presentation/home_scree.dart';
@@ -28,8 +27,6 @@ class NavbarController with ChangeNotifier {
     HomeScreen(),
     CategoryScreen(),
     CartScreen(),
-
-    LoginScreen(),
   ];
   void copyWith({int? index}) {
     pageIndex = index ?? pageIndex;

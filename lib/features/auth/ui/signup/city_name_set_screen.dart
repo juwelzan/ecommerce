@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/auth/model/signup_model.dart';
 import 'package:ecommerce/features/auth/ui/signup/numbar_set_screen.dart';
 import 'package:ecommerce/features/auth/ui/signup/password_set_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -5,8 +6,9 @@ import 'package:go_router/go_router.dart';
 import '../../../../shared/path/paths.dart';
 
 class CityNameSetScreen extends StatelessWidget {
+  final SignupModel signupModel;
   static const String name = "/CityNameSetScreen";
-  const CityNameSetScreen({super.key});
+  const CityNameSetScreen({super.key, required this.signupModel});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,17 @@ class CityNameSetScreen extends StatelessWidget {
       },
 
       onSubmitText: (fastFild, secondFild) {
-        context.pushReplacement(PasswordSetScreen.name);
+        context.pushReplacement(
+          PasswordSetScreen.name,
+          extra: SignupModel(
+            fastName: signupModel.fastName,
+            lastName: signupModel.lastName,
+            email: signupModel.email,
+            number: signupModel.number,
+            city: fastFild,
+          ),
+        );
+        return null;
       },
     );
   }
