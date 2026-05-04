@@ -17,7 +17,10 @@ class PasswordSetScreen extends StatelessWidget {
       lottie: Asset.passwordLottie,
       backScreenPath: CityNameSetScreen.name,
       onSubmitText: (fastFild, secondFild) {
-        context.pushNamed(ConfirmPasswardScreen.name);
+        context.pushReplacement(
+          ConfirmPasswardScreen.name,
+          extra: fastFild.trim(),
+        );
       },
     );
   }

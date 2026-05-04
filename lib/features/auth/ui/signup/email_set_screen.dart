@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/auth/logic/validation.dart';
 import 'package:ecommerce/features/auth/ui/signup/name_set_screen.dart';
 import 'package:ecommerce/features/auth/ui/signup/numbar_set_screen.dart';
 import 'package:ecommerce/shared/path/paths.dart';
@@ -12,12 +13,19 @@ class EmailSetScreen extends StatelessWidget {
     return SingnupScreenModel(
       title: "Email",
       subTitle: "Enter valid email",
-      hintText: "01000000000",
-      lable: "Phone",
-      lottie: Asset.passwordLottie,
+      hintText: "@mail.com",
+      lable: "Email",
+      lottie: Asset.emailLottie,
       backScreenPath: NameSetScreen.name,
       onSubmitText: (fastFild, secondFild) {
         context.pushReplacement(NumbarSetScreen.name);
+      },
+      validator1: (value) {
+        if (!Validation.email(value!)) {
+          return "invalid email";
+        } else {
+          return null;
+        }
       },
     );
   }

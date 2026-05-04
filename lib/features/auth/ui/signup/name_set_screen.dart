@@ -17,6 +17,24 @@ class NameSetScreen extends StatelessWidget {
       hintText2: "islam,mia,roy etc",
       lottie: Asset.userLottie,
       isShowSecondFild: true,
+      validator1: (value) {
+        if (value!.isEmpty) {
+          return "enter your fast name";
+        }
+        if (value.length < 5) {
+          return "enter your correct fast name";
+        }
+        return null;
+      },
+      validator2: (value) {
+        if (value!.isEmpty) {
+          return "enter your last name";
+        }
+        if (value.length < 3) {
+          return "enter your correct last name";
+        }
+        return null;
+      },
       onSubmitText: (fastFild, secondFild) {
         context.pushReplacement(EmailSetScreen.name);
       },

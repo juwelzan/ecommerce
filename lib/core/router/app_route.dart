@@ -14,7 +14,7 @@ import 'package:go_router/go_router.dart';
 class AppRoute {
   AppRoute._();
   static GoRouter goRouter = GoRouter(
-    initialLocation: ConfirmPasswardScreen.name,
+    initialLocation: NameSetScreen.name,
     routes: [
       GoRoute(
         path: HomeScreen.name,
@@ -46,28 +46,28 @@ class AppRoute {
       ),
       GoRoute(
         path: NumbarSetScreen.name,
-        pageBuilder: (context, state) => fadeTransition(NumbarSetScreen()),
+        builder: (context, state) => NumbarSetScreen(),
       ),
       GoRoute(
         path: CityNameSetScreen.name,
-        pageBuilder: (context, state) => fadeTransition(CityNameSetScreen()),
+        builder: (context, state) => CityNameSetScreen(),
       ),
       GoRoute(
         path: ConfirmPasswardScreen.name,
-        pageBuilder: (context, state) =>
-            fadeTransition(ConfirmPasswardScreen()),
+        builder: (context, state) =>
+            ConfirmPasswardScreen(pass: state.extra as String),
       ),
       GoRoute(
         path: EmailSetScreen.name,
-        pageBuilder: (context, state) => fadeTransition(EmailSetScreen()),
+        builder: (context, state) => EmailSetScreen(),
       ),
       GoRoute(
         path: NameSetScreen.name,
-        pageBuilder: (context, state) => fadeTransition(NameSetScreen()),
+        builder: (context, state) => NameSetScreen(),
       ),
       GoRoute(
         path: PasswordSetScreen.name,
-        pageBuilder: (context, state) => fadeTransition(PasswordSetScreen()),
+        builder: (context, state) => PasswordSetScreen(),
       ),
     ],
   );

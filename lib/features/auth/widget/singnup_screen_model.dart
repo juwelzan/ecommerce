@@ -43,8 +43,8 @@ class SingnupScreenModel extends StatefulWidget {
 }
 
 class _SingnupScreenModelState extends State<SingnupScreenModel> {
-  GlobalKey<FormState> textFormKey1 = GlobalKey<FormState>();
-  GlobalKey<FormState> textFormKey2 = GlobalKey<FormState>();
+  // GlobalKey<FormState> textFormKey1 = GlobalKey<FormState>();
+  // GlobalKey<FormState> textFormKey2 = GlobalKey<FormState>();
   final controll1 = SlideController(
     duration: Duration(milliseconds: 700),
     reversDuration: Duration(milliseconds: 700),
@@ -108,7 +108,8 @@ class _SingnupScreenModelState extends State<SingnupScreenModel> {
               Center(
                 child: Lottie.asset(
                   widget.lottie ?? Asset.phoneNumberLottie,
-                  width: 250,
+                  width: 300,
+                  height: 300,
                 ),
               ).slideMotion(controller: controll1),
               SizedBox(height: 10),
@@ -134,15 +135,15 @@ class _SingnupScreenModelState extends State<SingnupScreenModel> {
                     ).slideMotion(controller: title),
                     SizedBox(height: 30),
                     Form(
-                      key: textFormKey1,
+                      key: formKeys[0],
                       child: TextFormField(
                         controller: textEditingController,
                         onChanged: (value) {
                           if (widget.validator1 != null) {
-                            textFormKey1.currentState!.validate();
+                            formKeys[0].currentState!.validate();
                           }
                         },
-                        validator: widget.validator2,
+                        validator: widget.validator1,
                         decoration: decorationEliment(
                           labelText: widget.lable,
                           hintText: widget.hintText,
@@ -153,13 +154,13 @@ class _SingnupScreenModelState extends State<SingnupScreenModel> {
                     if (widget.isShowSecondFild!) SizedBox(height: 20),
                     if (widget.isShowSecondFild!)
                       Form(
-                        key: textFormKey2,
+                        key: formKeys[1],
                         child: TextFormField(
                           controller: lastnameController,
                           validator: widget.validator2,
                           onChanged: (value) {
                             if (widget.validator2 != null) {
-                              textFormKey2.currentState?.validate();
+                              formKeys[1].currentState?.validate();
                             }
                           },
 
@@ -176,20 +177,9 @@ class _SingnupScreenModelState extends State<SingnupScreenModel> {
                       scale: 0.95,
                       isFileBoxShow: true,
                       opacity: 1,
+                      onTap: animationback,
 
                       child: SvgPicture.asset(Asset.googleIconSVG),
-                      onTap: () async {
-                        controll1.reverse();
-                        controll2.reverse();
-                        title.reverse();
-                        textfield.reverse();
-                        button.reverse();
-
-                        await Future.delayed(
-                          Duration(milliseconds: 1000),
-                          onClick,
-                        );
-                      },
                     ).slideMotion(controller: button),
                   ],
                 ),
@@ -214,15 +204,63 @@ class _SingnupScreenModelState extends State<SingnupScreenModel> {
     super.dispose();
   }
 
-  void onClick() {
-    LoggerLog.logI("message");
+  List<GlobalKey<FormState>> formKeys = [
+    GlobalKey<FormState>(),
+    GlobalKey<FormState>(),
+  ];
+
+  void animationback() {
+    if (widget.onSubmitText == null) return;
     if (widget.isShowSecondFild!) {
-      widget.onSubmitText?.call(
-        textEditingController.text,
-        lastnameController.text,
-      );
+      if (widget.validator1 != null && widget.validator2 != null) {
+        if (formKeyValid()) {
+          reverseAllAnimations();
+          Future.delayed(Duration(milliseconds: 1000), onClick);
+        }
+      } else if (widget.validator1 != null || widget.validator2 != null) {
+        if ((formKeys[0].currentState!.validate() ||
+            formKeys[0].currentState!.validate())) {
+          reverseAllAnimations();
+          Future.delayed(Duration(milliseconds: 1000), onClick);
+        }
+      } else {
+        reverseAllAnimations();
+        Future.delayed(Duration(milliseconds: 1000), onClick);
+      }
     } else {
-      widget.onSubmitText?.call(textEditingController.text, null);
+      if (widget.validator1 != null) {
+        if (formKeys[0].currentState!.validate()) {
+          reverseAllAnimations();
+          Future.delayed(Duration(milliseconds: 1000), onClick);
+        }
+      } else {
+        reverseAllAnimations();
+        Future.delayed(Duration(milliseconds: 1000), onClick);
+      }
     }
+  }
+
+  bool formKeyValid() {
+    for (var key in formKeys) {
+      if (!key.currentState!.validate()) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  void onClick() {
+    widget.onSubmitText?.call(
+      textEditingController.text,
+      lastnameController.text,
+    );
+  }
+
+  void reverseAllAnimations() {
+    controll1.reverse();
+    controll2.reverse();
+    title.reverse();
+    textfield.reverse();
+    button.reverse();
   }
 }

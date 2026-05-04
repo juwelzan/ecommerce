@@ -11,12 +11,22 @@ class CityNameSetScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingnupScreenModel(
-      title: "Password",
-      subTitle: "Create strong password",
-      hintText: "01000000000",
-      lable: "Phone",
+      title: "City",
+      subTitle: "Enter your city name",
+      hintText: "dhaka,rangpur",
+      lable: "City",
       lottie: Asset.waldLottie,
       backScreenPath: NumbarSetScreen.name,
+      validator1: (value) {
+        if (value!.isEmpty) {
+          return "enter city";
+        }
+        if (value.length < 4) {
+          return "correct name";
+        }
+        return null;
+      },
+
       onSubmitText: (fastFild, secondFild) {
         context.pushReplacement(PasswordSetScreen.name);
       },
