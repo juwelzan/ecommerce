@@ -57,6 +57,12 @@ class _SlideAnimationState extends State<SlideAnimation>
       },
     );
   }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 }
 
 class SlideController {

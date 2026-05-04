@@ -5,11 +5,19 @@ import 'package:lottie/lottie.dart';
 
 class SingnupScreenModel extends StatefulWidget {
   final VoidCallback? onTap;
-  final String? title, subTitle, hintText, lable, lottie, backScreenPath;
+  final String? title,
+      subTitle,
+      hintText,
+      lable,
+      lottie,
+      backScreenPath,
+      hintText2,
+      lable2;
 
-  final Function(String text)? onSubmit;
-  final Function(String fastname, String lastName)? onSubmitName;
-  final String? Function(String? value)? validator;
+  final Function(String fastFild, String? secondFild)? onSubmitText;
+  final String? Function(String? value)? validator1;
+  final String? Function(String? value)? validator2;
+  final bool? isShowSecondFild;
 
   const SingnupScreenModel({
     super.key,
@@ -19,12 +27,15 @@ class SingnupScreenModel extends StatefulWidget {
     this.hintText,
     this.lable,
     this.lottie,
-    this.onSubmit,
 
     this.backScreenPath,
 
-    this.onSubmitName,
-    this.validator,
+    this.validator1,
+    this.validator2,
+    this.hintText2,
+    this.lable2,
+    this.onSubmitText,
+    this.isShowSecondFild = false,
   });
 
   @override
@@ -32,7 +43,8 @@ class SingnupScreenModel extends StatefulWidget {
 }
 
 class _SingnupScreenModelState extends State<SingnupScreenModel> {
-  GlobalKey<FormState> textFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> textFormKey1 = GlobalKey<FormState>();
+  GlobalKey<FormState> textFormKey2 = GlobalKey<FormState>();
   final controll1 = SlideController(
     duration: Duration(milliseconds: 700),
     reversDuration: Duration(milliseconds: 700),
@@ -88,102 +100,102 @@ class _SingnupScreenModelState extends State<SingnupScreenModel> {
       },
       child: Scaffold(
         body: SingleChildScrollView(
-          child: Form(
-            key: textFormKey,
-            child: Column(
-              crossAxisAlignment: .center,
-              mainAxisAlignment: .center,
-              children: [
-                SizedBox(height: 80),
-                Center(
-                  child: Lottie.asset(
-                    widget.lottie ?? Asset.phoneNumberLottie,
-                    width: 250,
-                  ),
-                ).slideMotion(controller: controll1),
-                SizedBox(height: 10),
-                Container(
-                  padding: EdgeInsets.only(
-                    top: 10,
-                    left: 10,
-                    right: 10,
-                    bottom: 40,
-                  ),
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  decoration: BoxDecoration(
-                    color: context.theme.splashColor,
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(width: 2),
-                  ),
-                  child: Column(
-                    children: [
-                      AuthWidget(
-                        showIcon: false,
-                        title: widget.title,
-                        subTitle: widget.subTitle,
-                      ).slideMotion(controller: title),
-                      SizedBox(height: 30),
-                      TextFormField(
+          child: Column(
+            crossAxisAlignment: .center,
+            mainAxisAlignment: .center,
+            children: [
+              SizedBox(height: 80),
+              Center(
+                child: Lottie.asset(
+                  widget.lottie ?? Asset.phoneNumberLottie,
+                  width: 250,
+                ),
+              ).slideMotion(controller: controll1),
+              SizedBox(height: 10),
+              Container(
+                padding: EdgeInsets.only(
+                  top: 10,
+                  left: 10,
+                  right: 10,
+                  bottom: 40,
+                ),
+                margin: EdgeInsets.symmetric(horizontal: 20),
+                decoration: BoxDecoration(
+                  color: context.theme.splashColor,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(width: 2),
+                ),
+                child: Column(
+                  children: [
+                    AuthWidget(
+                      showIcon: false,
+                      title: widget.title,
+                      subTitle: widget.subTitle,
+                    ).slideMotion(controller: title),
+                    SizedBox(height: 30),
+                    Form(
+                      key: textFormKey1,
+                      child: TextFormField(
                         controller: textEditingController,
                         onChanged: (value) {
-                          if (widget.validator != null) {
-                            textFormKey.currentState!.validate();
+                          if (widget.validator1 != null) {
+                            textFormKey1.currentState!.validate();
                           }
                         },
-                        validator: widget.validator,
+                        validator: widget.validator2,
                         decoration: decorationEliment(
                           labelText: widget.lable,
                           hintText: widget.hintText,
                         ),
                         style: textStyleEliment(),
                       ).slideMotion(controller: textfield),
-                      if (widget.onSubmitName != null) SizedBox(height: 20),
-                      if (widget.onSubmitName != null)
-                        TextFormField(
+                    ),
+                    if (widget.isShowSecondFild!) SizedBox(height: 20),
+                    if (widget.isShowSecondFild!)
+                      Form(
+                        key: textFormKey2,
+                        child: TextFormField(
                           controller: lastnameController,
+                          validator: widget.validator2,
+                          onChanged: (value) {
+                            if (widget.validator2 != null) {
+                              textFormKey2.currentState?.validate();
+                            }
+                          },
 
                           decoration: decorationEliment(
-                            labelText: "Last Name",
-                            hintText: "islam,roy etc",
+                            labelText: widget.lable2,
+                            hintText: widget.hintText2,
                           ),
                           style: textStyleEliment(),
                         ).slideMotion(controller: lastname),
-                      SizedBox(height: 40),
-                      JumpingButton(
-                        width: double.infinity,
-                        scale: 0.95,
-                        isFileBoxShow: true,
-                        opacity: 1,
+                      ),
+                    SizedBox(height: 40),
+                    JumpingButton(
+                      width: double.infinity,
+                      scale: 0.95,
+                      isFileBoxShow: true,
+                      opacity: 1,
 
-                        child: SvgPicture.asset(Asset.googleIconSVG),
-                        onTap: () async {
-                          // controll1.reverse();
-                          // controll2.reverse();
-                          // title.reverse();
-                          // textfield.reverse();
-                          // button.reverse();
+                      child: SvgPicture.asset(Asset.googleIconSVG),
+                      onTap: () async {
+                        controll1.reverse();
+                        controll2.reverse();
+                        title.reverse();
+                        textfield.reverse();
+                        button.reverse();
 
-                          await Future.delayed(
-                            Duration(milliseconds: 1000),
-                            () {
-                              if (widget.onTap != null) widget.onTap?.call();
-                              if (widget.onSubmit != null) {
-                                widget.onSubmit?.call(
-                                  textEditingController.text,
-                                );
-                              }
-                              if (widget.onSubmitName != null) {}
-                              if (widget.validator != null) {}
-                            },
-                          );
-                        },
-                      ).slideMotion(controller: button),
-                    ],
-                  ),
-                ).slideMotion(controller: controll2),
-                SizedBox(height: 40),
-              ],
-            ),
+                        await Future.delayed(
+                          Duration(milliseconds: 1000),
+                          onClick,
+                        );
+                      },
+                    ).slideMotion(controller: button),
+                  ],
+                ),
+              ).slideMotion(controller: controll2),
+              SizedBox(height: 40),
+            ],
           ),
         ),
       ),
@@ -195,15 +207,22 @@ class _SingnupScreenModelState extends State<SingnupScreenModel> {
   @override
   void dispose() {
     textEditingController.dispose();
-    controll1.controller?.dispose();
-    controll2.controller?.dispose();
-    title.controller?.dispose();
-    textfield.controller?.dispose();
-    button.controller?.dispose();
-    if (widget.onSubmitName != null) {
-      lastname.controller?.dispose();
+
+    if (widget.isShowSecondFild!) {
       lastnameController.dispose();
     }
     super.dispose();
+  }
+
+  void onClick() {
+    LoggerLog.logI("message");
+    if (widget.isShowSecondFild!) {
+      widget.onSubmitText?.call(
+        textEditingController.text,
+        lastnameController.text,
+      );
+    } else {
+      widget.onSubmitText?.call(textEditingController.text, null);
+    }
   }
 }

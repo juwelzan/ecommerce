@@ -14,7 +14,7 @@ import 'package:go_router/go_router.dart';
 class AppRoute {
   AppRoute._();
   static GoRouter goRouter = GoRouter(
-    initialLocation: NumbarSetScreen.name,
+    initialLocation: ConfirmPasswardScreen.name,
     routes: [
       GoRoute(
         path: HomeScreen.name,

@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/auth/ui/signup/password_set_screen.dart';
 import 'package:ecommerce/shared/path/paths.dart';
 
 class ConfirmPasswardScreen extends StatelessWidget {
@@ -11,6 +12,7 @@ class ConfirmPasswardScreen extends StatelessWidget {
       subTitle: "Create strong password",
       hintText: "01000000000",
       lable: "Phone",
+      backScreenPath: PasswordSetScreen.name,
       lottie: Asset.passwordLottie,
     );
   }

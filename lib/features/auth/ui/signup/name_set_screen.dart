@@ -1,4 +1,6 @@
+import 'package:ecommerce/features/auth/ui/signup/email_set_screen.dart';
 import 'package:ecommerce/shared/path/paths.dart';
+import 'package:go_router/go_router.dart';
 
 class NameSetScreen extends StatelessWidget {
   static const String name = "/NameSetScreen";
@@ -11,8 +13,13 @@ class NameSetScreen extends StatelessWidget {
       subTitle: "Enter your full name",
       hintText: "Md juwel",
       lable: "Fast Name",
+      lable2: "Last Name",
+      hintText2: "islam,mia,roy etc",
       lottie: Asset.userLottie,
-      onSubmitName: (fastname, lastName) {},
+      isShowSecondFild: true,
+      onSubmitText: (fastFild, secondFild) {
+        context.pushReplacement(EmailSetScreen.name);
+      },
     );
   }
 }

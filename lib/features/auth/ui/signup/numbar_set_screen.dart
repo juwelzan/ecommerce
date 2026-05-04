@@ -1,4 +1,5 @@
-import 'package:ecommerce/features/auth/ui/signup/name_set_screen.dart';
+import 'package:ecommerce/features/auth/ui/signup/city_name_set_screen.dart';
+import 'package:ecommerce/features/auth/ui/signup/email_set_screen.dart';
 import 'package:ecommerce/shared/path/paths.dart';
 import 'package:go_router/go_router.dart';
 
@@ -13,8 +14,9 @@ class NumbarSetScreen extends StatelessWidget {
       subTitle: "Enter your personal number",
       hintText: "01000000000",
       lable: "Phone",
-      onSubmit: (text) {
-        context.push(NameSetScreen.name);
+      backScreenPath: EmailSetScreen.name,
+      onSubmitText: (fastFild, secondFild) {
+        context.push(CityNameSetScreen.name);
       },
     );
   }
