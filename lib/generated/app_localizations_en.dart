@@ -300,6 +300,32 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please enter your registered email address to receive password reset instructions.';
 
   @override
+  String get sendResetInstructions => 'Send reset instructions';
+
+  @override
+  String get forgotPasswordSuccess =>
+      'Reset instructions sent. Check your email.';
+
+  @override
+  String get forgotPasswordError =>
+      'Unable to send reset instructions. Please try again.';
+
+  @override
+  String otpSentTo(String email) {
+    return 'A 4-digit OTP code has been sent to $email';
+  }
+
+  @override
+  String get otpSentToEmail =>
+      'A 4-digit OTP code has been sent to your email.';
+
+  @override
+  String get resendOtp => 'Resend';
+
+  @override
+  String get back => 'Back';
+
+  @override
   String get close => 'Close';
 
   @override

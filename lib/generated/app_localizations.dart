@@ -662,6 +662,48 @@ abstract class AppLocalizations {
   /// **'Please enter your registered email address to receive password reset instructions.'**
   String get forgotPasswordBody;
 
+  /// No description provided for @sendResetInstructions.
+  ///
+  /// In en, this message translates to:
+  /// **'Send reset instructions'**
+  String get sendResetInstructions;
+
+  /// No description provided for @forgotPasswordSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset instructions sent. Check your email.'**
+  String get forgotPasswordSuccess;
+
+  /// No description provided for @forgotPasswordError.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to send reset instructions. Please try again.'**
+  String get forgotPasswordError;
+
+  /// No description provided for @otpSentTo.
+  ///
+  /// In en, this message translates to:
+  /// **'A 4-digit OTP code has been sent to {email}'**
+  String otpSentTo(String email);
+
+  /// No description provided for @otpSentToEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'A 4-digit OTP code has been sent to your email.'**
+  String get otpSentToEmail;
+
+  /// No description provided for @resendOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend'**
+  String get resendOtp;
+
+  /// No description provided for @back.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get back;
+
   /// No description provided for @close.
   ///
   /// In en, this message translates to:

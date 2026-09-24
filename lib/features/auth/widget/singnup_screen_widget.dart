@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:ecommerce/shared/path/paths.dart';
 import 'package:ecommerce/shared/widget/slide_animation.dart';
 import 'package:go_router/go_router.dart';
@@ -14,10 +16,13 @@ class SingnupScreenModel extends StatefulWidget {
       hintText2,
       lable2;
 
-  final void Function(String fastFild, String? secondFild)? onSubmitText;
+  final FutureOr<void> Function(String fastFild, String? secondFild)?
+  onSubmitText;
   final String? Function(String? value)? validator1;
   final String? Function(String? value)? validator2;
   final bool? isShowSecondFild;
+  final bool obscureText;
+  final TextInputType? keyboardType;
 
   const SingnupScreenModel({
     super.key,
@@ -36,6 +41,8 @@ class SingnupScreenModel extends StatefulWidget {
     this.lable2,
     this.onSubmitText,
     this.isShowSecondFild = false,
+    this.obscureText = false,
+    this.keyboardType,
   });
 
   @override
@@ -43,6 +50,7 @@ class SingnupScreenModel extends StatefulWidget {
 }
 
 class _SingnupScreenModelState extends State<SingnupScreenModel> {
+  bool _isSubmitting = false;
   // GlobalKey<FormState> textFormKey1 = GlobalKey<FormState>();
   // GlobalKey<FormState> textFormKey2 = GlobalKey<FormState>();
   final controll1 = SlideController(
@@ -99,7 +107,22 @@ class _SingnupScreenModelState extends State<SingnupScreenModel> {
         }
       },
       child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title ?? ''),
+          leading: IconButton(
+            tooltip: context.l10n.back,
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              if (context.canPop()) {
+                context.pop();
+              } else if (widget.backScreenPath != null) {
+                context.go(widget.backScreenPath!);
+              }
+            },
+          ),
+        ),
         body: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Column(
             crossAxisAlignment: .center,
             mainAxisAlignment: .center,
@@ -138,6 +161,8 @@ class _SingnupScreenModelState extends State<SingnupScreenModel> {
                       key: formKeys[0],
                       child: TextFormField(
                         controller: textEditingController,
+                        keyboardType: widget.keyboardType,
+                        obscureText: widget.obscureText,
                         onChanged: (value) {
                           if (widget.validator1 != null) {
                             formKeys[0].currentState!.validate();
@@ -175,7 +200,7 @@ class _SingnupScreenModelState extends State<SingnupScreenModel> {
                     JumpingButton(
                       scale: 0.95,
 
-                      isLoding: false,
+                      isLoding: _isSubmitting,
                       isFileBoxShow: true,
                       opacity: 1,
                       onTap: animationback,
@@ -210,33 +235,34 @@ class _SingnupScreenModelState extends State<SingnupScreenModel> {
     GlobalKey<FormState>(),
   ];
 
-  void animationback() {
+  Future<void> animationback() async {
+    if (_isSubmitting) return;
     if (widget.onSubmitText == null) return;
     if (widget.isShowSecondFild!) {
       if (widget.validator1 != null && widget.validator2 != null) {
         if (formKeyValid()) {
           reverseAllAnimations();
-          Future.delayed(Duration(milliseconds: 1000), onClick);
+          await _submitAfterAnimation();
         }
       } else if (widget.validator1 != null || widget.validator2 != null) {
         if ((formKeys[0].currentState!.validate() ||
             formKeys[0].currentState!.validate())) {
           reverseAllAnimations();
-          Future.delayed(Duration(milliseconds: 1000), onClick);
+          await _submitAfterAnimation();
         }
       } else {
         reverseAllAnimations();
-        Future.delayed(Duration(milliseconds: 1000), onClick);
+        await _submitAfterAnimation();
       }
     } else {
       if (widget.validator1 != null) {
         if (formKeys[0].currentState!.validate()) {
           reverseAllAnimations();
-          Future.delayed(Duration(milliseconds: 1000), onClick);
+          await _submitAfterAnimation();
         }
       } else {
         reverseAllAnimations();
-        Future.delayed(Duration(milliseconds: 1000), onClick);
+        await _submitAfterAnimation();
       }
     }
   }
@@ -250,11 +276,19 @@ class _SingnupScreenModelState extends State<SingnupScreenModel> {
     return true;
   }
 
-  void onClick() {
-    widget.onSubmitText?.call(
+  Future<void> _submitAfterAnimation() async {
+    if (_isSubmitting) return;
+    setState(() => _isSubmitting = true);
+    reverseAllAnimations();
+    await Future<void>.delayed(const Duration(milliseconds: 300));
+    await widget.onSubmitText?.call(
       textEditingController.text,
       lastnameController.text,
     );
+    if (mounted) {
+      forwardAllAnimations();
+      setState(() => _isSubmitting = false);
+    }
   }
 
   void reverseAllAnimations() {
@@ -263,5 +297,13 @@ class _SingnupScreenModelState extends State<SingnupScreenModel> {
     title.reverse();
     textfield.reverse();
     button.reverse();
+  }
+
+  void forwardAllAnimations() {
+    controll1.forward();
+    controll2.forward();
+    title.forward();
+    textfield.forward();
+    button.forward();
   }
 }

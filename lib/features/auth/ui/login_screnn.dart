@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/auth/logic/validation.dart';
 import 'package:ecommerce/features/auth/ui/login_with_email_pass.dart';
 import 'package:ecommerce/features/auth/ui/signup/name_set_screen.dart';
 import 'package:ecommerce/features/auth/widget/i_have_an_account.dart';
@@ -13,6 +14,7 @@ class LoginScrenn extends StatefulWidget {
 }
 
 class _LoginScrennState extends State<LoginScrenn> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final ValueNotifier<bool> isShowPasslod = ValueNotifier<bool>(false);
   final ValueNotifier<bool> google = ValueNotifier<bool>(false);
@@ -26,11 +28,9 @@ class _LoginScrennState extends State<LoginScrenn> {
   }
 
   void _onEmailSubmit() {
+    if (!(_formKey.currentState?.validate() ?? false)) return;
     final emailText = _emailController.text.trim();
-    context.push(
-      LoginWithEmailPass.name,
-      extra: emailText,
-    );
+    context.push(LoginWithEmailPass.name, extra: emailText);
   }
 
   @override
@@ -67,10 +67,22 @@ class _LoginScrennState extends State<LoginScrenn> {
               logoSize: 100,
             ),
             Gap(h: 30.h),
-            _textField(
-              controller: _emailController,
-              labelText: context.l10n.email,
-              hintText: context.l10n.genericEmailExample,
+            Form(
+              key: _formKey,
+              child: _textField(
+                controller: _emailController,
+                labelText: context.l10n.email,
+                hintText: context.l10n.genericEmailExample,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return context.l10n.enterEmail;
+                  }
+                  if (!Validation.email(value.trim())) {
+                    return context.l10n.validEmail;
+                  }
+                  return null;
+                },
+              ),
             ),
             Gap(h: 20.h),
             ValueListenableBuilder<bool>(
@@ -85,9 +97,7 @@ class _LoginScrennState extends State<LoginScrenn> {
               },
             ),
             Gap(h: 20.h),
-            IDontHaveAnAccount(
-              onTap: () => context.push(NameSetScreen.name),
-            ),
+            IDontHaveAnAccount(onTap: () => context.push(NameSetScreen.name)),
             Gap(h: 30.h),
             Row(
               children: [
@@ -107,9 +117,7 @@ class _LoginScrennState extends State<LoginScrenn> {
                 return JumpingButton(
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(context.l10n.googleSoon),
-                      ),
+                      SnackBar(content: Text(context.l10n.googleSoon)),
                     );
                   },
                   color: Colors.transparent,
@@ -162,16 +170,16 @@ Widget _textField({
   String? hintText,
   String? labelText,
   TextEditingController? controller,
+  String? Function(String?)? validator,
 }) {
   return TextFormField(
     controller: controller,
+    validator: validator,
     keyboardType: TextInputType.emailAddress,
     decoration: InputDecoration(
       hintText: hintText,
       labelText: labelText,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       prefixIcon: const Icon(Icons.email_outlined),
     ),
     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),

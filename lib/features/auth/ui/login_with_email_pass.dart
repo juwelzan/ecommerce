@@ -1,4 +1,5 @@
 import 'package:ecommerce/features/auth/logic/validation.dart';
+import 'package:ecommerce/features/auth/ui/forgot_password_screen.dart';
 import 'package:ecommerce/features/auth/ui/login_screnn.dart';
 import 'package:ecommerce/features/auth/ui/signup/name_set_screen.dart';
 import 'package:ecommerce/features/auth/widget/i_have_an_account.dart';
@@ -53,15 +54,13 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
           backgroundColor: Colors.green,
         ),
       );
-      if (context.canPop()) {
-        context.pop();
-      } else {
-        context.go(MainScreen.name);
-      }
+      context.go(MainScreen.name);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(context.localizedError(auth.errorMessage, 'loginError')),
+          content: Text(
+            context.localizedError(auth.errorMessage, 'loginError'),
+          ),
           backgroundColor: Colors.redAccent,
         ),
       );
@@ -69,19 +68,7 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
   }
 
   void _showForgotPasswordDialog() {
-    showDialog<void>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(context.l10n.forgotPassword),
-        content: Text(context.l10n.forgotPasswordBody),
-        actions: [
-          TextButton(
-            onPressed: () => context.pop(),
-            child: Text(context.l10n.close),
-          ),
-        ],
-      ),
-    );
+    context.push(ForgotPasswordScreen.name, extra: email.text.trim());
   }
 
   @override
@@ -126,9 +113,7 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
                   decoration: decorationEliment(
                     hintText: context.l10n.emailExample,
                     labelText: context.l10n.email,
-                  ).copyWith(
-                    prefixIcon: const Icon(Icons.email_outlined),
-                  ),
+                  ).copyWith(prefixIcon: const Icon(Icons.email_outlined)),
                   style: textStyleEliment(),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
@@ -144,22 +129,25 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
                 TextFormField(
                   controller: password,
                   obscureText: _obscurePassword,
-                  decoration: decorationEliment(
-                    hintText: context.l10n.enterPassword,
-                    labelText: context.l10n.password,
-                  ).copyWith(
-                    prefixIcon: const Icon(Icons.lock_outline),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                  decoration:
+                      decorationEliment(
+                        hintText: context.l10n.enterPassword,
+                        labelText: context.l10n.password,
+                      ).copyWith(
+                        prefixIcon: const Icon(Icons.lock_outline),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _obscurePassword
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _obscurePassword = !_obscurePassword;
+                            });
+                          },
+                        ),
                       ),
-                      onPressed: () {
-                        setState(() {
-                          _obscurePassword = !_obscurePassword;
-                        });
-                      },
-                    ),
-                  ),
                   style: textStyleEliment(),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -187,6 +175,7 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
                 Gap(h: 20.h),
                 JumpingButton(
                   isLoding: auth.isLoading,
+                  isDisable: auth.isLoading,
                   label: context.l10n.login,
                   borderRadius: BorderRadius.circular(14.r),
                   color: context.theme.primaryColor,
@@ -201,10 +190,7 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
                   onPressed: () => context.push(LoginScrenn.name),
                   child: Text(
                     context.l10n.otherSignIn,
-                    style: TextStyle(
-                      fontSize: 14.f,
-                      color: Colors.grey,
-                    ),
+                    style: TextStyle(fontSize: 14.f, color: Colors.grey),
                   ),
                 ),
                 Gap(h: 20.h),

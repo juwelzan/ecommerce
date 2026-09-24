@@ -2,6 +2,7 @@ import 'package:ecommerce/features/auth/model/signup_model.dart';
 import 'package:ecommerce/features/auth/ui/login_screnn.dart';
 import 'package:ecommerce/features/auth/ui/login_with_email_pass.dart';
 import 'package:ecommerce/features/auth/ui/otp_verify_screen.dart';
+import 'package:ecommerce/features/auth/ui/forgot_password_screen.dart';
 import 'package:ecommerce/features/auth/ui/signup/city_name_set_screen.dart';
 import 'package:ecommerce/features/auth/ui/signup/confirm_passward_screen.dart';
 import 'package:ecommerce/features/auth/ui/signup/email_set_screen.dart';
@@ -81,7 +82,8 @@ class AppRoute {
       ),
       GoRoute(
         path: SettingsScreen.name,
-        pageBuilder: (context, state) => slideTransition(const SettingsScreen()),
+        pageBuilder: (context, state) =>
+            slideTransition(const SettingsScreen()),
       ),
       GoRoute(
         path: HelpSupportScreen.name,
@@ -99,7 +101,8 @@ class AppRoute {
       ),
       GoRoute(
         path: CheckoutScreen.name,
-        pageBuilder: (context, state) => slideTransition(const CheckoutScreen()),
+        pageBuilder: (context, state) =>
+            slideTransition(const CheckoutScreen()),
       ),
       GoRoute(
         path: LoginScrenn.name,
@@ -107,8 +110,13 @@ class AppRoute {
       ),
       GoRoute(
         path: OtpVerifyScreen.name,
+        pageBuilder: (context, state) =>
+            slideTransition(OtpVerifyScreen(email: state.extra as String?)),
+      ),
+      GoRoute(
+        path: ForgotPasswordScreen.name,
         pageBuilder: (context, state) => slideTransition(
-          OtpVerifyScreen(email: state.extra as String?),
+          ForgotPasswordScreen(initialEmail: state.extra as String?),
         ),
       ),
       GoRoute(
@@ -161,10 +169,7 @@ CustomTransitionPage<void> slideTransition(Widget page) =>
           end: Offset.zero,
         ).chain(CurveTween(curve: Curves.easeOutCubic));
 
-        return SlideTransition(
-          position: animation.drive(tween),
-          child: child,
-        );
+        return SlideTransition(position: animation.drive(tween), child: child);
       },
     );
 
@@ -173,9 +178,10 @@ CustomTransitionPage<void> fadeTransition(Widget page) =>
       child: page,
       transitionDuration: const Duration(milliseconds: 400),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        final fade = Tween(begin: 0.0, end: 1.0).animate(
-          CurvedAnimation(parent: animation, curve: Curves.easeOut),
-        );
+        final fade = Tween(
+          begin: 0.0,
+          end: 1.0,
+        ).animate(CurvedAnimation(parent: animation, curve: Curves.easeOut));
         return FadeTransition(opacity: fade, child: child);
       },
     );

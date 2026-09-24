@@ -17,6 +17,7 @@ class NumbarSetScreen extends StatelessWidget {
       subTitle: context.l10n.personalNumber,
       hintText: context.l10n.phoneExample,
       lable: context.l10n.phone,
+      keyboardType: TextInputType.phone,
       backScreenPath: EmailSetScreen.name,
       validator1: (value) {
         if (!Validation.phone(value!)) {

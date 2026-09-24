@@ -93,6 +93,13 @@
   "loadProductsError": "পণ্য লোড করা যায়নি।",
   "forgotPassword": "পাসওয়ার্ড ভুলে গেছেন?",
   "forgotPasswordBody": "পাসওয়ার্ড পুনরুদ্ধারের নির্দেশনা পেতে আপনার নিবন্ধিত ইমেইল দিন।",
+  "sendResetInstructions": "রিসেট নির্দেশনা পাঠান",
+  "forgotPasswordSuccess": "রিসেট নির্দেশনা পাঠানো হয়েছে। আপনার ইমেইল দেখুন।",
+  "forgotPasswordError": "রিসেট নির্দেশনা পাঠানো যায়নি। আবার চেষ্টা করুন।",
+  "otpSentTo": "{email}-এ ৪ সংখ্যার OTP পাঠানো হয়েছে",
+  "otpSentToEmail": "আপনার ইমেইলে ৪ সংখ্যার OTP পাঠানো হয়েছে।",
+  "resendOtp": "আবার পাঠান",
+  "back": "পেছনে",
   "close": "বন্ধ করুন",
   "welcomeBack": "আবারও স্বাগতম",
   "loginSubtitle": "লগইন করতে ইমেইল ও পাসওয়ার্ড দিন",
@@ -186,6 +193,13 @@
         "type": "int"
       },
       "query": {
+        "type": "String"
+      }
+    }
+  },
+  "@otpSentTo": {
+    "placeholders": {
+      "email": {
         "type": "String"
       }
     }

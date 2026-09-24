@@ -221,7 +221,7 @@ class _OtpPinPutState extends State<OtpPinPut> {
                             width: 70,
                             child: text(
                               key: Key("timeroff"),
-                              text: "resend",
+                              text: context.l10n.resendOtp,
                               onTap: () => time(),
                             ),
                           ),

@@ -39,7 +39,10 @@ class IDontHaveAnAccount extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("${context.l10n.dontHaveAccount} ", style: TextStyle(fontSize: 15.f)),
+        Text(
+          "${context.l10n.dontHaveAccount} ",
+          style: TextStyle(fontSize: 15.f),
+        ),
         GestureDetector(
           onTap: onTap ?? () => context.push(NameSetScreen.name),
           child: Text(

@@ -93,6 +93,13 @@
   "loadProductsError": "Unable to load products.",
   "forgotPassword": "Forgot Password",
   "forgotPasswordBody": "Please enter your registered email address to receive password reset instructions.",
+  "sendResetInstructions": "Send reset instructions",
+  "forgotPasswordSuccess": "Reset instructions sent. Check your email.",
+  "forgotPasswordError": "Unable to send reset instructions. Please try again.",
+  "otpSentTo": "A 4-digit OTP code has been sent to {email}",
+  "otpSentToEmail": "A 4-digit OTP code has been sent to your email.",
+  "resendOtp": "Resend",
+  "back": "Back",
   "close": "Close",
   "welcomeBack": "Welcome Back",
   "loginSubtitle": "Enter your email & password to sign in",
@@ -186,6 +193,13 @@
         "type": "int"
       },
       "query": {
+        "type": "String"
+      }
+    }
+  },
+  "@otpSentTo": {
+    "placeholders": {
+      "email": {
         "type": "String"
       }
     }

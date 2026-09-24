@@ -300,6 +300,31 @@ class AppLocalizationsBn extends AppLocalizations {
       'পাসওয়ার্ড পুনরুদ্ধারের নির্দেশনা পেতে আপনার নিবন্ধিত ইমেইল দিন।';
 
   @override
+  String get sendResetInstructions => 'রিসেট নির্দেশনা পাঠান';
+
+  @override
+  String get forgotPasswordSuccess =>
+      'রিসেট নির্দেশনা পাঠানো হয়েছে। আপনার ইমেইল দেখুন।';
+
+  @override
+  String get forgotPasswordError =>
+      'রিসেট নির্দেশনা পাঠানো যায়নি। আবার চেষ্টা করুন।';
+
+  @override
+  String otpSentTo(String email) {
+    return '$email-এ ৪ সংখ্যার OTP পাঠানো হয়েছে';
+  }
+
+  @override
+  String get otpSentToEmail => 'আপনার ইমেইলে ৪ সংখ্যার OTP পাঠানো হয়েছে।';
+
+  @override
+  String get resendOtp => 'আবার পাঠান';
+
+  @override
+  String get back => 'পেছনে';
+
+  @override
   String get close => 'বন্ধ করুন';
 
   @override

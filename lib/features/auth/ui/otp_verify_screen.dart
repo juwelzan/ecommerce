@@ -24,15 +24,15 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
   Future<void> _handleVerify() async {
     final email = widget.email?.trim() ?? "";
     if (email.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.emailNotFound)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(context.l10n.emailNotFound)));
       return;
     }
     if (_otpCode.length != 4) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.validOtp)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(context.l10n.validOtp)));
       return;
     }
 
@@ -88,8 +88,8 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
             title: context.l10n.validOtp,
             titleSize: 26,
             subTitle: widget.email != null
-                ? "A 4-digit OTP code has been sent to\n${widget.email}"
-                : "A 4-digit OTP code has been sent to your email",
+                ? context.l10n.otpSentTo(widget.email!)
+                : context.l10n.otpSentToEmail,
             subTitleSize: 15,
             logoSize: 100,
           ),
@@ -110,7 +110,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
             valueListenable: isOk,
             builder: (context, value, child) {
               return JumpingButton(
-                isDisable: !value,
+                isDisable: !value || auth.isLoading,
                 isLoding: auth.isLoading,
                 label: context.l10n.verifyOtp,
                 borderRadius: BorderRadius.circular(14.r),

@@ -18,6 +18,8 @@ class ConfirmPasswardScreen extends StatelessWidget {
       lable: context.l10n.password,
       backScreenPath: PasswordSetScreen.name,
       lottie: Asset.passwordLottie,
+      obscureText: true,
+      keyboardType: TextInputType.visiblePassword,
       validator1: (value) {
         if (value == null || value.isEmpty) {
           return context.l10n.enterPasswordError;

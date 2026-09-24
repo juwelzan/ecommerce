@@ -8,7 +8,7 @@ class AuthController extends ChangeNotifier {
   final NetworkCaller _networkCaller;
 
   AuthController({NetworkCaller? networkCaller})
-      : _networkCaller = networkCaller ?? getIt<NetworkCaller>();
+    : _networkCaller = networkCaller ?? getIt<NetworkCaller>();
 
   UserModel? _user;
   String? _token;
@@ -59,10 +59,7 @@ class AuthController extends ChangeNotifier {
     }
   }
 
-  Future<bool> login({
-    required String email,
-    required String password,
-  }) async {
+  Future<bool> login({required String email, required String password}) async {
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
@@ -70,10 +67,7 @@ class AuthController extends ChangeNotifier {
     try {
       final response = await _networkCaller.post(
         url: Urls.postAuthLogin,
-        body: {
-          "email": email.trim(),
-          "password": password,
-        },
+        body: {"email": email.trim(), "password": password},
       );
 
       if (response.isSuccess && response.body != null) {
@@ -100,12 +94,14 @@ class AuthController extends ChangeNotifier {
       }
 
       _isLoading = false;
-      _errorMessage = response.errrorM ?? "Login failed. Please check your credentials.";
+      _errorMessage =
+          response.errrorM ?? "Login failed. Please check your credentials.";
       notifyListeners();
       return false;
     } catch (e) {
       _isLoading = false;
-      _errorMessage = "An unexpected error occurred: $e";
+      _errorMessage = "Unable to sign in right now. Please try again.";
+      LoggerLog.logE("login error: $e");
       notifyListeners();
       return false;
     }
@@ -134,16 +130,15 @@ class AuthController extends ChangeNotifier {
       }
     } catch (e) {
       _isLoading = false;
-      _errorMessage = "An unexpected error occurred: $e";
+      _errorMessage =
+          "Unable to create your account right now. Please try again.";
+      LoggerLog.logE("signup error: $e");
       notifyListeners();
       return false;
     }
   }
 
-  Future<bool> verifyOtp({
-    required String email,
-    required String otp,
-  }) async {
+  Future<bool> verifyOtp({required String email, required String otp}) async {
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
@@ -151,10 +146,7 @@ class AuthController extends ChangeNotifier {
     try {
       final response = await _networkCaller.post(
         url: Urls.postAuthVerifyOtp,
-        body: {
-          "email": email.trim(),
-          "otp": otp.trim(),
-        },
+        body: {"email": email.trim(), "otp": otp.trim()},
       );
 
       if (response.isSuccess && response.body != null) {
@@ -186,7 +178,35 @@ class AuthController extends ChangeNotifier {
       return false;
     } catch (e) {
       _isLoading = false;
-      _errorMessage = "An unexpected error occurred: $e";
+      _errorMessage = "Unable to verify the code right now. Please try again.";
+      LoggerLog.logE("verifyOtp error: $e");
+      notifyListeners();
+      return false;
+    }
+  }
+
+  Future<bool> forgotPassword({required String email}) async {
+    _isLoading = true;
+    _errorMessage = null;
+    notifyListeners();
+
+    try {
+      final response = await _networkCaller.post(
+        url: Urls.postAuthForgotPassword,
+        body: {"email": email.trim()},
+      );
+      _isLoading = false;
+      if (response.isSuccess) {
+        notifyListeners();
+        return true;
+      }
+      _errorMessage = response.errrorM ?? "Unable to send reset instructions.";
+      notifyListeners();
+      return false;
+    } catch (e) {
+      _isLoading = false;
+      _errorMessage = "Unable to send reset instructions. Please try again.";
+      LoggerLog.logE("forgotPassword error: $e");
       notifyListeners();
       return false;
     }
@@ -274,7 +294,9 @@ class AuthController extends ChangeNotifier {
       }
     } catch (e) {
       _isLoading = false;
-      _errorMessage = "An unexpected error occurred: $e";
+      _errorMessage =
+          "Unable to update your profile right now. Please try again.";
+      LoggerLog.logE("updateProfile error: $e");
       notifyListeners();
       return false;
     }

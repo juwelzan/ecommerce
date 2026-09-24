@@ -18,6 +18,8 @@ class PasswordSetScreen extends StatelessWidget {
       lable: context.l10n.password,
       lottie: Asset.passwordLottie,
       backScreenPath: CityNameSetScreen.name,
+      obscureText: true,
+      keyboardType: TextInputType.visiblePassword,
       onSubmitText: (fastFild, secondFild) {
         context.pushReplacement(
           ConfirmPasswardScreen.name,
