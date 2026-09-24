@@ -1,18 +1,27 @@
+import 'package:ecommerce/features/auth/ui/login_with_email_pass.dart';
+import 'package:ecommerce/features/auth/ui/signup/name_set_screen.dart';
 import 'package:ecommerce/shared/path/paths.dart';
+import 'package:go_router/go_router.dart';
 
 class IHaveAnAccount extends StatelessWidget {
-  const IHaveAnAccount({super.key});
+  final VoidCallback? onTap;
+  const IHaveAnAccount({super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("i have an ", style: TextStyle(fontSize: 15.f)),
+        Text("I have an ", style: TextStyle(fontSize: 15.f)),
         GestureDetector(
+          onTap: onTap ?? () => context.push(LoginWithEmailPass.name),
           child: Text(
             "account",
-            style: TextStyle(fontSize: 15.f, color: context.theme.primaryColor),
+            style: TextStyle(
+              fontSize: 15.f,
+              color: context.theme.primaryColor,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         Text("?", style: TextStyle(fontSize: 15.f)),
@@ -22,18 +31,24 @@ class IHaveAnAccount extends StatelessWidget {
 }
 
 class IDontHaveAnAccount extends StatelessWidget {
-  const IDontHaveAnAccount({super.key});
+  final VoidCallback? onTap;
+  const IDontHaveAnAccount({super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("i don't have an ", style: TextStyle(fontSize: 15.f)),
+        Text("Don't have an ", style: TextStyle(fontSize: 15.f)),
         GestureDetector(
+          onTap: onTap ?? () => context.push(NameSetScreen.name),
           child: Text(
             "account",
-            style: TextStyle(fontSize: 15.f, color: context.theme.primaryColor),
+            style: TextStyle(
+              fontSize: 15.f,
+              color: context.theme.primaryColor,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         Text("?", style: TextStyle(fontSize: 15.f)),

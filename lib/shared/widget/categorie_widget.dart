@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ecommerce/shared/model/category_model.dart';
 import 'package:ecommerce/shared/path/paths.dart';
+import 'package:go_router/go_router.dart';
 
 class CategorieWidget extends StatelessWidget {
   final CategoryModel data;
@@ -8,7 +8,9 @@ class CategorieWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return InkWell(
+      onTap: () => context.push(CategoryProductsScreen.name, extra: data),
+      borderRadius: BorderRadius.circular(10.r),
       child: Column(
         children: [
           SingleChildScrollView(
@@ -20,7 +22,7 @@ class CategorieWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10.r),
               ),
               child: CachedNetworkImage(
-                imageUrl: data.icon!,
+                imageUrl: data.icon ?? '',
                 width: 45.w,
                 color: context.theme.primaryColor,
                 fit: .cover,

@@ -15,18 +15,11 @@ class AdsBannerData {
         .map((e) => BannerModel.fromJson(e))
         .toList();
 
-    bannerData.addAll(bannerList);
-    LoggerLog.logI('''
-    ${bannerList.length}
-    ${bannerList[0].imgUrl}
-
-    ${bannerList[3].description}
-
-    ${bannerList[0].product}
-    ${bannerList[0].brand}
-    ${bannerList[0].category}
-    ${bannerList[0].createdAt}
-    ''');
+    bannerData
+      ..clear()
+      ..addAll(bannerList);
+    LoggerLog.logI('Loaded ${bannerList.length} banners');
+    bannerImge.clear();
     getBannerImge(bannerList.length);
   }
 
@@ -41,7 +34,7 @@ class AdsBannerData {
               child: ClipRRect(
                 borderRadius: .circular(15.r),
                 child: CachedNetworkImage(
-                  imageUrl: bannerData[index].imgUrl!,
+                  imageUrl: bannerData[index].imgUrl ?? '',
                   fit: BoxFit.cover,
                   height: 150.h,
                   width: double.infinity,

@@ -1,8 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:ecommerce/core/di/dependency_injection.dart';
 import 'package:ecommerce/core/themes/app_colors.dart';
 import 'package:ecommerce/shared/network_data/get_categories_data.dart';
+import 'package:ecommerce/shared/network_data/get_product_data.dart';
+import 'package:ecommerce/features/home_screen/data/ads_danner_data.dart';
 import 'package:ecommerce/shared/path/paths.dart';
 import 'package:ecommerce/shared/widget/png_logo.dart';
 import 'package:lottie/lottie.dart';
@@ -21,9 +22,21 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.microtask(() {
       context.read<SplashProvider>().startSpash();
       getIt<GetCategoriesData>().getAllCategori();
+      getIt<GetProductData>().getProduct();
+      _loadBanners();
     });
 
     super.initState();
+  }
+
+  Future<void> _loadBanners() async {
+    final response = await getIt<NetworkCaller>().get(
+      url: Urls.getSlideList,
+      unauthorized: () {},
+    );
+    if (response.isSuccess) {
+      AdsBannerData.bannerSeparate(response.body);
+    }
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:ecommerce/shared/path/paths.dart';
+import 'package:go_router/go_router.dart';
 
 class CardBottonBox extends StatelessWidget {
   const CardBottonBox({super.key});
@@ -23,23 +24,30 @@ class CardBottonBox extends StatelessWidget {
           ),
         ],
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text("Total Pricr"), Text("34565365")],
-          ),
-          Container(
-            height: 50,
-            width: 150,
-
-            decoration: BoxDecoration(
-              color: Colors.amber,
-              borderRadius: BorderRadius.circular(10),
+      child: Consumer<CartController>(
+        builder: (context, cart, child) => Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Subtotal'),
+                Text('${cart.subtotal}', style: context.textTheme.titleLarge),
+              ],
             ),
-          ),
-        ],
+            SizedBox(
+              width: 145.w,
+              child: FilledButton.icon(
+                onPressed: cart.items.isEmpty
+                    ? null
+                    : () => context.push(CheckoutScreen.name),
+                icon: const Icon(Icons.lock_outline),
+                label: const Text('Checkout'),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

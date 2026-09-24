@@ -67,8 +67,8 @@ class AppTheme {
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
         backgroundColor: AppColors.lightPrimary,
-        maximumSize: Size(.infinity, 50.h),
-        minimumSize: Size(.infinity, 50.h),
+        maximumSize: Size(double.infinity, 50.h),
+        minimumSize: Size(0, 50.h),
         shape: RoundedSuperellipseBorder(
           borderRadius: BorderRadius.circular(10.r),
         ),
@@ -125,8 +125,8 @@ class AppTheme {
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
         backgroundColor: AppColors.darkPrimary,
-        maximumSize: Size(.infinity, 50.h),
-        minimumSize: Size(.infinity, 50.h),
+        maximumSize: Size(double.infinity, 50.h),
+        minimumSize: Size(0, 50.h),
         shape: RoundedSuperellipseBorder(
           borderRadius: BorderRadius.circular(10.r),
         ),

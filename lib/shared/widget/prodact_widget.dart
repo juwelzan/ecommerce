@@ -1,14 +1,19 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce/core/themes/app_colors.dart';
 import 'package:ecommerce/shared/path/paths.dart';
+import 'package:go_router/go_router.dart';
 
 class ProdactWidget extends StatelessWidget {
-  const ProdactWidget({super.key});
+  final ProductModel? product;
+  const ProdactWidget({super.key, this.product});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print("view");
+        if (product != null) {
+          context.push(ProductDetailsScreen.name, extra: product);
+        }
       },
       child: Container(
         width: 150.w,
@@ -27,7 +32,15 @@ class ProdactWidget extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.all(8.0.r),
-              child: Image.asset(Asset.navbCart, height: 70.h),
+              child: product?.photo == null
+                  ? Image.asset(Asset.navbCart, height: 70.h)
+                  : CachedNetworkImage(
+                      imageUrl: product!.photo!,
+                      height: 70.h,
+                      fit: BoxFit.contain,
+                      errorWidget: (context, url, error) =>
+                          Image.asset(Asset.navbCart, height: 70.h),
+                    ),
             ),
             Gap(h: 10.h),
             Expanded(
@@ -48,7 +61,7 @@ class ProdactWidget extends StatelessWidget {
                       Text(
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        "sdfklghsdljgv sdjfhjdsf sdjfghjdsf sdhfgdsfg",
+                        product?.title ?? "Featured product",
                         style: context.textTheme.titleLarge?.copyWith(
                           fontSize: 12.f,
                           fontWeight: .w500,
@@ -56,33 +69,75 @@ class ProdactWidget extends StatelessWidget {
                         ),
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          Expanded(
+                            child: Text(
+                              "\$${product?.currentprice ?? product?.regularprice ?? 0}",
+                              style: context.textTheme.titleMedium?.copyWith(
+                                fontSize: 11.f,
+                                color: AppColors.lightText,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          Image.asset(Asset.starPNG, width: 13.w),
+                          SizedBox(width: 3.w),
                           Text(
-                            "\$100000",
+                            "4.5",
                             style: context.textTheme.titleMedium?.copyWith(
                               fontSize: 11.f,
                               color: AppColors.lightText,
                             ),
                           ),
-                          Row(
-                            children: [
-                              Image.asset(Asset.starPNG, width: 13.w),
-                              Gap(w: 5.w),
-                              Text(
-                                "4.5",
-                                style: context.textTheme.titleMedium?.copyWith(
-                                  fontSize: 11.f,
-                                  color: AppColors.lightText,
-                                ),
+                          IconButton(
+                            constraints: const BoxConstraints(),
+                            padding: EdgeInsets.zero,
+                            visualDensity: VisualDensity.compact,
+                            onPressed: product == null
+                                ? null
+                                : () {
+                                    final cart = context.read<CartController>();
+                                    final added = cart.add(product!);
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          added
+                                              ? 'Added to cart'
+                                              : cart.errorMessage ??
+                                                    'Could not add to cart',
+                                        ),
+                                        duration: const Duration(seconds: 1),
+                                      ),
+                                    );
+                                  },
+                            icon: Consumer<CartController>(
+                              builder: (context, cart, child) => Icon(
+                                cart.quantityFor(product ?? ProductModel()) > 0
+                                    ? Icons.check_circle_outline
+                                    : Icons.add_shopping_cart,
+                                size: 18,
                               ),
-                            ],
+                            ),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              print("object");
-                            },
-                            child: Image.asset(Asset.hardPNG, width: 15.w),
+                          IconButton(
+                            constraints: const BoxConstraints(),
+                            padding: EdgeInsets.zero,
+                            visualDensity: VisualDensity.compact,
+                            onPressed: product == null
+                                ? null
+                                : () => context
+                                      .read<WishlistController>()
+                                      .toggle(product!),
+                            icon: Consumer<WishlistController>(
+                              builder: (context, wishlist, child) => Icon(
+                                wishlist.contains(product ?? ProductModel())
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
+                                size: 18,
+                                color: context.theme.primaryColor,
+                              ),
+                            ),
                           ),
                         ],
                       ),

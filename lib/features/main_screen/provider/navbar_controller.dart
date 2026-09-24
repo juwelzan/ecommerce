@@ -4,14 +4,35 @@ import 'package:ecommerce/features/home_screen/presentation/home_scree.dart';
 import 'package:ecommerce/shared/path/paths.dart';
 
 class NavbarController with ChangeNotifier {
-  final PageController pageController = PageController();
   List<int> pageRoute = [];
   late int? lastpage;
   int pageIndex = 0;
+  bool isNavbarVisible = true;
+
+  void hideNavbar() {
+    if (isNavbarVisible) {
+      isNavbarVisible = false;
+      notifyListeners();
+    }
+  }
+
+  void showNavbar() {
+    if (!isNavbarVisible) {
+      isNavbarVisible = true;
+      notifyListeners();
+    }
+  }
 
   void nextScreen(int pagendex) {
-    _page(pagendex);
+    if (pagendex < 0 || pagendex >= page.length) return;
     pageIndex = pagendex;
+    
+    if (pagendex == 2) {
+      hideNavbar();
+    } else {
+      showNavbar();
+    }
+
     if (pagendex == 0) {
       pageRoute.clear();
       pageRoute.add(pagendex);
@@ -27,24 +48,23 @@ class NavbarController with ChangeNotifier {
     HomeScreen(),
     CategoryScreen(),
     CartScreen(),
+    WishlistScreen(),
   ];
   void copyWith({int? index}) {
     pageIndex = index ?? pageIndex;
     notifyListeners();
   }
 
-  void _page(int i) {
-    pageController.jumpToPage(i);
-  }
-
   void back() {
+    showNavbar();
     if (lastpage != null && lastpage == pageRoute.last) {
       pageRoute.removeLast();
-      pageRoute.isEmpty ? _page(0) : _page(pageRoute.last);
       if (pageRoute.isEmpty) {
         pageRoute.add(0);
+        pageIndex = 0;
       } else {
         lastpage = pageRoute.last;
+        pageIndex = lastpage!;
       }
     }
     LoggerLog.logI("$pageRoute");

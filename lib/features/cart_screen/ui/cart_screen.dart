@@ -16,8 +16,10 @@ class _CartScreenState extends State<CartScreen>
     super.build(context);
     return PopScope(
       canPop: false,
-      onPopInvokedWithResult: (didPop, result) =>
-          context.read<NavbarController>().back(),
+      onPopInvokedWithResult: (didPop, result) {
+        context.read<NavbarController>().showNavbar();
+        context.read<NavbarController>().back();
+      },
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
@@ -27,6 +29,7 @@ class _CartScreenState extends State<CartScreen>
             children: [
               IconButton(
                 onPressed: () {
+                  context.read<NavbarController>().showNavbar();
                   context.read<NavbarController>().nextScreen(0);
                 },
                 icon: Image.asset(
@@ -38,7 +41,7 @@ class _CartScreenState extends State<CartScreen>
               Text(
                 "Cart",
                 style: context.textTheme.headlineLarge?.copyWith(
-                  fontSize: 20.w,
+                  fontSize: 20.f,
                 ),
               ),
             ],
@@ -58,11 +61,20 @@ class _CartScreenState extends State<CartScreen>
                       left: 10.w,
                       right: 10.w,
                     ),
-                    sliver: SliverList.separated(
-                      separatorBuilder: (context, index) => Gap(h: 20),
-                      itemCount: 10,
-                      itemBuilder: (context, index) {
-                        return RepaintBoundary(child: CartContainer());
+                    sliver: Consumer<CartController>(
+                      builder: (context, cart, child) {
+                        if (cart.items.isEmpty) {
+                          return const SliverFillRemaining(
+                            child: Center(child: Text('Your cart is empty')),
+                          );
+                        }
+                        return SliverList.separated(
+                          separatorBuilder: (context, index) => Gap(h: 20),
+                          itemCount: cart.items.length,
+                          itemBuilder: (context, index) => RepaintBoundary(
+                            child: CartContainer(line: cart.items[index]),
+                          ),
+                        );
                       },
                     ),
                   ),

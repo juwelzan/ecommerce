@@ -31,7 +31,7 @@ class _OtpPinPutState extends State<OtpPinPut> {
   ValueNotifier<int> timeValu = ValueNotifier(30);
   ValueNotifier<bool> isTimerOn = ValueNotifier(false);
 
-  late Timer _timer;
+  Timer? _timer;
   late List<TextEditingController> controller;
   late List<FocusNode> focusNode;
   @override
@@ -49,8 +49,10 @@ class _OtpPinPutState extends State<OtpPinPut> {
     for (var c in controller) {
       c.dispose();
     }
+    _timer?.cancel();
+    timeValu.dispose();
+    isTimerOn.dispose();
     super.dispose();
-    _timer.cancel();
   }
 
   // Future<void> clipeBoard() async {
@@ -105,11 +107,12 @@ class _OtpPinPutState extends State<OtpPinPut> {
     isTimerOn.value = true;
     widget.onReset?.call();
     widget.isDisable.call(true);
+    _timer?.cancel();
     _timer = Timer.periodic(Duration(seconds: 1), (times) {
       timeValu.value = timeValu.value - 1;
       if (timeValu.value == 0) {
         widget.isDisable.call(false);
-        _timer.cancel();
+        _timer?.cancel();
         timeValu.value = 30;
         isTimerOn.value = false;
       }
@@ -291,13 +294,13 @@ InputDecoration inputDecoration(bool isError) {
       borderRadius: BorderRadius.circular(15),
       borderSide: BorderSide(
         width: 2,
-        color: Colors.redAccent.withOpacity(0.6),
+        color: Colors.redAccent.withValues(alpha: 0.6),
       ),
     ),
     errorText: isError ? "" : null,
     filled: true,
     fillColor: isError
-        ? Colors.redAccent.withOpacity(0.15)
+        ? Colors.redAccent.withValues(alpha: 0.15)
         : Colors.grey.shade50,
 
     contentPadding: EdgeInsets.all(2),

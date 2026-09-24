@@ -16,12 +16,13 @@ class TitleName extends StatelessWidget {
           RepaintBoundary(
             child: Text("$title", style: context.textTheme.headlineLarge),
           ),
-          RepaintBoundary(
-            child: TextButton(
-              onPressed: onTap,
-              child: Text("See All", style: context.textTheme.headlineMedium),
+          if (onTap != null)
+            RepaintBoundary(
+              child: TextButton(
+                onPressed: onTap,
+                child: Text("See All", style: context.textTheme.headlineMedium),
+              ),
             ),
-          ),
         ],
       ),
     );

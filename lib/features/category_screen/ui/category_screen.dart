@@ -1,4 +1,3 @@
-import 'package:ecommerce/core/di/dependency_injection.dart';
 import 'package:ecommerce/shared/network_data/get_categories_data.dart';
 import 'package:ecommerce/shared/path/paths.dart';
 import 'package:ecommerce/shared/widget/categorie_widget.dart';
@@ -14,13 +13,52 @@ class CategoryScreen extends StatelessWidget {
           context.read<NavbarController>().back(),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: GridView.builder(
-          itemCount: controller.allCategory.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          title: Text(
+            "Categories",
+            style: context.textTheme.headlineLarge?.copyWith(
+              fontSize: 20.f,
+            ),
           ),
-          itemBuilder: (context, index) {
-            return CategorieWidget(data: controller.allCategory[index]);
+        ),
+        body: AnimatedBuilder(
+          animation: controller,
+          builder: (context, child) {
+            if (controller.isLoading && controller.allCategory.isEmpty) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (controller.errorMessage != null &&
+                controller.allCategory.isEmpty) {
+              return Center(
+                child: OutlinedButton(
+                  onPressed: controller.getAllCategori,
+                  child: const Text('Retry'),
+                ),
+              );
+            }
+            if (controller.allCategory.isEmpty) {
+              return const Center(child: Text('No categories available'));
+            }
+            return RefreshIndicator(
+              onRefresh: controller.getAllCategori,
+              child: GridView.builder(
+                padding: EdgeInsets.only(
+                  top: 10.h,
+                  bottom: 120.h,
+                  left: 10.w,
+                  right: 10.w,
+                ),
+                itemCount: controller.allCategory.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                ),
+                itemBuilder: (context, index) =>
+                    CategorieWidget(data: controller.allCategory[index]),
+              ),
+            );
           },
         ),
       ),

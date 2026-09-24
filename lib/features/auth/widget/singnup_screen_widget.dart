@@ -14,7 +14,7 @@ class SingnupScreenModel extends StatefulWidget {
       hintText2,
       lable2;
 
-  final bool? Function(String fastFild, String? secondFild)? onSubmitText;
+  final void Function(String fastFild, String? secondFild)? onSubmitText;
   final String? Function(String? value)? validator1;
   final String? Function(String? value)? validator2;
   final bool? isShowSecondFild;

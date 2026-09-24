@@ -40,7 +40,6 @@ class CityNameSetScreen extends StatelessWidget {
             city: fastFild,
           ),
         );
-        return null;
       },
     );
   }

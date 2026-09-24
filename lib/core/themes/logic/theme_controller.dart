@@ -13,7 +13,7 @@ class ThemeController with ChangeNotifier {
     }
     if (getTheme != null) {
       if (getTheme == "${ThemeMode.light}") {
-        themeMode = ThemeMode.system;
+        themeMode = ThemeMode.light;
       }
       if (getTheme == "${ThemeMode.dark}") {
         themeMode = ThemeMode.dark;
@@ -22,25 +22,13 @@ class ThemeController with ChangeNotifier {
         themeMode = ThemeMode.system;
       }
     }
-    ChangeNotifier();
+    notifyListeners();
   }
 
-  Future<void> themeTgol(ThemeMode themeMode) async {
+  Future<void> themeTgol(ThemeMode mode) async {
     final shared = await SharedPreferences.getInstance();
-
-    if (themeMode == ThemeMode.dark) {
-      themeMode = ThemeMode.dark;
-      shared.setString(Keys.themeKey, "${ThemeMode.dark}");
-    }
-
-    if (themeMode == ThemeMode.light) {
-      themeMode = ThemeMode.light;
-      shared.setString(Keys.themeKey, "${ThemeMode.light}");
-    }
-    if (themeMode == ThemeMode.system) {
-      themeMode = ThemeMode.system;
-      shared.setString(Keys.themeKey, "${ThemeMode.system}");
-    }
-    ChangeNotifier();
+    themeMode = mode;
+    await shared.setString(Keys.themeKey, "$mode");
+    notifyListeners();
   }
 }
