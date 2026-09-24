@@ -60,6 +60,7 @@ class IDontHaveAnAccount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return SizedBox(
       width: double.infinity,
       height: AuthButtonStyle.height,
@@ -112,6 +113,28 @@ class AuthForgotPasswordButton extends StatelessWidget {
         style: AuthButtonStyle.textAction(context),
         child: Text(context.l10n.forgotPasswordQuestion),
       ),
+=======
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "${context.l10n.dontHaveAccount} ",
+          style: TextStyle(fontSize: 15.f),
+        ),
+        GestureDetector(
+          onTap: onTap ?? () => context.push(NameSetScreen.name),
+          child: Text(
+            context.l10n.signup,
+            style: TextStyle(
+              fontSize: 15.f,
+              color: context.theme.primaryColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Text("?", style: TextStyle(fontSize: 15.f)),
+      ],
+>>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
     );
   }
 }

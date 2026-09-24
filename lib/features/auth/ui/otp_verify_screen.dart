@@ -125,8 +125,13 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
             valueListenable: isOk,
             builder: (context, value, child) {
               return JumpingButton(
+<<<<<<< HEAD
                 isDisable: !value || busy,
                 isLoding: busy,
+=======
+                isDisable: !value || auth.isLoading,
+                isLoding: auth.isLoading,
+>>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
                 label: context.l10n.verifyOtp,
                 borderRadius: AuthButtonStyle.radius,
                 color: context.theme.primaryColor,

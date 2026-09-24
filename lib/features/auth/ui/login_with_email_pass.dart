@@ -68,7 +68,11 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
     }
   }
 
+<<<<<<< HEAD
   void _openForgotPassword() {
+=======
+  void _showForgotPasswordDialog() {
+>>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
     context.push(ForgotPasswordScreen.name, extra: email.text.trim());
   }
 
@@ -141,11 +145,14 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
                   controller: password,
                   enabled: !busy,
                   obscureText: _obscurePassword,
+<<<<<<< HEAD
                   autofillHints: const [AutofillHints.password],
                   textInputAction: TextInputAction.done,
                   onFieldSubmitted: (_) {
                     if (!busy) _handleLogin();
                   },
+=======
+>>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
                   decoration:
                       decorationEliment(
                         hintText: context.l10n.enterPassword,
@@ -153,14 +160,18 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
                       ).copyWith(
                         prefixIcon: const Icon(Icons.lock_outline),
                         suffixIcon: IconButton(
+<<<<<<< HEAD
                           tooltip: _obscurePassword
                               ? context.l10n.showPassword
                               : context.l10n.hidePassword,
+=======
+>>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
                           icon: Icon(
                             _obscurePassword
                                 ? Icons.visibility_off
                                 : Icons.visibility,
                           ),
+<<<<<<< HEAD
                           onPressed: busy
                               ? null
                               : () {
@@ -168,6 +179,13 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
                                     _obscurePassword = !_obscurePassword;
                                   });
                                 },
+=======
+                          onPressed: () {
+                            setState(() {
+                              _obscurePassword = !_obscurePassword;
+                            });
+                          },
+>>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
                         ),
                       ),
                   style: textStyleEliment(),
@@ -178,6 +196,7 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
                     return null;
                   },
                 ),
+<<<<<<< HEAD
                 Gap(h: 8.h),
                 AuthForgotPasswordButton(
                   enabled: !busy,
@@ -207,6 +226,43 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
                         : () => context.pushReplacement(LoginScrenn.name),
                     style: AuthButtonStyle.textAction(context),
                     child: Text(context.l10n.otherSignIn),
+=======
+                Gap(h: 10.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: _showForgotPasswordDialog,
+                      child: Text(
+                        context.l10n.forgotPasswordQuestion,
+                        style: TextStyle(
+                          color: context.theme.primaryColor,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Gap(h: 20.h),
+                JumpingButton(
+                  isLoding: auth.isLoading,
+                  isDisable: auth.isLoading,
+                  label: context.l10n.login,
+                  borderRadius: BorderRadius.circular(14.r),
+                  color: context.theme.primaryColor,
+                  onTap: _handleLogin,
+                ),
+                Gap(h: 24.h),
+                IDontHaveAnAccount(
+                  onTap: () => context.push(NameSetScreen.name),
+                ),
+                Gap(h: 16.h),
+                TextButton(
+                  onPressed: () => context.push(LoginScrenn.name),
+                  child: Text(
+                    context.l10n.otherSignIn,
+                    style: TextStyle(fontSize: 14.f, color: Colors.grey),
+>>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
                   ),
                 ),
                 Gap(h: 24.h),

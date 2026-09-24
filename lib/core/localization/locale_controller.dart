@@ -43,7 +43,10 @@ extension AppLocalizationsContext on BuildContext {
         'OTP verification failed.' => localization.otpVerificationError,
         'Unable to send reset instructions.' =>
           localization.forgotPasswordError,
+<<<<<<< HEAD
         'Unable to resend the OTP.' => localization.otpResendError,
+=======
+>>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
         'This product is out of stock.' => localization.outOfStock,
         'Maximum available quantity already added.' =>
           localization.maxQuantityAdded,
@@ -59,7 +62,10 @@ extension AppLocalizationsContext on BuildContext {
       'registrationError' => localization.registrationError,
       'profileUpdateError' => localization.profileUpdateError,
       'forgotPasswordError' => localization.forgotPasswordError,
+<<<<<<< HEAD
       'otpResendError' => localization.otpResendError,
+=======
+>>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
       'noProducts' => localization.noProducts,
       'outOfStock' => localization.outOfStock,
       'maxQuantityAdded' => localization.maxQuantityAdded,

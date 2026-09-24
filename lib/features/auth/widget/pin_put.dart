@@ -182,6 +182,7 @@ class _OtpPinPutState extends State<OtpPinPut> {
           ListenableBuilder(
             listenable: Listenable.merge([isTimerOn, timeValu]),
             builder: (context, child) {
+<<<<<<< HEAD
               return Align(
                 alignment: Alignment.centerRight,
                 child: AnimatedSwitcher(
@@ -204,6 +205,35 @@ class _OtpPinPutState extends State<OtpPinPut> {
                               fontSize: 14.f,
                               fontWeight: FontWeight.w600,
                               color: context.theme.primaryColor,
+=======
+              return Row(
+                mainAxisAlignment: .end,
+                crossAxisAlignment: .center,
+                children: [
+                  AnimatedSwitcher(
+                    duration: Duration(milliseconds: 400),
+                    switchInCurve: Curves.easeIn,
+                    switchOutCurve: Curves.easeOut,
+                    transitionBuilder: (child, animation) {
+                      return FadeTransition(opacity: animation, child: child);
+                    },
+                    child: isTimerOn.value
+                        ? SizedBox(
+                            width: 70,
+                            child: Center(
+                              child: text(
+                                key: Key("timeron"),
+                                text: "${timeValu.value}",
+                              ),
+                            ),
+                          )
+                        : SizedBox(
+                            width: 70,
+                            child: text(
+                              key: Key("timeroff"),
+                              text: context.l10n.resendOtp,
+                              onTap: () => time(),
+>>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
                             ),
                           ),
                         )

@@ -2,7 +2,16 @@ import 'package:ecommerce/features/auth/ui/login_screnn.dart';
 import 'package:ecommerce/features/auth/ui/login_with_email_pass.dart';
 import 'package:ecommerce/features/auth/ui/otp_verify_screen.dart';
 import 'package:ecommerce/features/auth/ui/forgot_password_screen.dart';
+<<<<<<< HEAD
 import 'package:ecommerce/features/auth/ui/signup/sign_up_screen.dart';
+=======
+import 'package:ecommerce/features/auth/ui/signup/city_name_set_screen.dart';
+import 'package:ecommerce/features/auth/ui/signup/confirm_passward_screen.dart';
+import 'package:ecommerce/features/auth/ui/signup/email_set_screen.dart';
+import 'package:ecommerce/features/auth/ui/signup/name_set_screen.dart';
+import 'package:ecommerce/features/auth/ui/signup/numbar_set_screen.dart';
+import 'package:ecommerce/features/auth/ui/signup/password_set_screen.dart';
+>>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
 import 'package:ecommerce/features/home_screen/presentation/home_scree.dart';
 import 'package:ecommerce/features/search_screen/ui/search_screen.dart';
 import 'package:ecommerce/shared/path/paths.dart';

@@ -326,6 +326,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get resendOtp => 'Resend';
 
   @override
+<<<<<<< HEAD
   String get otpResent => 'A new OTP has been sent.';
 
   @override
@@ -365,6 +366,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get haveAccountLogin => 'Already have an account? Sign in';
 
   @override
+=======
+  String get back => 'Back';
+
+  @override
+>>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
   String get close => 'Close';
 
   @override

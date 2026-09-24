@@ -60,7 +60,10 @@ class AuthController extends ChangeNotifier {
   }
 
   Future<bool> login({required String email, required String password}) async {
+<<<<<<< HEAD
     if (_isLoading) return false;
+=======
+>>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
@@ -109,7 +112,11 @@ class AuthController extends ChangeNotifier {
       return false;
     } catch (e) {
       _isLoading = false;
+<<<<<<< HEAD
       _errorMessage = "Login failed. Please check your credentials.";
+=======
+      _errorMessage = "Unable to sign in right now. Please try again.";
+>>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
       LoggerLog.logE("login error: $e");
       notifyListeners();
       return false;
@@ -140,7 +147,12 @@ class AuthController extends ChangeNotifier {
       }
     } catch (e) {
       _isLoading = false;
+<<<<<<< HEAD
       _errorMessage = "Sign up failed. Please try again.";
+=======
+      _errorMessage =
+          "Unable to create your account right now. Please try again.";
+>>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
       LoggerLog.logE("signup error: $e");
       notifyListeners();
       return false;
@@ -148,7 +160,10 @@ class AuthController extends ChangeNotifier {
   }
 
   Future<bool> verifyOtp({required String email, required String otp}) async {
+<<<<<<< HEAD
     if (_isLoading) return false;
+=======
+>>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
@@ -194,13 +209,18 @@ class AuthController extends ChangeNotifier {
       return false;
     } catch (e) {
       _isLoading = false;
+<<<<<<< HEAD
       _errorMessage = "OTP verification failed.";
+=======
+      _errorMessage = "Unable to verify the code right now. Please try again.";
+>>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
       LoggerLog.logE("verifyOtp error: $e");
       notifyListeners();
       return false;
     }
   }
 
+<<<<<<< HEAD
   Future<bool> resendOtp({required String email}) async {
     try {
       final response = await _networkCaller.post(
@@ -221,6 +241,9 @@ class AuthController extends ChangeNotifier {
 
   Future<bool> forgotPassword({required String email}) async {
     if (_isLoading) return false;
+=======
+  Future<bool> forgotPassword({required String email}) async {
+>>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
@@ -240,7 +263,11 @@ class AuthController extends ChangeNotifier {
       return false;
     } catch (e) {
       _isLoading = false;
+<<<<<<< HEAD
       _errorMessage = "Unable to send reset instructions.";
+=======
+      _errorMessage = "Unable to send reset instructions. Please try again.";
+>>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
       LoggerLog.logE("forgotPassword error: $e");
       notifyListeners();
       return false;
@@ -332,7 +359,12 @@ class AuthController extends ChangeNotifier {
       }
     } catch (e) {
       _isLoading = false;
+<<<<<<< HEAD
       _errorMessage = "Failed to update profile.";
+=======
+      _errorMessage =
+          "Unable to update your profile right now. Please try again.";
+>>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
       LoggerLog.logE("updateProfile error: $e");
       notifyListeners();
       return false;
