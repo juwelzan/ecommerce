@@ -325,7 +325,6 @@ class AppLocalizationsBn extends AppLocalizations {
   String get resendOtp => 'আবার পাঠান';
 
   @override
-<<<<<<< HEAD
   String get otpResent => 'নতুন OTP পাঠানো হয়েছে।';
 
   @override
@@ -366,11 +365,6 @@ class AppLocalizationsBn extends AppLocalizations {
   String get haveAccountLogin => 'আগেই অ্যাকাউন্ট আছে? লগইন করুন';
 
   @override
-=======
-  String get back => 'পেছনে';
-
-  @override
->>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
   String get close => 'বন্ধ করুন';
 
   @override

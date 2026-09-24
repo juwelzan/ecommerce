@@ -70,16 +70,11 @@ class _LoginScrennState extends State<LoginScrenn> {
               key: _formKey,
               child: _textField(
                 controller: _emailController,
-<<<<<<< HEAD
                 autofillHints: const [AutofillHints.email],
                 textInputAction: TextInputAction.done,
                 labelText: context.l10n.email,
                 hintText: context.l10n.genericEmailExample,
                 onFieldSubmitted: (_) => _onEmailSubmit(),
-=======
-                labelText: context.l10n.email,
-                hintText: context.l10n.genericEmailExample,
->>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return context.l10n.enterEmail;
@@ -99,15 +94,9 @@ class _LoginScrennState extends State<LoginScrenn> {
               label: context.l10n.login,
               onTap: _onEmailSubmit,
             ),
-<<<<<<< HEAD
             Gap(h: 16.h),
             IDontHaveAnAccount(onTap: () => navigateToSignUp(context)),
             Gap(h: 28.h),
-=======
-            Gap(h: 20.h),
-            IDontHaveAnAccount(onTap: () => context.push(NameSetScreen.name)),
-            Gap(h: 30.h),
->>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
             Row(
               children: [
                 const Expanded(
@@ -183,21 +172,15 @@ Widget _textField({
   String? labelText,
   TextEditingController? controller,
   String? Function(String?)? validator,
-<<<<<<< HEAD
   Iterable<String>? autofillHints,
   TextInputAction? textInputAction,
   ValueChanged<String>? onFieldSubmitted,
-=======
->>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
 }) {
   return TextFormField(
     controller: controller,
     validator: validator,
-<<<<<<< HEAD
     autofillHints: autofillHints,
     textInputAction: textInputAction,
-=======
->>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
     keyboardType: TextInputType.emailAddress,
     onFieldSubmitted: onFieldSubmitted,
     decoration: InputDecoration(

@@ -704,7 +704,6 @@ abstract class AppLocalizations {
   /// **'Resend'**
   String get resendOtp;
 
-<<<<<<< HEAD
   /// No description provided for @otpResent.
   ///
   /// In en, this message translates to:
@@ -717,15 +716,12 @@ abstract class AppLocalizations {
   /// **'Unable to resend the OTP. Please try again.'**
   String get otpResendError;
 
-=======
->>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
   /// No description provided for @back.
   ///
   /// In en, this message translates to:
   /// **'Back'**
   String get back;
 
-<<<<<<< HEAD
   /// No description provided for @continueAction.
   ///
   /// In en, this message translates to:
@@ -786,8 +782,6 @@ abstract class AppLocalizations {
   /// **'Already have an account? Sign in'**
   String get haveAccountLogin;
 
-=======
->>>>>>> 0c9fdf6364bf53d28779b3286a04601772a85241
   /// No description provided for @close.
   ///
   /// In en, this message translates to:
