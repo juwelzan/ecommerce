@@ -13,18 +13,18 @@ class CityNameSetScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingnupScreenModel(
-      title: "City",
-      subTitle: "Enter your city name",
-      hintText: "dhaka,rangpur",
-      lable: "City",
+      title: context.l10n.city,
+      subTitle: context.l10n.enterCityName,
+      hintText: context.l10n.cityExample,
+      lable: context.l10n.city,
       lottie: Asset.waldLottie,
       backScreenPath: NumbarSetScreen.name,
       validator1: (value) {
         if (value!.isEmpty) {
-          return "enter city";
+          return context.l10n.enterCity;
         }
         if (value.length < 4) {
-          return "correct name";
+          return context.l10n.correctName;
         }
         return null;
       },

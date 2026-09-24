@@ -23,6 +23,7 @@ class _HomeScreeState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
@@ -31,7 +32,7 @@ class _HomeScreeState extends State<HomeScreen> {
         title: SvgPicture.asset(Asset.navLogoSVG, width: 140.w),
         actions: [
           IconButton(
-            tooltip: 'Profile',
+            tooltip: l10n.profileTooltip,
             onPressed: () => context.push(ProfileScreen.name),
             icon: Image.asset(
               Asset.appbarUser,
@@ -40,7 +41,7 @@ class _HomeScreeState extends State<HomeScreen> {
             ),
           ),
           IconButton(
-            tooltip: 'Support',
+            tooltip: l10n.supportTooltip,
             onPressed: () => showModalBottomSheet<void>(
               context: context,
               isScrollControlled: true,
@@ -55,14 +56,14 @@ class _HomeScreeState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Customer Support',
+                        l10n.customerSupport,
                         style: context.textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Gap(h: 8.h),
                       Text(
-                        'We are here to help you 24/7. Reach out to us via any of the channels below.',
+                        l10n.supportDescription,
                         style: context.textTheme.bodyMedium?.copyWith(color: Colors.grey),
                       ),
                       Gap(h: 20.h),
@@ -71,12 +72,12 @@ class _HomeScreeState extends State<HomeScreen> {
                           backgroundColor: context.theme.primaryColor.withValues(alpha: 0.1),
                           child: Icon(Icons.phone, color: context.theme.primaryColor),
                         ),
-                        title: const Text('Call Us'),
-                        subtitle: const Text('+880 1700-000000'),
+                        title: Text(l10n.callUs),
+                        subtitle: Text(l10n.supportPhone),
                         onTap: () {
                           Navigator.pop(context);
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Calling +880 1700-000000...')),
+                            SnackBar(content: Text(l10n.calling)),
                           );
                         },
                       ),
@@ -85,12 +86,12 @@ class _HomeScreeState extends State<HomeScreen> {
                           backgroundColor: context.theme.primaryColor.withValues(alpha: 0.1),
                           child: Icon(Icons.email, color: context.theme.primaryColor),
                         ),
-                        title: const Text('Email Support'),
-                        subtitle: const Text('support@easyecommerce.com'),
+                        title: Text(l10n.emailSupport),
+                        subtitle: Text(l10n.supportEmail),
                         onTap: () {
                           Navigator.pop(context);
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Opening email support...')),
+                            SnackBar(content: Text(l10n.openingEmail)),
                           );
                         },
                       ),
@@ -99,12 +100,12 @@ class _HomeScreeState extends State<HomeScreen> {
                           backgroundColor: context.theme.primaryColor.withValues(alpha: 0.1),
                           child: Icon(Icons.chat, color: context.theme.primaryColor),
                         ),
-                        title: const Text('Live Chat'),
-                        subtitle: const Text('Chat with our support agent'),
+                        title: Text(l10n.liveChat),
+                        subtitle: Text(l10n.supportChatAgent),
                         onTap: () {
                           Navigator.pop(context);
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Connecting to live chat...')),
+                            SnackBar(content: Text(l10n.connectingChat)),
                           );
                         },
                       ),
@@ -120,7 +121,7 @@ class _HomeScreeState extends State<HomeScreen> {
             ),
           ),
           IconButton(
-            tooltip: 'Notifications',
+            tooltip: l10n.notificationTooltip,
             onPressed: () => context.push(NotificationScreen.name),
             icon: Image.asset(
               Asset.appbarBell,
@@ -162,7 +163,7 @@ class _HomeScreeState extends State<HomeScreen> {
           SliverToBoxAdapter(
             child: RepaintBoundary(
               child: TitleName(
-                title: 'All Products',
+                title: l10n.allProducts,
                 onTap: () => context.push(ProductListingScreen.name),
               ),
             ),

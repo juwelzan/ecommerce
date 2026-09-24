@@ -39,7 +39,7 @@ class _CartScreenState extends State<CartScreen>
                 ),
               ),
               Text(
-                "Cart",
+                context.l10n.cart,
                 style: context.textTheme.headlineLarge?.copyWith(
                   fontSize: 20.f,
                 ),
@@ -64,8 +64,8 @@ class _CartScreenState extends State<CartScreen>
                     sliver: Consumer<CartController>(
                       builder: (context, cart, child) {
                         if (cart.items.isEmpty) {
-                          return const SliverFillRemaining(
-                            child: Center(child: Text('Your cart is empty')),
+                          return SliverFillRemaining(
+                            child: Center(child: Text(context.l10n.emptyCart)),
                           );
                         }
                         return SliverList.separated(

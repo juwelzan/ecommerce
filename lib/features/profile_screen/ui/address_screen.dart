@@ -8,7 +8,7 @@ class AddressScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Saved Addresses'),
+        title: Text(context.l10n.savedAddresses),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
@@ -22,8 +22,8 @@ class AddressScreen extends StatelessWidget {
                 backgroundColor: context.theme.primaryColor.withValues(alpha: 0.1),
                 child: Icon(Icons.home_outlined, color: context.theme.primaryColor),
               ),
-              title: const Text('Home Address'),
-              subtitle: const Text('House #12, Road #4, Block C, Dhaka, Bangladesh'),
+              title: Text(context.l10n.homeAddress),
+              subtitle: Text(context.l10n.homeAddressValue),
               trailing: IconButton(
                 icon: const Icon(Icons.edit_outlined),
                 onPressed: () {},
@@ -39,8 +39,8 @@ class AddressScreen extends StatelessWidget {
               leading: const CircleAvatar(
                 child: Icon(Icons.work_outline),
               ),
-              title: const Text('Work Address'),
-              subtitle: const Text('Level 5, Software Technology Park, Dhaka'),
+              title: Text(context.l10n.workAddress),
+              subtitle: Text(context.l10n.workAddressValue),
               trailing: IconButton(
                 icon: const Icon(Icons.edit_outlined),
                 onPressed: () {},
@@ -52,11 +52,11 @@ class AddressScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Add Address feature coming soon!')),
+            SnackBar(content: Text(context.l10n.addressSoon)),
           );
         },
         icon: const Icon(Icons.add),
-        label: const Text('Add New Address'),
+        label: Text(context.l10n.addAddress),
       ),
     );
   }

@@ -81,11 +81,11 @@ class _SearchScreenState extends State<SearchScreen> {
           autofocus: true,
           textInputAction: TextInputAction.search,
           decoration: InputDecoration(
-            hintText: 'Search products...',
+            hintText: context.l10n.searchProducts,
             border: InputBorder.none,
             suffixIcon: _queryController.text.isNotEmpty
                 ? IconButton(
-                    tooltip: 'Clear search',
+                    tooltip: context.l10n.clearSearch,
                     onPressed: _clearSearch,
                     icon: const Icon(Icons.clear, size: 20),
                   )
@@ -111,7 +111,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   Gap(h: 12.h),
                   OutlinedButton(
                     onPressed: products.getProduct,
-                    child: const Text('Retry'),
+                    child: Text(context.l10n.retry),
                   ),
                 ],
               ),
@@ -126,7 +126,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Popular Searches',
+                    context.l10n.popularSearches,
                     style: context.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -166,14 +166,14 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                     Gap(h: 16.h),
                     Text(
-                      'No products found',
+                      context.l10n.noProductsFound,
                       style: context.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Gap(h: 8.h),
                     Text(
-                      'We couldn\'t find any match for "$_query".\nTry checking for typos or search another keyword.',
+                      context.l10n.noSearchMatch(_query),
                       textAlign: TextAlign.center,
                       style: context.textTheme.bodyMedium?.copyWith(
                         color: Colors.grey,
@@ -182,7 +182,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     Gap(h: 20.h),
                     OutlinedButton(
                       onPressed: _clearSearch,
-                      child: const Text('Clear Search'),
+                      child: Text(context.l10n.clearSearch),
                     ),
                   ],
                 ),
@@ -197,7 +197,7 @@ class _SearchScreenState extends State<SearchScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
                 child: Text(
-                  'Found ${results.length} result${results.length == 1 ? '' : 's'} for "$_query"',
+                  context.l10n.searchResultCount(results.length, _query),
                   style: context.textTheme.bodyMedium?.copyWith(
                     color: Colors.grey,
                     fontWeight: FontWeight.w500,

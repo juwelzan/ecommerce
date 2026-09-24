@@ -14,7 +14,7 @@ class SearchField extends StatelessWidget {
           readOnly: true,
           onTap: () => context.push(SearchScreen.name),
           decoration: InputDecoration(
-            hintText: 'Search products',
+            hintText: context.l10n.searchProducts,
             prefixIcon: const Icon(Icons.search),
             focusedBorder: _decoration,
             enabledBorder: _decoration,

@@ -54,7 +54,7 @@ class WelcomeScreen extends StatelessWidget {
                         ),
                         Gap(h: 32.h),
                         Text(
-                          'Welcome to\nEasyEcommerce',
+                          context.l10n.welcomeTitle,
                           textAlign: TextAlign.center,
                           style: context.textTheme.headlineMedium?.copyWith(
                             fontWeight: FontWeight.bold,
@@ -62,7 +62,7 @@ class WelcomeScreen extends StatelessWidget {
                         ),
                         Gap(h: 16.h),
                         Text(
-                          'Discover products you love, shop easily, and manage everything from one place.',
+                          context.l10n.welcomeDescription,
                           textAlign: TextAlign.center,
                           style: context.textTheme.bodyMedium?.copyWith(
                             color: Colors.grey,
@@ -84,7 +84,7 @@ class WelcomeScreen extends StatelessWidget {
                               ),
                             ),
                             child: Text(
-                              'Get Started',
+                              context.l10n.getStarted,
                               style: TextStyle(
                                 fontSize: 16.f,
                                 fontWeight: FontWeight.bold,
@@ -94,7 +94,7 @@ class WelcomeScreen extends StatelessWidget {
                         ),
                         Gap(h: 16.h),
                         Text(
-                          'Everything you need, all in one place.',
+                          context.l10n.welcomeTagline,
                           style: context.textTheme.bodySmall?.copyWith(
                             color: Colors.grey,
                           ),

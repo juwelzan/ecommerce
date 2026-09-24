@@ -13,10 +13,10 @@ class EmailSetScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingnupScreenModel(
-      title: "Email",
-      subTitle: "Enter valid email",
-      hintText: "@mail.com",
-      lable: "Email",
+      title: context.l10n.email,
+      subTitle: context.l10n.validEmail,
+      hintText: context.l10n.mailExample,
+      lable: context.l10n.email,
       lottie: Asset.emailLottie,
       backScreenPath: NameSetScreen.name,
       onSubmitText: (fastFild, secondFild) {
@@ -31,7 +31,7 @@ class EmailSetScreen extends StatelessWidget {
       },
       validator1: (value) {
         if (!Validation.email(value!)) {
-          return "invalid email";
+          return context.l10n.validEmail;
         } else {
           return null;
         }

@@ -56,8 +56,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
     if (success) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Profile updated successfully!'),
+        SnackBar(
+          content: Text(context.l10n.profileUpdated),
           backgroundColor: Colors.green,
         ),
       );
@@ -65,7 +65,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(auth.errorMessage ?? 'Failed to update profile.'),
+          content: Text(
+            context.localizedError(auth.errorMessage, 'profileUpdateError'),
+          ),
           backgroundColor: Colors.redAccent,
         ),
       );
@@ -75,11 +77,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.watch<AuthController>().user;
-    final displayName = user?.fullName ?? 'User';
+    final displayName = user?.fullName ?? context.l10n.userFallback;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Profile'),
+        title: Text(context.l10n.editProfile),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
@@ -125,7 +127,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               TextFormField(
                 controller: _nameController,
                 decoration: InputDecoration(
-                  labelText: 'Full Name',
+                  labelText: context.l10n.fullName,
                   prefixIcon: const Icon(Icons.person_outline),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.r),
@@ -133,7 +135,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
-                    return 'Please enter your name';
+                    return context.l10n.pleaseEnterName;
                   }
                   return null;
                 },
@@ -144,7 +146,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 enabled: false, // Email is identifier, immutable from profile update
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
-                  labelText: 'Email Address (read-only)',
+                  labelText: context.l10n.emailAddress,
                   prefixIcon: const Icon(Icons.email_outlined),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.r),
@@ -158,7 +160,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 controller: _phoneController,
                 keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
-                  labelText: 'Phone Number',
+                  labelText: context.l10n.phoneNumber,
                   prefixIcon: const Icon(Icons.phone_outlined),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.r),
@@ -180,7 +182,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             color: Colors.white,
                           ),
                         )
-                      : const Text('Save Changes'),
+                      : Text(context.l10n.saveChanges),
                 ),
               ),
             ],

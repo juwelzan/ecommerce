@@ -13,11 +13,11 @@ class ProductDetailsScreen extends StatelessWidget {
     final price = product.currentprice ?? product.regularprice ?? 0;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product details'),
+        title: Text(context.l10n.productDetails),
         actions: [
           Consumer<WishlistController>(
             builder: (context, wishlist, child) => IconButton(
-              tooltip: 'Wishlist',
+              tooltip: context.l10n.wishlist,
               onPressed: () => wishlist.toggle(product),
               icon: Icon(
                 wishlist.contains(product)
@@ -44,24 +44,26 @@ class ProductDetailsScreen extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            product.title ?? 'Product',
+            product.title ?? context.l10n.allProducts,
             style: context.textTheme.headlineMedium,
           ),
           const SizedBox(height: 8),
           Text('\$$price', style: context.textTheme.headlineSmall),
           if (product.categoryTitle != null) ...[
             const SizedBox(height: 8),
-            Text('Category: ${product.categoryTitle}'),
+            Text('${context.l10n.category}: ${product.categoryTitle}'),
           ],
           const SizedBox(height: 8),
           Text(
             product.quantity == 0
-                ? 'Out of stock'
-                : 'In stock: ${product.quantity ?? 'Available'}',
+                ? context.l10n.noProducts
+                : product.quantity == null
+                    ? context.l10n.available
+                    : context.l10n.quantity(product.quantity!),
           ),
           if (product.brand != null) ...[
             const SizedBox(height: 8),
-            Text('Brand: ${product.brand}'),
+            Text('${context.l10n.brand}: ${product.brand}'),
           ],
           if (product.description != null) ...[
             const SizedBox(height: 16),
@@ -81,8 +83,11 @@ class ProductDetailsScreen extends StatelessWidget {
                     SnackBar(
                       content: Text(
                         added
-                            ? 'Added to cart'
-                            : cart.errorMessage ?? 'Could not add to cart',
+                            ? context.l10n.addToCart
+                            : context.localizedError(
+                                cart.errorMessage,
+                                'noProducts',
+                              ),
                       ),
                     ),
                   );
@@ -90,8 +95,8 @@ class ProductDetailsScreen extends StatelessWidget {
                 icon: const Icon(Icons.add_shopping_cart),
                 label: Text(
                   quantity == 0
-                      ? 'Add to cart'
-                      : 'Add again  |  $quantity in cart',
+                      ? context.l10n.addToCart
+                      : '${context.l10n.addToCart}  |  $quantity',
                 ),
               );
             },
@@ -103,7 +108,7 @@ class ProductDetailsScreen extends StatelessWidget {
               context.read<NavbarController>().nextScreen(2);
             },
             icon: const Icon(Icons.shopping_cart_outlined),
-            label: const Text('View cart'),
+            label: Text(context.l10n.viewCart),
           ),
         ],
       ),

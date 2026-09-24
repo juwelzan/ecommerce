@@ -59,9 +59,9 @@ class _LoginScrennState extends State<LoginScrenn> {
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           children: <Widget>[
             Gap(h: 20.h),
-            const AuthWidget(
-              title: "Welcome Back",
-              subTitle: "Please enter your email to continue",
+            AuthWidget(
+              title: context.l10n.welcomeBack,
+              subTitle: context.l10n.loginSubtitle,
               subTitleSize: 16,
               titleSize: 26,
               logoSize: 100,
@@ -69,8 +69,8 @@ class _LoginScrennState extends State<LoginScrenn> {
             Gap(h: 30.h),
             _textField(
               controller: _emailController,
-              labelText: "Email",
-              hintText: "example@gmail.com",
+              labelText: context.l10n.email,
+              hintText: context.l10n.genericEmailExample,
             ),
             Gap(h: 20.h),
             ValueListenableBuilder<bool>(
@@ -79,7 +79,7 @@ class _LoginScrennState extends State<LoginScrenn> {
                 return JumpingButton(
                   borderRadius: BorderRadius.circular(10.r),
                   isLoding: value,
-                  label: "Continue with Password",
+                  label: context.l10n.login,
                   onTap: _onEmailSubmit,
                 );
               },
@@ -90,11 +90,11 @@ class _LoginScrennState extends State<LoginScrenn> {
             ),
             Gap(h: 30.h),
             Row(
-              children: const [
+              children: [
                 Expanded(
                   child: Divider(endIndent: 20, indent: 20, thickness: 1.5),
                 ),
-                Text("or", style: TextStyle(color: Colors.grey)),
+                Text(context.l10n.or, style: TextStyle(color: Colors.grey)),
                 Expanded(
                   child: Divider(endIndent: 20, indent: 20, thickness: 1.5),
                 ),
@@ -107,8 +107,8 @@ class _LoginScrennState extends State<LoginScrenn> {
                 return JumpingButton(
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Google Sign-In is coming soon. Please sign in with email and password."),
+                      SnackBar(
+                        content: Text(context.l10n.googleSoon),
                       ),
                     );
                   },
@@ -130,7 +130,7 @@ class _LoginScrennState extends State<LoginScrenn> {
                         ),
                         Gap(w: 12.w),
                         Text(
-                          "Continue with Google",
+                          context.l10n.otherSignIn,
                           style: TextStyle(
                             fontSize: 16.f,
                             fontWeight: FontWeight.w600,
@@ -146,7 +146,7 @@ class _LoginScrennState extends State<LoginScrenn> {
             Gap(h: 40.h),
             Center(
               child: Text(
-                "Privacy Policy",
+                context.l10n.privacyPolicy,
                 style: TextStyle(color: Colors.grey.shade600, fontSize: 13.f),
               ),
             ),

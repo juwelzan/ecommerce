@@ -32,8 +32,8 @@ class _AppConfigState extends State<AppConfig> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeController>(
-      builder: (context, state, _) {
+    return Consumer2<ThemeController, LocaleController>(
+      builder: (context, state, localeController, _) {
         return MaterialApp.router(
           scaffoldMessengerKey: globalContext,
           debugShowCheckedModeBanner: false,
@@ -41,6 +41,9 @@ class _AppConfigState extends State<AppConfig> {
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: state.themeMode,
+          locale: localeController.locale,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           routerConfig: AppRoute.goRouter,
         );
       },

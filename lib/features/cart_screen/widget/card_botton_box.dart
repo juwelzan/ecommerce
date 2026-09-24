@@ -32,7 +32,7 @@ class CardBottonBox extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Subtotal'),
+                Text(context.l10n.subtotal),
                 Text('${cart.subtotal}', style: context.textTheme.titleLarge),
               ],
             ),
@@ -43,7 +43,7 @@ class CardBottonBox extends StatelessWidget {
                     ? null
                     : () => context.push(CheckoutScreen.name),
                 icon: const Icon(Icons.lock_outline),
-                label: const Text('Checkout'),
+                label: Text(context.l10n.checkout),
               ),
             ),
           ],

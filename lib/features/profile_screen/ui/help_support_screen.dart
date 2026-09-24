@@ -7,12 +7,12 @@ class HelpSupportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Help & Support')),
+      appBar: AppBar(title: Text(context.l10n.helpSupport)),
       body: ListView(
         padding: EdgeInsets.all(16.r),
         children: [
           Text(
-            'How can we help you today?',
+            context.l10n.helpIntro,
             style: context.textTheme.titleMedium?.copyWith(
               fontSize: 18.f,
               fontWeight: FontWeight.bold,
@@ -36,13 +36,13 @@ class HelpSupportScreen extends StatelessWidget {
                     Icons.phone_outlined,
                     color: context.theme.primaryColor,
                   ),
-                  title: const Text('Call Customer Care'),
-                  subtitle: const Text('+880 1700-000000 (24/7)'),
+                  title: Text(context.l10n.callUs),
+                  subtitle: Text(context.l10n.supportPhone),
                   trailing: const Icon(Icons.chevron_right, size: 20),
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Calling +880 1700-000000...'),
+                      SnackBar(
+                        content: Text(context.l10n.calling),
                       ),
                     );
                   },
@@ -53,12 +53,12 @@ class HelpSupportScreen extends StatelessWidget {
                     Icons.email_outlined,
                     color: context.theme.primaryColor,
                   ),
-                  title: const Text('Email Support'),
-                  subtitle: const Text('support@easyecommerce.com'),
+                  title: Text(context.l10n.emailSupport),
+                  subtitle: Text(context.l10n.supportEmail),
                   trailing: const Icon(Icons.chevron_right, size: 20),
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Opening email support...')),
+                      SnackBar(content: Text(context.l10n.openingEmail)),
                     );
                   },
                 ),
@@ -68,13 +68,13 @@ class HelpSupportScreen extends StatelessWidget {
                     Icons.chat_bubble_outline,
                     color: context.theme.primaryColor,
                   ),
-                  title: const Text('Live Chat'),
-                  subtitle: const Text('Chat instantly with our support team'),
+                  title: Text(context.l10n.liveChat),
+                  subtitle: Text(context.l10n.chatTeam),
                   trailing: const Icon(Icons.chevron_right, size: 20),
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Connecting to live chat agent...'),
+                      SnackBar(
+                        content: Text(context.l10n.connectingChat),
                       ),
                     );
                   },
@@ -84,7 +84,7 @@ class HelpSupportScreen extends StatelessWidget {
           ),
           Gap(h: 24.h),
           Text(
-            'Frequently Asked Questions',
+            context.l10n.faqTitle,
             style: context.textTheme.titleMedium?.copyWith(
               fontSize: 18.f,
               fontWeight: FontWeight.bold,
@@ -92,35 +92,29 @@ class HelpSupportScreen extends StatelessWidget {
           ),
           Gap(h: 12.h),
           ExpansionTile(
-            title: const Text('How do I track my order?'),
+            title: Text(context.l10n.trackOrderQuestion),
             children: [
               Padding(
                 padding: EdgeInsets.all(16.r),
-                child: const Text(
-                  'You can track your orders by going to Profile -> My Orders. Here you will find live status updates for all your purchases.',
-                ),
+                child: Text(context.l10n.trackOrderAnswer),
               ),
             ],
           ),
           ExpansionTile(
-            title: const Text('What is the return policy?'),
+            title: Text(context.l10n.returnPolicyQuestion),
             children: [
               Padding(
                 padding: EdgeInsets.all(16.r),
-                child: const Text(
-                  'We offer a 7-day easy return policy for all eligible products. Items must be in their original condition.',
-                ),
+                child: Text(context.l10n.returnPolicyAnswer),
               ),
             ],
           ),
           ExpansionTile(
-            title: const Text('How do I apply a promo code?'),
+            title: Text(context.l10n.promoCodeQuestion),
             children: [
               Padding(
                 padding: EdgeInsets.all(16.r),
-                child: const Text(
-                  'You can apply promo codes on the Checkout screen before placing your order.',
-                ),
+                child: Text(context.l10n.promoCodeAnswer),
               ),
             ],
           ),

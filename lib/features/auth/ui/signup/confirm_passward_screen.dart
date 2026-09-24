@@ -12,18 +12,18 @@ class ConfirmPasswardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingnupScreenModel(
-      title: "Confirm Password",
-      subTitle: "Re-enter your password to confirm",
-      hintText: "Re-enter password",
-      lable: "Confirm Password",
+      title: context.l10n.password,
+      subTitle: context.l10n.confirmPasswordSubtitle,
+      hintText: context.l10n.enterPassword,
+      lable: context.l10n.password,
       backScreenPath: PasswordSetScreen.name,
       lottie: Asset.passwordLottie,
       validator1: (value) {
         if (value == null || value.isEmpty) {
-          return "Please re-enter your password";
+          return context.l10n.enterPasswordError;
         }
         if (value != signupModel.password) {
-          return "Passwords do not match.";
+          return context.l10n.registrationError;
         }
         return null;
       },
@@ -34,8 +34,8 @@ class ConfirmPasswardScreen extends StatelessWidget {
 
         if (success) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("Account created! Please verify your email with the OTP."),
+            SnackBar(
+              content: Text(context.l10n.accountCreated),
               backgroundColor: Colors.green,
             ),
           );
@@ -46,7 +46,9 @@ class ConfirmPasswardScreen extends StatelessWidget {
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(auth.errorMessage ?? "Registration failed. Please try again."),
+              content: Text(
+                context.localizedError(auth.errorMessage, 'registrationError'),
+              ),
               backgroundColor: Colors.redAccent,
             ),
           );

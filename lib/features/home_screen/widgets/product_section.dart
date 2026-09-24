@@ -11,15 +11,15 @@ class ProductSection extends StatelessWidget {
       animation: products,
       builder: (context, child) {
         if (products.isLoding && products.product.isEmpty) {
-          return const SizedBox(
+          return SizedBox(
             height: 180,
             child: Center(child: CircularProgressIndicator()),
           );
         }
         if (products.product.isEmpty) {
-          return const SizedBox(
+          return SizedBox(
             height: 180,
-            child: Center(child: Text('No products available')),
+            child: Center(child: Text(context.l10n.noProducts)),
           );
         }
         return SizedBox(

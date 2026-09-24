@@ -10,7 +10,7 @@ class WishlistScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text(
-          'Wishlist',
+          context.l10n.wishlist,
           style: context.textTheme.headlineLarge?.copyWith(
             fontSize: 20.f,
           ),
@@ -23,12 +23,12 @@ class WishlistScreen extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text('আপনার Wishlist এখনো খালি।'),
+                  Text(context.l10n.emptyWishlist),
                   const SizedBox(height: 12),
                   FilledButton(
                     onPressed: () =>
                         context.read<NavbarController>().nextScreen(0),
-                    child: const Text('Continue shopping'),
+                    child: Text(context.l10n.continueShopping),
                   ),
                 ],
               ),

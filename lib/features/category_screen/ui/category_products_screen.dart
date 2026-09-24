@@ -12,7 +12,7 @@ class CategoryProductsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final products = getIt<GetProductData>();
     return Scaffold(
-      appBar: AppBar(title: Text(category.title ?? 'Products')),
+      appBar: AppBar(title: Text(category.title ?? context.l10n.allProducts)),
       body: AnimatedBuilder(
         animation: products,
         builder: (context, child) {
@@ -21,17 +21,20 @@ class CategoryProductsScreen extends StatelessWidget {
           }
           if (products.errorMessage != null && products.product.isEmpty) {
             return _MessageState(
-              message: products.errorMessage!,
+              message: context.localizedError(
+                products.errorMessage,
+                'loadProductsError',
+              ),
               action: products.getProduct,
-              actionLabel: 'Retry',
+              actionLabel: context.l10n.retry,
             );
           }
           final items = products.byCategory(
             category.id ?? category.slug ?? category.title,
           );
           if (items.isEmpty) {
-            return const _MessageState(
-              message: 'এই ক্যাটাগরিতে কোনো পণ্য পাওয়া যায়নি।',
+            return _MessageState(
+              message: context.l10n.noProducts,
             );
           }
           return RefreshIndicator(

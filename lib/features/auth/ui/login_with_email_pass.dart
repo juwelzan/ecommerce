@@ -47,7 +47,9 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
     if (success) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Welcome back, ${auth.user?.fullName ?? "User"}!'),
+          content: Text(
+            '${context.l10n.welcomeBack}, ${auth.user?.fullName ?? context.l10n.userFallback}!',
+          ),
           backgroundColor: Colors.green,
         ),
       );
@@ -59,7 +61,7 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(auth.errorMessage ?? 'Login failed. Please check credentials.'),
+          content: Text(context.localizedError(auth.errorMessage, 'loginError')),
           backgroundColor: Colors.redAccent,
         ),
       );
@@ -70,14 +72,12 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
     showDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Forgot Password'),
-        content: const Text(
-          'Please enter your registered email address to receive password reset instructions.',
-        ),
+        title: Text(context.l10n.forgotPassword),
+        content: Text(context.l10n.forgotPasswordBody),
         actions: [
           TextButton(
             onPressed: () => context.pop(),
-            child: const Text('Close'),
+            child: Text(context.l10n.close),
           ),
         ],
       ),
@@ -113,9 +113,9 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Gap(h: 20.h),
-                const AuthWidget(
-                  title: "Welcome Back",
-                  subTitle: "Enter your email & password to sign in",
+                AuthWidget(
+                  title: context.l10n.welcomeBack,
+                  subTitle: context.l10n.loginSubtitle,
                   subTitleSize: 15,
                   logoSize: 100,
                 ),
@@ -124,18 +124,18 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
                   controller: email,
                   keyboardType: TextInputType.emailAddress,
                   decoration: decorationEliment(
-                    hintText: "email@example.com",
-                    labelText: "Email",
+                    hintText: context.l10n.emailExample,
+                    labelText: context.l10n.email,
                   ).copyWith(
                     prefixIcon: const Icon(Icons.email_outlined),
                   ),
                   style: textStyleEliment(),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Please enter your email';
+                      return context.l10n.enterEmail;
                     }
                     if (!Validation.email(value.trim())) {
-                      return 'Please enter a valid email';
+                      return context.l10n.validEmail;
                     }
                     return null;
                   },
@@ -145,8 +145,8 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
                   controller: password,
                   obscureText: _obscurePassword,
                   decoration: decorationEliment(
-                    hintText: "Enter your password",
-                    labelText: "Password",
+                    hintText: context.l10n.enterPassword,
+                    labelText: context.l10n.password,
                   ).copyWith(
                     prefixIcon: const Icon(Icons.lock_outline),
                     suffixIcon: IconButton(
@@ -163,7 +163,7 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
                   style: textStyleEliment(),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your password';
+                      return context.l10n.enterPasswordError;
                     }
                     return null;
                   },
@@ -175,7 +175,7 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
                     TextButton(
                       onPressed: _showForgotPasswordDialog,
                       child: Text(
-                        "Forgot Password?",
+                        context.l10n.forgotPasswordQuestion,
                         style: TextStyle(
                           color: context.theme.primaryColor,
                           fontWeight: FontWeight.w600,
@@ -187,7 +187,7 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
                 Gap(h: 20.h),
                 JumpingButton(
                   isLoding: auth.isLoading,
-                  label: "Log In",
+                  label: context.l10n.login,
                   borderRadius: BorderRadius.circular(14.r),
                   color: context.theme.primaryColor,
                   onTap: _handleLogin,
@@ -200,7 +200,7 @@ class _LoginWithEmailPassState extends State<LoginWithEmailPass> {
                 TextButton(
                   onPressed: () => context.push(LoginScrenn.name),
                   child: Text(
-                    "Other Sign-in Options",
+                    context.l10n.otherSignIn,
                     style: TextStyle(
                       fontSize: 14.f,
                       color: Colors.grey,

@@ -51,7 +51,7 @@ class CartContainer extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          line.product.title ?? 'Product',
+                          line.product.title ?? context.l10n.productFallback,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -67,7 +67,7 @@ class CartContainer extends StatelessWidget {
                     ],
                   ),
                   Gap(h: 4.h),
-                  Text('Quantity: ${line.quantity}'),
+                  Text(context.l10n.quantityLabel(line.quantity)),
                   Gap(h: 8.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

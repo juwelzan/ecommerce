@@ -10,29 +10,29 @@ class NameSetScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingnupScreenModel(
-      title: "Your Name",
-      subTitle: "Enter your full name",
-      hintText: "Md juwel",
-      lable: "Fast Name",
-      lable2: "Last Name",
-      hintText2: "islam,mia,roy etc",
+      title: context.l10n.yourName,
+      subTitle: context.l10n.fullName,
+      hintText: context.l10n.nameExample,
+      lable: context.l10n.firstName,
+      lable2: context.l10n.lastName,
+      hintText2: context.l10n.lastNameExample,
       lottie: Asset.userLottie,
       isShowSecondFild: true,
       validator1: (value) {
         if (value!.isEmpty) {
-          return "enter your fast name";
+          return context.l10n.enterFirstName;
         }
         if (value.length < 5) {
-          return "enter your correct fast name";
+          return context.l10n.correctFirstName;
         }
         return null;
       },
       validator2: (value) {
         if (value!.isEmpty) {
-          return "enter your last name";
+          return context.l10n.enterLastName;
         }
         if (value.length < 3) {
-          return "enter your correct last name";
+          return context.l10n.correctLastName;
         }
         return null;
       },

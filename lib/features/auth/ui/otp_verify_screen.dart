@@ -25,13 +25,13 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
     final email = widget.email?.trim() ?? "";
     if (email.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Email not found. Please try signing up again.")),
+        SnackBar(content: Text(context.l10n.emailNotFound)),
       );
       return;
     }
     if (_otpCode.length != 4) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Please enter a valid 4-digit OTP code.")),
+        SnackBar(content: Text(context.l10n.validOtp)),
       );
       return;
     }
@@ -44,7 +44,9 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
     if (success) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Welcome, ${auth.user?.fullName ?? "User"}!"),
+          content: Text(
+            "${context.l10n.welcome}, ${auth.user?.fullName ?? context.l10n.userFallback}!",
+          ),
           backgroundColor: Colors.green,
         ),
       );
@@ -52,7 +54,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(auth.errorMessage ?? "Invalid OTP code. Please try again."),
+          content: Text(auth.errorMessage ?? context.l10n.invalidOtp),
           backgroundColor: Colors.redAccent,
         ),
       );
@@ -83,7 +85,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
         children: [
           Gap(h: 40.h),
           AuthWidget(
-            title: "Enter OTP Code",
+            title: context.l10n.validOtp,
             titleSize: 26,
             subTitle: widget.email != null
                 ? "A 4-digit OTP code has been sent to\n${widget.email}"
@@ -110,7 +112,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
               return JumpingButton(
                 isDisable: !value,
                 isLoding: auth.isLoading,
-                label: "Verify OTP",
+                label: context.l10n.verifyOtp,
                 borderRadius: BorderRadius.circular(14.r),
                 color: context.theme.primaryColor,
                 onTap: _handleVerify,

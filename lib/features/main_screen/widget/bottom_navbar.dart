@@ -7,6 +7,7 @@ class BottomNavbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<NavbarController>(
       builder: (context, state, child) {
+        final l10n = context.l10n;
         return Container(
           height: 60.h,
           width: double.infinity,
@@ -38,24 +39,28 @@ class BottomNavbar extends StatelessWidget {
                   img: Asset.navbHome,
                   isActive: state.pageIndex == 0,
                   screenIndex: 0,
+                  label: l10n.home,
                 ),
                 navBarIcon(
                   context,
                   img: Asset.navbCategory,
                   isActive: state.pageIndex == 1,
                   screenIndex: 1,
+                  label: l10n.categories,
                 ),
                 navBarIcon(
                   context,
                   img: Asset.navbCart,
                   isActive: state.pageIndex == 2,
                   screenIndex: 2,
+                  label: l10n.cart,
                 ),
                 navBarIcon(
                   context,
                   img: Asset.navbWish,
                   isActive: state.pageIndex == 3,
                   screenIndex: 3,
+                  label: l10n.wishlist,
                 ),
               ],
             ),
@@ -71,6 +76,7 @@ Widget navBarIcon(
   required bool isActive,
   required String img,
   required int screenIndex,
+  required String label,
 }) {
   final icon = Image.asset(
     img,
@@ -79,10 +85,12 @@ Widget navBarIcon(
         ? context.theme.primaryColor
         : context.theme.primaryColorLight,
   );
-  return InkWell(
-    onTap: () => context.read<NavbarController>().nextScreen(screenIndex),
-    borderRadius: BorderRadius.circular(20.r),
-    child: Padding(
+  return Tooltip(
+    message: label,
+    child: InkWell(
+      onTap: () => context.read<NavbarController>().nextScreen(screenIndex),
+      borderRadius: BorderRadius.circular(20.r),
+      child: Padding(
       padding: EdgeInsets.all(6.r),
       child: screenIndex == 2
           ? Consumer<CartController>(
@@ -114,6 +122,7 @@ Widget navBarIcon(
               ),
             )
           : icon,
+      ),
     ),
   );
 }

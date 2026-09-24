@@ -12,10 +12,10 @@ class PasswordSetScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingnupScreenModel(
-      title: "Password",
-      subTitle: "Create strong password",
-      hintText: "01000000000",
-      lable: "Phone",
+      title: context.l10n.password,
+      subTitle: context.l10n.createStrongPassword,
+      hintText: context.l10n.passwordExample,
+      lable: context.l10n.password,
       lottie: Asset.passwordLottie,
       backScreenPath: CityNameSetScreen.name,
       onSubmitText: (fastFild, secondFild) {

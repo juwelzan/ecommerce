@@ -9,13 +9,14 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final auth = context.watch<AuthController>();
     final isLoggedIn = auth.isLoggedIn;
     final user = auth.user;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile'),
+        title: Text(l10n.profile),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -40,25 +41,25 @@ class ProfileScreen extends StatelessWidget {
           Gap(h: 20.h),
 
           // Account Section
-          _buildSectionHeader(context, 'Account'),
+          _buildSectionHeader(context, l10n.account),
           _buildTile(
             context,
             icon: Icons.shopping_bag_outlined,
-            title: 'My Orders',
-            subtitle: 'Track and view your orders',
+            title: l10n.orders,
+            subtitle: l10n.trackOrders,
             onTap: () {
               if (isLoggedIn) {
                 context.push(OrdersScreen.name);
               } else {
-                _showLoginRequiredDialog(context, 'view your orders');
+                _showLoginRequiredDialog(context, l10n.trackOrders);
               }
             },
           ),
           _buildTile(
             context,
             icon: Icons.favorite_border,
-            title: 'Wishlist',
-            subtitle: 'Your saved items',
+            title: l10n.wishlist,
+            subtitle: l10n.savedItems,
             onTap: () {
               if (context.canPop()) {
                 context.pop();
@@ -69,50 +70,50 @@ class ProfileScreen extends StatelessWidget {
           _buildTile(
             context,
             icon: Icons.location_on_outlined,
-            title: 'Saved Addresses',
-            subtitle: 'Manage delivery addresses',
+            title: l10n.savedAddresses,
+            subtitle: l10n.manageAddresses,
             onTap: () {
               if (isLoggedIn) {
                 context.push(AddressScreen.name);
               } else {
-                _showLoginRequiredDialog(context, 'manage your addresses');
+                _showLoginRequiredDialog(context, l10n.manageAddresses);
               }
             },
           ),
           Gap(h: 16.h),
 
           // Preferences Section
-          _buildSectionHeader(context, 'Preferences'),
+          _buildSectionHeader(context, l10n.preferences),
           _buildTile(
             context,
             icon: Icons.notifications_outlined,
-            title: 'Notifications',
-            subtitle: 'Manage push alerts',
+            title: l10n.notifications,
+            subtitle: l10n.manageAlerts,
             onTap: () => context.push(NotificationScreen.name),
           ),
           _buildTile(
             context,
             icon: Icons.settings_outlined,
-            title: 'Settings',
-            subtitle: 'App theme & preferences',
+            title: l10n.settings,
+            subtitle: l10n.themePreferences,
             onTap: () => context.push(SettingsScreen.name),
           ),
           Gap(h: 16.h),
 
           // Support Section
-          _buildSectionHeader(context, 'Support & Legal'),
+          _buildSectionHeader(context, l10n.supportLegal),
           _buildTile(
             context,
             icon: Icons.help_outline,
-            title: 'Help & Support',
-            subtitle: 'FAQs and contact support',
+            title: l10n.helpSupport,
+            subtitle: l10n.faqsSupport,
             onTap: () => context.push(HelpSupportScreen.name),
           ),
           _buildTile(
             context,
             icon: Icons.info_outline,
-            title: 'About EasyEcommerce',
-            subtitle: 'App version & details',
+            title: l10n.about,
+            subtitle: l10n.appDetails,
             onTap: () => context.push(AboutScreen.name),
           ),
           Gap(h: 24.h),
@@ -132,7 +133,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
                 icon: const Icon(Icons.logout),
-                label: const Text('Logout'),
+                label: Text(l10n.logout),
               ),
             ),
             Gap(h: 24.h),
@@ -145,8 +146,8 @@ class ProfileScreen extends StatelessWidget {
   Widget _buildLoggedInHeader(BuildContext context, UserModel? user) {
     final displayName = user?.fullName.isNotEmpty == true
         ? user!.fullName
-        : 'User';
-    final email = user?.email ?? 'No email available';
+        : context.l10n.userFallback;
+    final email = user?.email ?? context.l10n.noEmailAvailable;
     final phone = user?.phone;
 
     return Container(
@@ -226,7 +227,7 @@ class ProfileScreen extends StatelessWidget {
               ),
               padding: EdgeInsets.symmetric(horizontal: 12.w),
             ),
-            child: const Text('Edit'),
+            child: Text(context.l10n.edit),
           ),
         ],
       ),
@@ -234,6 +235,7 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget _buildLoggedOutCard(BuildContext context) {
+    final l10n = context.l10n;
     return Container(
       padding: EdgeInsets.all(20.r),
       decoration: BoxDecoration(
@@ -269,14 +271,14 @@ class ProfileScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Welcome to EasyEcommerce',
+                      l10n.welcome,
                       style: context.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Gap(h: 4.h),
                     Text(
-                      'Sign in to enjoy all features, track your orders & manage wishlist.',
+                      l10n.signInFeatures,
                       style: context.textTheme.bodySmall?.copyWith(
                         color: Colors.grey,
                         height: 1.3,
@@ -300,7 +302,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   icon: const Icon(Icons.login, size: 18),
-                  label: const Text('Sign In'),
+                  label: Text(context.l10n.login),
                 ),
               ),
               Gap(w: 12.w),
@@ -314,7 +316,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   icon: const Icon(Icons.person_add_outlined, size: 18),
-                  label: const Text('Sign Up'),
+                  label: Text(context.l10n.signup),
                 ),
               ),
             ],
@@ -378,19 +380,19 @@ class ProfileScreen extends StatelessWidget {
     showDialog<void>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Sign In Required'),
-        content: Text('Please sign in to your account to $actionText.'),
+        title: Text(context.l10n.signInRequired),
+        content: Text(context.l10n.pleaseSignIn(actionText)),
         actions: [
           TextButton(
             onPressed: () => ctx.pop(),
-            child: const Text('Cancel'),
+            child: Text(context.l10n.cancel),
           ),
           FilledButton(
             onPressed: () {
               ctx.pop();
               context.push(LoginWithEmailPass.name);
             },
-            child: const Text('Sign In'),
+            child: Text(context.l10n.login),
           ),
         ],
       ),
@@ -401,12 +403,12 @@ class ProfileScreen extends StatelessWidget {
     showDialog<void>(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: const Text('Logout'),
-        content: const Text('Are you sure you want to log out of your account?'),
+        title: Text(context.l10n.logout),
+        content: Text(context.l10n.logoutConfirm),
         actions: [
           TextButton(
             onPressed: () => dialogContext.pop(),
-            child: const Text('Cancel'),
+            child: Text(context.l10n.cancel),
           ),
           FilledButton(
             style: FilledButton.styleFrom(
@@ -417,13 +419,13 @@ class ProfileScreen extends StatelessWidget {
               await auth.logout();
               if (context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Logged out successfully'),
+                  SnackBar(
+                    content: Text(context.l10n.loggedOut),
                   ),
                 );
               }
             },
-            child: const Text('Logout'),
+            child: Text(context.l10n.logout),
           ),
         ],
       ),

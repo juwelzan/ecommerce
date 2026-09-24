@@ -6,9 +6,11 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final localeController = context.read<LocaleController>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: Text(l10n.settings),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
@@ -16,13 +18,13 @@ class SettingsScreen extends StatelessWidget {
           Consumer<ThemeController>(
             builder: (context, themeCtrl, child) => ListTile(
               leading: const Icon(Icons.dark_mode_outlined),
-              title: const Text('Theme Mode'),
+              title: Text(l10n.themeMode),
               subtitle: Text(
                 themeCtrl.themeMode == ThemeMode.dark
-                    ? 'Dark Mode'
+                    ? l10n.darkMode
                     : themeCtrl.themeMode == ThemeMode.light
-                        ? 'Light Mode'
-                        : 'System Default',
+                        ? l10n.lightMode
+                        : l10n.systemDefault,
               ),
               trailing: DropdownButton<ThemeMode>(
                 value: themeCtrl.themeMode,
@@ -32,18 +34,18 @@ class SettingsScreen extends StatelessWidget {
                     themeCtrl.themeTgol(newMode);
                   }
                 },
-                items: const [
+                items: [
                   DropdownMenuItem(
                     value: ThemeMode.light,
-                    child: Text('Light'),
+                    child: Text(l10n.light),
                   ),
                   DropdownMenuItem(
                     value: ThemeMode.dark,
-                    child: Text('Dark'),
+                    child: Text(l10n.dark),
                   ),
                   DropdownMenuItem(
                     value: ThemeMode.system,
-                    child: Text('System'),
+                    child: Text(l10n.system),
                   ),
                 ],
               ),
@@ -52,7 +54,7 @@ class SettingsScreen extends StatelessWidget {
           const Divider(),
           ListTile(
             leading: const Icon(Icons.notifications_outlined),
-            title: const Text('Push Notifications'),
+            title: Text(l10n.pushNotifications),
             trailing: Switch(
               value: true,
               onChanged: (val) {},
@@ -61,9 +63,38 @@ class SettingsScreen extends StatelessWidget {
           const Divider(),
           ListTile(
             leading: const Icon(Icons.language_outlined),
-            title: const Text('Language'),
-            subtitle: const Text('English (US)'),
-            onTap: () {},
+            title: Text(l10n.language),
+            subtitle: Text(Localizations.localeOf(context).languageCode == 'bn'
+                ? l10n.bangla
+                : l10n.english),
+            onTap: () => showModalBottomSheet<void>(
+              context: context,
+              builder: (sheetContext) => SafeArea(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    RadioListTile<Locale>(
+                      title: Text(l10n.bangla),
+                      value: const Locale('bn'),
+                      groupValue: localeController.locale,
+                      onChanged: (value) {
+                        if (value != null) localeController.setLocale(value);
+                        Navigator.pop(sheetContext);
+                      },
+                    ),
+                    RadioListTile<Locale>(
+                      title: Text(l10n.english),
+                      value: const Locale('en'),
+                      groupValue: localeController.locale,
+                      onChanged: (value) {
+                        if (value != null) localeController.setLocale(value);
+                        Navigator.pop(sheetContext);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
         ],
       ),

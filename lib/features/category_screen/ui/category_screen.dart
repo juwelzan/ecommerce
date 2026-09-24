@@ -16,7 +16,7 @@ class CategoryScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           title: Text(
-            "Categories",
+            context.l10n.categories,
             style: context.textTheme.headlineLarge?.copyWith(
               fontSize: 20.f,
             ),
@@ -33,12 +33,12 @@ class CategoryScreen extends StatelessWidget {
               return Center(
                 child: OutlinedButton(
                   onPressed: controller.getAllCategori,
-                  child: const Text('Retry'),
+                  child: Text(context.l10n.retry),
                 ),
               );
             }
             if (controller.allCategory.isEmpty) {
-              return const Center(child: Text('No categories available'));
+              return Center(child: Text(context.l10n.noCategories));
             }
             return RefreshIndicator(
               onRefresh: controller.getAllCategori,

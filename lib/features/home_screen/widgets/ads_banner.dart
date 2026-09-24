@@ -19,7 +19,7 @@ class AdsBanner extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            'Promotions will appear here',
+            context.l10n.promotions,
             style: context.textTheme.bodyMedium,
           ),
         ),

@@ -61,7 +61,7 @@ class ProdactWidget extends StatelessWidget {
                       Text(
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        product?.title ?? "Featured product",
+                        product?.title ?? context.l10n.allProducts,
                         style: context.textTheme.titleLarge?.copyWith(
                           fontSize: 12.f,
                           fontWeight: .w500,
@@ -103,9 +103,11 @@ class ProdactWidget extends StatelessWidget {
                                       SnackBar(
                                         content: Text(
                                           added
-                                              ? 'Added to cart'
-                                              : cart.errorMessage ??
-                                                    'Could not add to cart',
+                                              ? context.l10n.addToCart
+                                              : context.localizedError(
+                                                  cart.errorMessage,
+                                                  'noProducts',
+                                                ),
                                         ),
                                         duration: const Duration(seconds: 1),
                                       ),

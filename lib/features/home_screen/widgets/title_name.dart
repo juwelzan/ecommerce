@@ -20,7 +20,7 @@ class TitleName extends StatelessWidget {
             RepaintBoundary(
               child: TextButton(
                 onPressed: onTap,
-                child: Text("See All", style: context.textTheme.headlineMedium),
+                child: Text(context.l10n.seeAll, style: context.textTheme.headlineMedium),
               ),
             ),
         ],

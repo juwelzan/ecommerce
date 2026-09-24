@@ -9,9 +9,10 @@ class ProductListingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final displayTitle = title == 'All Products' ? context.l10n.allProducts : title;
     final products = getIt<GetProductData>();
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(title: Text(displayTitle)),
       body: AnimatedBuilder(
         animation: products,
         builder: (context, child) {
@@ -22,12 +23,12 @@ class ProductListingScreen extends StatelessWidget {
             return Center(
               child: OutlinedButton(
                 onPressed: products.getProduct,
-                child: const Text('Retry'),
+                child: Text(context.l10n.retry),
               ),
             );
           }
           if (products.product.isEmpty) {
-            return const Center(child: Text('কোনো পণ্য পাওয়া যায়নি।'));
+            return Center(child: Text(context.l10n.noProducts));
           }
           return RefreshIndicator(
             onRefresh: products.getProduct,

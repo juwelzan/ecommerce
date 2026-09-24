@@ -14,6 +14,9 @@ void main() async {
           ChangeNotifierProvider<ThemeController>(
             create: (context) => ThemeController()..themeInitial(),
           ),
+          ChangeNotifierProvider<LocaleController>(
+            create: (context) => LocaleController()..load(),
+          ),
           ChangeNotifierProvider<AuthController>(
             create: (context) => AuthController()..checkInitialAuth(),
           ),

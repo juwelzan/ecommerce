@@ -4,6 +4,8 @@ export 'package:ecommerce/core/assets/asset.dart';
 export 'package:ecommerce/core/di/dependency_injection.dart';
 export 'package:ecommerce/core/extensions/extension.dart';
 export 'package:ecommerce/core/keys/keys.dart';
+export 'package:ecommerce/core/localization/locale_controller.dart';
+export 'package:ecommerce/generated/app_localizations.dart';
 export 'package:ecommerce/core/logger/logger.dart';
 export 'package:ecommerce/core/network/network_caller.dart';
 export 'package:ecommerce/core/package/gap/extension.dart';

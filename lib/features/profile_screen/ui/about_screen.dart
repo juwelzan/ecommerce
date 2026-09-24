@@ -8,7 +8,7 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('About EasyEcommerce'),
+        title: Text(context.l10n.about),
       ),
       body: Padding(
         padding: const EdgeInsets.all(24),
@@ -23,13 +23,13 @@ class AboutScreen extends StatelessWidget {
             ),
             Gap(h: 8.h),
             Text(
-              'Your ultimate one-stop shopping destination for the best products and deals.',
+              context.l10n.aboutDescription,
               textAlign: TextAlign.center,
               style: context.textTheme.bodyMedium?.copyWith(color: Colors.grey),
             ),
             const Spacer(),
             Text(
-              '© 2025 EasyEcommerce Inc. All rights reserved.',
+              context.l10n.rightsReserved,
               style: context.textTheme.bodySmall?.copyWith(color: Colors.grey),
             ),
             Gap(h: 20.h),

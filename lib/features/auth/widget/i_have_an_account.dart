@@ -12,11 +12,11 @@ class IHaveAnAccount extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("I have an ", style: TextStyle(fontSize: 15.f)),
+        Text("${context.l10n.haveAccount} ", style: TextStyle(fontSize: 15.f)),
         GestureDetector(
           onTap: onTap ?? () => context.push(LoginWithEmailPass.name),
           child: Text(
-            "account",
+            context.l10n.login,
             style: TextStyle(
               fontSize: 15.f,
               color: context.theme.primaryColor,
@@ -39,11 +39,11 @@ class IDontHaveAnAccount extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("Don't have an ", style: TextStyle(fontSize: 15.f)),
+        Text("${context.l10n.dontHaveAccount} ", style: TextStyle(fontSize: 15.f)),
         GestureDetector(
           onTap: onTap ?? () => context.push(NameSetScreen.name),
           child: Text(
-            "account",
+            context.l10n.signup,
             style: TextStyle(
               fontSize: 15.f,
               color: context.theme.primaryColor,

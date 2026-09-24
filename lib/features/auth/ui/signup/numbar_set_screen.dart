@@ -13,14 +13,14 @@ class NumbarSetScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingnupScreenModel(
-      title: "Phone Number",
-      subTitle: "Enter your personal number",
-      hintText: "01X00000000",
-      lable: "Phone",
+      title: context.l10n.phoneNumber,
+      subTitle: context.l10n.personalNumber,
+      hintText: context.l10n.phoneExample,
+      lable: context.l10n.phone,
       backScreenPath: EmailSetScreen.name,
       validator1: (value) {
         if (!Validation.phone(value!)) {
-          return "enter BD number";
+          return context.l10n.enterBdNumber;
         }
         return null;
       },

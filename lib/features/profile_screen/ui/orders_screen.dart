@@ -8,7 +8,7 @@ class OrdersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Orders'),
+        title: Text(context.l10n.orders),
       ),
       body: Center(
         child: Column(
@@ -21,18 +21,18 @@ class OrdersScreen extends StatelessWidget {
             ),
             Gap(h: 16.h),
             Text(
-              'No orders placed yet',
+              context.l10n.noOrders,
               style: context.textTheme.titleMedium,
             ),
             Gap(h: 8.h),
             Text(
-              'Your order history will appear here.',
+              context.l10n.orderHistory,
               style: context.textTheme.bodyMedium?.copyWith(color: Colors.grey),
             ),
             Gap(h: 20.h),
             OutlinedButton(
               onPressed: () => context.read<NavbarController>().nextScreen(0),
-              child: const Text('Start Shopping'),
+              child: Text(context.l10n.startShopping),
             ),
           ],
         ),
