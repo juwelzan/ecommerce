@@ -45,7 +45,9 @@ class UserModel {
       phoneVerified: json['phone_verified'] as bool?,
       avatarUrl: json['avatar_url'] as String?,
       city: json['city'] as String?,
-      role: json['role'] is int ? json['role'] as int : int.tryParse('${json['role']}'),
+      role: json['role'] is int
+          ? json['role'] as int
+          : int.tryParse('${json['role']}'),
     );
   }
 

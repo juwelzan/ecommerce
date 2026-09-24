@@ -278,6 +278,12 @@ abstract class AppLocalizations {
   /// **'Subtotal'**
   String get subtotal;
 
+  /// No description provided for @total.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get total;
+
   /// No description provided for @checkout.
   ///
   /// In en, this message translates to:
@@ -383,7 +389,7 @@ abstract class AppLocalizations {
   /// No description provided for @about.
   ///
   /// In en, this message translates to:
-  /// **'About EasyEcommerce'**
+  /// **'About CraftyBay'**
   String get about;
 
   /// No description provided for @savedAddresses.
@@ -395,7 +401,7 @@ abstract class AppLocalizations {
   /// No description provided for @welcome.
   ///
   /// In en, this message translates to:
-  /// **'Welcome to EasyEcommerce'**
+  /// **'Welcome to CraftyBay'**
   String get welcome;
 
   /// No description provided for @signInFeatures.
@@ -662,6 +668,120 @@ abstract class AppLocalizations {
   /// **'Please enter your registered email address to receive password reset instructions.'**
   String get forgotPasswordBody;
 
+  /// No description provided for @sendResetInstructions.
+  ///
+  /// In en, this message translates to:
+  /// **'Send reset instructions'**
+  String get sendResetInstructions;
+
+  /// No description provided for @forgotPasswordSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset instructions sent. Check your email.'**
+  String get forgotPasswordSuccess;
+
+  /// No description provided for @forgotPasswordError.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to send reset instructions. Please try again.'**
+  String get forgotPasswordError;
+
+  /// No description provided for @otpSentTo.
+  ///
+  /// In en, this message translates to:
+  /// **'A 4-digit OTP code has been sent to {email}'**
+  String otpSentTo(String email);
+
+  /// No description provided for @otpSentToEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'A 4-digit OTP code has been sent to your email.'**
+  String get otpSentToEmail;
+
+  /// No description provided for @resendOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend'**
+  String get resendOtp;
+
+  /// No description provided for @otpResent.
+  ///
+  /// In en, this message translates to:
+  /// **'A new OTP has been sent.'**
+  String get otpResent;
+
+  /// No description provided for @otpResendError.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to resend the OTP. Please try again.'**
+  String get otpResendError;
+
+  /// No description provided for @back.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get back;
+
+  /// No description provided for @continueAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continueAction;
+
+  /// No description provided for @createAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Account'**
+  String get createAccount;
+
+  /// No description provided for @createAccountSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create your account to start shopping'**
+  String get createAccountSubtitle;
+
+  /// No description provided for @firstNameExample.
+  ///
+  /// In en, this message translates to:
+  /// **'John'**
+  String get firstNameExample;
+
+  /// No description provided for @enterPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your phone number'**
+  String get enterPhone;
+
+  /// No description provided for @validPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid Bangladesh phone number'**
+  String get validPhone;
+
+  /// No description provided for @passwordMinLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 6 characters'**
+  String get passwordMinLength;
+
+  /// No description provided for @showPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Show password'**
+  String get showPassword;
+
+  /// No description provided for @hidePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide password'**
+  String get hidePassword;
+
+  /// No description provided for @haveAccountLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account? Sign in'**
+  String get haveAccountLogin;
+
   /// No description provided for @close.
   ///
   /// In en, this message translates to:
@@ -803,7 +923,7 @@ abstract class AppLocalizations {
   /// No description provided for @rightsReserved.
   ///
   /// In en, this message translates to:
-  /// **'© 2025 EasyEcommerce Inc. All rights reserved.'**
+  /// **'© 2025 CraftyBay Inc. All rights reserved.'**
   String get rightsReserved;
 
   /// No description provided for @haveAccount.
@@ -1007,7 +1127,7 @@ abstract class AppLocalizations {
   /// No description provided for @supportEmail.
   ///
   /// In en, this message translates to:
-  /// **'support@easyecommerce.com'**
+  /// **'support@craftybay.com'**
   String get supportEmail;
 
   /// No description provided for @supportPhone.
@@ -1049,7 +1169,7 @@ abstract class AppLocalizations {
   /// No description provided for @welcomeTitle.
   ///
   /// In en, this message translates to:
-  /// **'Welcome to\nEasyEcommerce'**
+  /// **'Welcome to\nCraftyBay'**
   String get welcomeTitle;
 
   /// No description provided for @welcomeDescription.
@@ -1115,31 +1235,31 @@ abstract class AppLocalizations {
   /// No description provided for @enterFirstName.
   ///
   /// In en, this message translates to:
-  /// **'enter your first name'**
+  /// **'Please enter your first name'**
   String get enterFirstName;
 
   /// No description provided for @correctFirstName.
   ///
   /// In en, this message translates to:
-  /// **'enter your correct first name'**
+  /// **'Please enter a valid first name'**
   String get correctFirstName;
 
   /// No description provided for @enterLastName.
   ///
   /// In en, this message translates to:
-  /// **'enter your last name'**
+  /// **'Please enter your last name'**
   String get enterLastName;
 
   /// No description provided for @correctLastName.
   ///
   /// In en, this message translates to:
-  /// **'enter your correct last name'**
+  /// **'Please enter a valid last name'**
   String get correctLastName;
 
   /// No description provided for @lastNameExample.
   ///
   /// In en, this message translates to:
-  /// **'islam,mia,roy etc'**
+  /// **'Doe'**
   String get lastNameExample;
 
   /// No description provided for @productFallback.
@@ -1183,6 +1303,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Chat instantly with our support team'**
   String get chatTeam;
+
+  /// No description provided for @appVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Version {version}'**
+  String appVersion(String version);
+
+  /// No description provided for @appVersionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'CraftyBay v{version}'**
+  String appVersionLabel(String version);
 }
 
 class _AppLocalizationsDelegate

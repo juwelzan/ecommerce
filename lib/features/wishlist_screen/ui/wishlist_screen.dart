@@ -11,9 +11,7 @@ class WishlistScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         title: Text(
           context.l10n.wishlist,
-          style: context.textTheme.headlineLarge?.copyWith(
-            fontSize: 20.f,
-          ),
+          style: context.textTheme.headlineLarge,
         ),
       ),
       body: Consumer<WishlistController>(

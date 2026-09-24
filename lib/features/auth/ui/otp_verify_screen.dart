@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:ecommerce/features/auth/widget/i_have_an_account.dart';
 import 'package:ecommerce/features/auth/widget/pin_put.dart';
 import 'package:ecommerce/shared/path/paths.dart';
 import 'package:go_router/go_router.dart';
@@ -24,19 +27,21 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
   Future<void> _handleVerify() async {
     final email = widget.email?.trim() ?? "";
     if (email.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.emailNotFound)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(context.l10n.emailNotFound)));
       return;
     }
     if (_otpCode.length != 4) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.validOtp)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(context.l10n.validOtp)));
       return;
     }
 
     final auth = context.read<AuthController>();
+    if (auth.isLoading) return;
+
     final success = await auth.verifyOtp(email: email, otp: _otpCode);
 
     if (!mounted) return;
@@ -64,23 +69,28 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
   @override
   Widget build(BuildContext context) {
     final auth = context.watch<AuthController>();
+    final busy = auth.isLoading;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
+          tooltip: context.l10n.back,
           icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            if (context.canPop()) {
-              context.pop();
-            } else {
-              context.go(MainScreen.name);
-            }
-          },
+          onPressed: busy
+              ? null
+              : () {
+                  if (context.canPop()) {
+                    context.pop();
+                  } else {
+                    context.go(MainScreen.name);
+                  }
+                },
         ),
       ),
       body: ListView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         padding: EdgeInsets.symmetric(horizontal: 20.w),
         children: [
           Gap(h: 40.h),
@@ -88,8 +98,8 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
             title: context.l10n.validOtp,
             titleSize: 26,
             subTitle: widget.email != null
-                ? "A 4-digit OTP code has been sent to\n${widget.email}"
-                : "A 4-digit OTP code has been sent to your email",
+                ? context.l10n.otpSentTo(widget.email!)
+                : context.l10n.otpSentToEmail,
             subTitleSize: 15,
             logoSize: 100,
           ),
@@ -99,6 +109,11 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
             isError: false,
             boxSize: 65,
             isShowReset: true,
+            onReset: () {
+              final email = widget.email?.trim();
+              if (email == null || email.isEmpty) return;
+              unawaited(_resendOtp(email));
+            },
             onChanged: (value) {
               _otpCode = value;
               isOk.value = value.length == 4;
@@ -110,17 +125,34 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
             valueListenable: isOk,
             builder: (context, value, child) {
               return JumpingButton(
-                isDisable: !value,
-                isLoding: auth.isLoading,
+                isDisable: !value || busy,
+                isLoding: busy,
                 label: context.l10n.verifyOtp,
-                borderRadius: BorderRadius.circular(14.r),
+                borderRadius: AuthButtonStyle.radius,
                 color: context.theme.primaryColor,
+                height: AuthButtonStyle.height,
                 onTap: _handleVerify,
               );
             },
           ),
           Gap(h: 30.h),
         ],
+      ),
+    );
+  }
+
+  Future<void> _resendOtp(String email) async {
+    final auth = context.read<AuthController>();
+    final success = await auth.resendOtp(email: email);
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          success
+              ? context.l10n.otpResent
+              : context.localizedError(auth.errorMessage, 'otpResendError'),
+        ),
+        backgroundColor: success ? Colors.green : Colors.redAccent,
       ),
     );
   }

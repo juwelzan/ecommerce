@@ -40,8 +40,11 @@ Widget createTestableWidget({
           create: (_) => navbarController ?? NavbarController(),
         ),
       ],
-      child: const MaterialApp(
-        home: ProfileScreen(),
+      child: MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        locale: const Locale('en'),
+        home: const ProfileScreen(),
       ),
     ),
   );
@@ -59,21 +62,23 @@ void main() {
     getIt.registerLazySingleton<NetworkCaller>(() => mockCaller);
   });
 
-  testWidgets('ProfileScreen shows guest card when user is not logged in',
-      (WidgetTester tester) async {
+  testWidgets('ProfileScreen shows guest card when user is not logged in', (
+    WidgetTester tester,
+  ) async {
     final auth = AuthController(networkCaller: mockCaller);
 
     await tester.pumpWidget(createTestableWidget(authController: auth));
     await tester.pumpAndSettle();
 
-    expect(find.text('Welcome to EasyEcommerce'), findsOneWidget);
+    expect(find.text('Welcome to CraftyBay'), findsOneWidget);
     expect(find.text('Sign In'), findsOneWidget);
     expect(find.text('Sign Up'), findsOneWidget);
     expect(find.text('Logout'), findsNothing);
   });
 
-  testWidgets('ProfileScreen shows user info and logout when user is logged in',
-      (WidgetTester tester) async {
+  testWidgets('ProfileScreen shows user info and logout when user is logged in', (
+    WidgetTester tester,
+  ) async {
     final auth = AuthController(networkCaller: mockCaller);
 
     SharedPreferences.setMockInitialValues({
@@ -86,13 +91,12 @@ void main() {
     await tester.pumpWidget(createTestableWidget(authController: auth));
     await tester.pumpAndSettle();
 
-    expect(find.text('Welcome to EasyEcommerce'), findsNothing);
+    expect(find.text('Welcome to CraftyBay'), findsNothing);
     expect(find.text('Juwel Developer'), findsOneWidget);
     expect(find.text('juwel.dev@example.com'), findsOneWidget);
     expect(find.text('01700000000'), findsOneWidget);
     expect(find.text('Edit'), findsOneWidget);
 
-    // Scroll down to check Logout button
     await tester.scrollUntilVisible(find.text('Logout'), 200);
     expect(find.text('Logout'), findsOneWidget);
   });

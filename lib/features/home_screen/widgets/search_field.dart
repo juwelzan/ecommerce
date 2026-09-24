@@ -22,7 +22,7 @@ class SearchField extends StatelessWidget {
             border: _decoration,
             filled: true,
           ),
-          style: TextStyle(fontSize: 15.f),
+          style: context.textTheme.bodyLarge,
         ),
       ),
     );

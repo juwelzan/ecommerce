@@ -9,16 +9,12 @@ InputDecoration decorationEliment({
   return InputDecoration(
     filled: isError,
     hintText: hintText,
-    hintStyle: TextStyle(fontSize: 20, color: Colors.black38),
     labelText: labelText,
-    labelStyle: TextStyle(fontSize: 20, color: Colors.black38),
     fillColor: isError! ? Colors.redAccent.withValues(alpha: 0.2) : null,
     errorText: isError ? errorText : null,
-
-    // focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10),borderSide: BorderSide(width: 3.5,color: )),
   );
 }
 
 TextStyle textStyleEliment() {
-  return TextStyle(fontSize: 20);
+  return TextStyle(fontSize: 14.f, fontWeight: FontWeight.w400);
 }

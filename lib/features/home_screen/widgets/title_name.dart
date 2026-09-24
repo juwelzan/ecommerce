@@ -13,14 +13,15 @@ class TitleName extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: MainAxisSize.min,
         children: [
-          RepaintBoundary(
-            child: Text("$title", style: context.textTheme.headlineLarge),
-          ),
+          Text(title ?? '', style: context.textTheme.headlineLarge),
           if (onTap != null)
             RepaintBoundary(
               child: TextButton(
                 onPressed: onTap,
-                child: Text(context.l10n.seeAll, style: context.textTheme.headlineMedium),
+                child: Text(
+                  context.l10n.seeAll,
+                  style: context.textTheme.headlineMedium,
+                ),
               ),
             ),
         ],

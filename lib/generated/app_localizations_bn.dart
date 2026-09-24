@@ -101,6 +101,9 @@ class AppLocalizationsBn extends AppLocalizations {
   String get subtotal => 'উপমোট';
 
   @override
+  String get total => 'মোট';
+
+  @override
   String get checkout => 'চেকআউট';
 
   @override
@@ -153,13 +156,13 @@ class AppLocalizationsBn extends AppLocalizations {
   String get helpSupport => 'সহায়তা ও সাপোর্ট';
 
   @override
-  String get about => 'EasyEcommerce সম্পর্কে';
+  String get about => 'CraftyBay সম্পর্কে';
 
   @override
   String get savedAddresses => 'সংরক্ষিত ঠিকানা';
 
   @override
-  String get welcome => 'EasyEcommerce-এ স্বাগতম';
+  String get welcome => 'CraftyBay-এ স্বাগতম';
 
   @override
   String get signInFeatures =>
@@ -300,6 +303,68 @@ class AppLocalizationsBn extends AppLocalizations {
       'পাসওয়ার্ড পুনরুদ্ধারের নির্দেশনা পেতে আপনার নিবন্ধিত ইমেইল দিন।';
 
   @override
+  String get sendResetInstructions => 'রিসেট নির্দেশনা পাঠান';
+
+  @override
+  String get forgotPasswordSuccess =>
+      'রিসেট নির্দেশনা পাঠানো হয়েছে। আপনার ইমেইল দেখুন।';
+
+  @override
+  String get forgotPasswordError =>
+      'রিসেট নির্দেশনা পাঠানো যায়নি। আবার চেষ্টা করুন।';
+
+  @override
+  String otpSentTo(String email) {
+    return '$email-এ ৪ সংখ্যার OTP পাঠানো হয়েছে';
+  }
+
+  @override
+  String get otpSentToEmail => 'আপনার ইমেইলে ৪ সংখ্যার OTP পাঠানো হয়েছে।';
+
+  @override
+  String get resendOtp => 'আবার পাঠান';
+
+  @override
+  String get otpResent => 'নতুন OTP পাঠানো হয়েছে।';
+
+  @override
+  String get otpResendError => 'OTP আবার পাঠানো যায়নি। আবার চেষ্টা করুন।';
+
+  @override
+  String get back => 'পেছনে';
+
+  @override
+  String get continueAction => 'এগিয়ে যান';
+
+  @override
+  String get createAccount => 'অ্যাকাউন্ট তৈরি করুন';
+
+  @override
+  String get createAccountSubtitle =>
+      'কেনাকাটা শুরু করতে আপনার অ্যাকাউন্ট তৈরি করুন';
+
+  @override
+  String get firstNameExample => 'জুয়েল';
+
+  @override
+  String get enterPhone => 'আপনার ফোন নম্বর লিখুন';
+
+  @override
+  String get validPhone => 'সঠিক বাংলাদেশি ফোন নম্বর লিখুন';
+
+  @override
+  String get passwordMinLength => 'পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে';
+
+  @override
+  String get showPassword => 'পাসওয়ার্ড দেখুন';
+
+  @override
+  String get hidePassword => 'পাসওয়ার্ড লুকান';
+
+  @override
+  String get haveAccountLogin => 'আগেই অ্যাকাউন্ট আছে? লগইন করুন';
+
+  @override
   String get close => 'বন্ধ করুন';
 
   @override
@@ -376,7 +441,7 @@ class AppLocalizationsBn extends AppLocalizations {
       'সেরা পণ্য ও অফারের জন্য আপনার একমাত্র অনলাইন শপিং গন্তব্য।';
 
   @override
-  String get rightsReserved => '© ২০২৫ EasyEcommerce Inc. সর্বস্বত্ব সংরক্ষিত।';
+  String get rightsReserved => '© ২০২৫ CraftyBay Inc. সর্বস্বত্ব সংরক্ষিত।';
 
   @override
   String get haveAccount => 'আমার অ্যাকাউন্ট আছে';
@@ -480,7 +545,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get workAddressValue => 'লেভেল ৫, সফটওয়্যার টেকনোলজি পার্ক, ঢাকা';
 
   @override
-  String get supportEmail => 'support@easyecommerce.com';
+  String get supportEmail => 'support@craftybay.com';
 
   @override
   String get supportPhone => '+৮৮০ ১৭০০-০০০০০০ (২৪/৭)';
@@ -504,7 +569,7 @@ class AppLocalizationsBn extends AppLocalizations {
       'অর্ডার দেওয়ার আগে চেকআউট স্ক্রিনে প্রোমো কোড ব্যবহার করতে পারবেন।';
 
   @override
-  String get welcomeTitle => 'EasyEcommerce-এ\nস্বাগতম';
+  String get welcomeTitle => 'CraftyBay-এ\nস্বাগতম';
 
   @override
   String get welcomeDescription =>
@@ -550,7 +615,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get correctLastName => 'সঠিক নামের শেষ অংশ লিখুন';
 
   @override
-  String get lastNameExample => 'islam,mia,roy etc';
+  String get lastNameExample => 'ইসলাম';
 
   @override
   String get productFallback => 'পণ্য';
@@ -573,4 +638,14 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get chatTeam => 'আমাদের সাপোর্ট টিমের সাথে সরাসরি চ্যাট করুন';
+
+  @override
+  String appVersion(String version) {
+    return 'ভার্সন $version';
+  }
+
+  @override
+  String appVersionLabel(String version) {
+    return 'CraftyBay v$version';
+  }
 }

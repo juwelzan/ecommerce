@@ -80,9 +80,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     final displayName = user?.fullName ?? context.l10n.userFallback;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.l10n.editProfile),
-      ),
+      appBar: AppBar(title: Text(context.l10n.editProfile)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Form(
@@ -94,14 +92,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   children: [
                     CircleAvatar(
                       radius: 50.r,
-                      backgroundColor:
-                          context.theme.primaryColor.withValues(alpha: 0.1),
+                      backgroundColor: context.theme.primaryColor.withValues(
+                        alpha: 0.1,
+                      ),
                       child: Text(
                         displayName.isNotEmpty
                             ? displayName[0].toUpperCase()
                             : 'U',
                         style: TextStyle(
-                          fontSize: 36.f,
+                          fontSize: 28.f,
                           fontWeight: FontWeight.bold,
                           color: context.theme.primaryColor,
                         ),
@@ -143,7 +142,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               Gap(h: 16.h),
               TextFormField(
                 controller: _emailController,
-                enabled: false, // Email is identifier, immutable from profile update
+                enabled:
+                    false, // Email is identifier, immutable from profile update
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   labelText: context.l10n.emailAddress,

@@ -29,6 +29,7 @@
   "addToCart": "কার্টে যোগ করুন",
   "quantity": "পরিমাণ: {count}",
   "subtotal": "উপমোট",
+  "total": "মোট",
   "checkout": "চেকআউট",
   "orderSummary": "অর্ডারের সারাংশ",
   "placeOrderUnavailable": "অর্ডার করা যাচ্ছে না",
@@ -46,9 +47,9 @@
   "faqsSupport": "প্রশ্নোত্তর ও সহায়তা",
   "appDetails": "অ্যাপের সংস্করণ ও তথ্য",
   "helpSupport": "সহায়তা ও সাপোর্ট",
-  "about": "EasyEcommerce সম্পর্কে",
+  "about": "CraftyBay সম্পর্কে",
   "savedAddresses": "সংরক্ষিত ঠিকানা",
-  "welcome": "EasyEcommerce-এ স্বাগতম",
+  "welcome": "CraftyBay-এ স্বাগতম",
   "signInFeatures": "সব সুবিধা উপভোগ করতে, অর্ডার ট্র্যাক করতে ও উইশলিস্ট পরিচালনা করতে লগইন করুন।",
   "edit": "সম্পাদনা",
   "cancel": "বাতিল",
@@ -93,6 +94,25 @@
   "loadProductsError": "পণ্য লোড করা যায়নি।",
   "forgotPassword": "পাসওয়ার্ড ভুলে গেছেন?",
   "forgotPasswordBody": "পাসওয়ার্ড পুনরুদ্ধারের নির্দেশনা পেতে আপনার নিবন্ধিত ইমেইল দিন।",
+  "sendResetInstructions": "রিসেট নির্দেশনা পাঠান",
+  "forgotPasswordSuccess": "রিসেট নির্দেশনা পাঠানো হয়েছে। আপনার ইমেইল দেখুন।",
+  "forgotPasswordError": "রিসেট নির্দেশনা পাঠানো যায়নি। আবার চেষ্টা করুন।",
+  "otpSentTo": "{email}-এ ৪ সংখ্যার OTP পাঠানো হয়েছে",
+  "otpSentToEmail": "আপনার ইমেইলে ৪ সংখ্যার OTP পাঠানো হয়েছে।",
+  "resendOtp": "আবার পাঠান",
+  "otpResent": "নতুন OTP পাঠানো হয়েছে।",
+  "otpResendError": "OTP আবার পাঠানো যায়নি। আবার চেষ্টা করুন।",
+  "back": "পেছনে",
+  "continueAction": "এগিয়ে যান",
+  "createAccount": "অ্যাকাউন্ট তৈরি করুন",
+  "createAccountSubtitle": "কেনাকাটা শুরু করতে আপনার অ্যাকাউন্ট তৈরি করুন",
+  "firstNameExample": "জুয়েল",
+  "enterPhone": "আপনার ফোন নম্বর লিখুন",
+  "validPhone": "সঠিক বাংলাদেশি ফোন নম্বর লিখুন",
+  "passwordMinLength": "পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে",
+  "showPassword": "পাসওয়ার্ড দেখুন",
+  "hidePassword": "পাসওয়ার্ড লুকান",
+  "haveAccountLogin": "আগেই অ্যাকাউন্ট আছে? লগইন করুন",
   "close": "বন্ধ করুন",
   "welcomeBack": "আবারও স্বাগতম",
   "loginSubtitle": "লগইন করতে ইমেইল ও পাসওয়ার্ড দিন",
@@ -116,7 +136,7 @@
   "noSearchMatch": "\"{query}\"-এর কোনো মিল পাওয়া যায়নি।\\\nঅন্য কোনো শব্দ দিয়ে চেষ্টা করুন।",
   "searchResultCount": "\"{query}\"-এর জন্য {count}টি ফলাফল পাওয়া গেছে",
   "aboutDescription": "সেরা পণ্য ও অফারের জন্য আপনার একমাত্র অনলাইন শপিং গন্তব্য।",
-  "rightsReserved": "© ২০২৫ EasyEcommerce Inc. সর্বস্বত্ব সংরক্ষিত।",
+  "rightsReserved": "© ২০২৫ CraftyBay Inc. সর্বস্বত্ব সংরক্ষিত।",
   "haveAccount": "আমার অ্যাকাউন্ট আছে",
   "dontHaveAccount": "আমার অ্যাকাউন্ট নেই",
   "signInHere": "এখানে লগইন করুন",
@@ -150,7 +170,7 @@
   "nameExample": "Md juwel",
   "homeAddressValue": "বাড়ি #১২, রোড #৪, ব্লক সি, ঢাকা, বাংলাদেশ",
   "workAddressValue": "লেভেল ৫, সফটওয়্যার টেকনোলজি পার্ক, ঢাকা",
-  "supportEmail": "support@easyecommerce.com",
+  "supportEmail": "support@craftybay.com",
   "supportPhone": "+৮৮০ ১৭০০-০০০০০০ (২৪/৭)",
   "@quantity": {
     "placeholders": {
@@ -190,12 +210,19 @@
       }
     }
   },
+  "@otpSentTo": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
   "helpIntro": "আজ আমরা কীভাবে আপনাকে সাহায্য করতে পারি?",
   "faqTitle": "সাধারণ জিজ্ঞাসা",
   "trackOrderAnswer": "প্রোফাইল -> আমার অর্ডারসমূহ-এ গিয়ে অর্ডার ট্র্যাক করতে পারবেন। এখানে আপনার সব কেনাকাটার লাইভ স্ট্যাটাস দেখা যাবে।",
   "returnPolicyAnswer": "যোগ্য সব পণ্যের জন্য আমরা ৭ দিনের সহজ রিটার্ন সুবিধা দিই। পণ্যটি অবশ্যই মূল অবস্থায় থাকতে হবে।",
   "promoCodeAnswer": "অর্ডার দেওয়ার আগে চেকআউট স্ক্রিনে প্রোমো কোড ব্যবহার করতে পারবেন।",
-  "welcomeTitle": "EasyEcommerce-এ\nস্বাগতম",
+  "welcomeTitle": "CraftyBay-এ\nস্বাগতম",
   "welcomeDescription": "আপনার পছন্দের পণ্য খুঁজুন, সহজে কেনাকাটা করুন এবং এক জায়গা থেকে সবকিছু পরিচালনা করুন।",
   "getStarted": "শুরু করুন",
   "welcomeTagline": "আপনার প্রয়োজনীয় সবকিছু এক জায়গায়।",
@@ -210,12 +237,28 @@
   "correctFirstName": "সঠিক নামের প্রথম অংশ লিখুন",
   "enterLastName": "আপনার নামের শেষ অংশ লিখুন",
   "correctLastName": "সঠিক নামের শেষ অংশ লিখুন",
-  "lastNameExample": "islam,mia,roy etc",
+  "lastNameExample": "ইসলাম",
   "productFallback": "পণ্য",
   "outOfStock": "এই পণ্যটি স্টকে নেই।",
   "maxQuantityAdded": "সর্বোচ্চ পাওয়া যায় এমন পরিমাণ ইতোমধ্যে যোগ করা হয়েছে।",
   "maxQuantityReached": "সর্বোচ্চ পরিমাণে পৌঁছে গেছে।",
   "pleaseEnterName": "আপনার নাম লিখুন",
   "otpVerificationError": "OTP যাচাই ব্যর্থ হয়েছে।",
-  "chatTeam": "আমাদের সাপোর্ট টিমের সাথে সরাসরি চ্যাট করুন"
+  "chatTeam": "আমাদের সাপোর্ট টিমের সাথে সরাসরি চ্যাট করুন",
+  "appVersion": "ভার্সন {version}",
+  "@appVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "appVersionLabel": "CraftyBay v{version}",
+  "@appVersionLabel": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  }
 }

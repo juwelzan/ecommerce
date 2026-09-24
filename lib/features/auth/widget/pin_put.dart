@@ -140,28 +140,14 @@ class _OtpPinPutState extends State<OtpPinPut> {
       }
     }
     if (evend is KeyDownEvent &&
-        evend.logicalKey == LogicalKeyboardKey.arrowLeft) {
-      if (index == 3) {
-        focusNode[2].requestFocus();
-      }
-      if (index == 2) {
-        focusNode[1].requestFocus();
-      }
-      if (index == 1) {
-        focusNode[0].requestFocus();
-      }
+        evend.logicalKey == LogicalKeyboardKey.arrowLeft &&
+        index > 0) {
+      focusNode[index - 1].requestFocus();
     }
     if (evend is KeyDownEvent &&
-        evend.logicalKey == LogicalKeyboardKey.arrowRight) {
-      if (index == 0) {
-        focusNode[1].requestFocus();
-      }
-      if (index == 1) {
-        focusNode[2].requestFocus();
-      }
-      if (index == 2) {
-        focusNode[3].requestFocus();
-      }
+        evend.logicalKey == LogicalKeyboardKey.arrowRight &&
+        index < widget.length - 1) {
+      focusNode[index + 1].requestFocus();
     }
   }
 
@@ -196,37 +182,49 @@ class _OtpPinPutState extends State<OtpPinPut> {
           ListenableBuilder(
             listenable: Listenable.merge([isTimerOn, timeValu]),
             builder: (context, child) {
-              return Row(
-                mainAxisAlignment: .end,
-                crossAxisAlignment: .center,
-                children: [
-                  AnimatedSwitcher(
-                    duration: Duration(milliseconds: 400),
-                    switchInCurve: Curves.easeIn,
-                    switchOutCurve: Curves.easeOut,
-                    transitionBuilder: (child, animation) {
-                      return FadeTransition(opacity: animation, child: child);
-                    },
-                    child: isTimerOn.value
-                        ? SizedBox(
-                            width: 70,
-                            child: Center(
-                              child: text(
-                                key: Key("timeron"),
-                                text: "${timeValu.value}",
-                              ),
-                            ),
-                          )
-                        : SizedBox(
-                            width: 70,
-                            child: text(
-                              key: Key("timeroff"),
-                              text: "resend",
-                              onTap: () => time(),
+              return Align(
+                alignment: Alignment.centerRight,
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 400),
+                  switchInCurve: Curves.easeIn,
+                  switchOutCurve: Curves.easeOut,
+                  transitionBuilder: (child, animation) {
+                    return FadeTransition(opacity: animation, child: child);
+                  },
+                  child: isTimerOn.value
+                      ? Padding(
+                          key: const Key('timeron'),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 12.w,
+                            vertical: 12.h,
+                          ),
+                          child: Text(
+                            '${timeValu.value}',
+                            style: TextStyle(
+                              fontSize: 14.f,
+                              fontWeight: FontWeight.w600,
+                              color: context.theme.primaryColor,
                             ),
                           ),
-                  ),
-                ],
+                        )
+                      : TextButton(
+                          key: const Key('timeroff'),
+                          onPressed: time,
+                          style: TextButton.styleFrom(
+                            foregroundColor: context.theme.primaryColor,
+                            minimumSize: Size(48.h, 48.h),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 12.w,
+                              vertical: 12.h,
+                            ),
+                            textStyle: TextStyle(
+                              fontSize: 15.f,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          child: Text(context.l10n.resendOtp),
+                        ),
+                ),
               );
             },
           ),
@@ -246,27 +244,25 @@ Widget _textFild({
   VoidCallback? onTab,
   TextStyle? textStyle,
 }) {
-  return KeyboardListener(
-    focusNode: FocusNode(),
-    onKeyEvent: onKeyEvent,
+  return Focus(
+    onKeyEvent: (node, event) {
+      onKeyEvent(event);
+      return KeyEventResult.ignored;
+    },
     child: TextField(
       controller: controller,
       focusNode: focusNode,
-      textAlign: .center,
+      textAlign: TextAlign.center,
       expands: true,
       maxLines: null,
-
       decoration: inputDecoration(isError),
-      style: textStyle ?? TextStyle(fontSize: 20),
-
+      style: textStyle ?? TextStyle(fontSize: 18.f),
       maxLength: 1,
       onChanged: onChanged,
       showCursor: false,
       onTap: onTab,
-
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
-
         LengthLimitingTextInputFormatter(1),
       ],
       textInputAction: TextInputAction.go,
@@ -310,13 +306,21 @@ InputDecoration inputDecoration(bool isError) {
 Widget text({required Key key, required String text, VoidCallback? onTap}) {
   return Padding(
     padding: const EdgeInsets.only(right: 10, top: 10),
-    child: GestureDetector(
-      onTap: onTap,
+    child: TextButton(
+      key: key,
+      onPressed: onTap,
+      style: TextButton.styleFrom(
+        minimumSize: const Size(48, 48),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      ),
       child: Text(
-        key: key,
-        textAlign: .center,
         text,
-        style: TextStyle(fontSize: 18, color: Colors.deepPurpleAccent.shade200),
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: 14.f,
+          fontWeight: FontWeight.w600,
+          color: Colors.deepPurpleAccent.shade200,
+        ),
       ),
     ),
   );

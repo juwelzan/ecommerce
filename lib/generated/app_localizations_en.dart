@@ -101,6 +101,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get subtotal => 'Subtotal';
 
   @override
+  String get total => 'Total';
+
+  @override
   String get checkout => 'Checkout';
 
   @override
@@ -153,13 +156,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get helpSupport => 'Help & Support';
 
   @override
-  String get about => 'About EasyEcommerce';
+  String get about => 'About CraftyBay';
 
   @override
   String get savedAddresses => 'Saved Addresses';
 
   @override
-  String get welcome => 'Welcome to EasyEcommerce';
+  String get welcome => 'Welcome to CraftyBay';
 
   @override
   String get signInFeatures =>
@@ -300,6 +303,68 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please enter your registered email address to receive password reset instructions.';
 
   @override
+  String get sendResetInstructions => 'Send reset instructions';
+
+  @override
+  String get forgotPasswordSuccess =>
+      'Reset instructions sent. Check your email.';
+
+  @override
+  String get forgotPasswordError =>
+      'Unable to send reset instructions. Please try again.';
+
+  @override
+  String otpSentTo(String email) {
+    return 'A 4-digit OTP code has been sent to $email';
+  }
+
+  @override
+  String get otpSentToEmail =>
+      'A 4-digit OTP code has been sent to your email.';
+
+  @override
+  String get resendOtp => 'Resend';
+
+  @override
+  String get otpResent => 'A new OTP has been sent.';
+
+  @override
+  String get otpResendError => 'Unable to resend the OTP. Please try again.';
+
+  @override
+  String get back => 'Back';
+
+  @override
+  String get continueAction => 'Continue';
+
+  @override
+  String get createAccount => 'Create Account';
+
+  @override
+  String get createAccountSubtitle => 'Create your account to start shopping';
+
+  @override
+  String get firstNameExample => 'John';
+
+  @override
+  String get enterPhone => 'Please enter your phone number';
+
+  @override
+  String get validPhone => 'Please enter a valid Bangladesh phone number';
+
+  @override
+  String get passwordMinLength => 'Password must be at least 6 characters';
+
+  @override
+  String get showPassword => 'Show password';
+
+  @override
+  String get hidePassword => 'Hide password';
+
+  @override
+  String get haveAccountLogin => 'Already have an account? Sign in';
+
+  @override
   String get close => 'Close';
 
   @override
@@ -376,7 +441,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Your ultimate one-stop shopping destination for the best products and deals.';
 
   @override
-  String get rightsReserved => '© 2025 EasyEcommerce Inc. All rights reserved.';
+  String get rightsReserved => '© 2025 CraftyBay Inc. All rights reserved.';
 
   @override
   String get haveAccount => 'I have an account';
@@ -481,7 +546,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get workAddressValue => 'Level 5, Software Technology Park, Dhaka';
 
   @override
-  String get supportEmail => 'support@easyecommerce.com';
+  String get supportEmail => 'support@craftybay.com';
 
   @override
   String get supportPhone => '+880 1700-000000 (24/7)';
@@ -505,7 +570,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'You can apply promo codes on the Checkout screen before placing your order.';
 
   @override
-  String get welcomeTitle => 'Welcome to\nEasyEcommerce';
+  String get welcomeTitle => 'Welcome to\nCraftyBay';
 
   @override
   String get welcomeDescription =>
@@ -539,19 +604,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get confirmPasswordSubtitle => 'Re-enter your password to confirm';
 
   @override
-  String get enterFirstName => 'enter your first name';
+  String get enterFirstName => 'Please enter your first name';
 
   @override
-  String get correctFirstName => 'enter your correct first name';
+  String get correctFirstName => 'Please enter a valid first name';
 
   @override
-  String get enterLastName => 'enter your last name';
+  String get enterLastName => 'Please enter your last name';
 
   @override
-  String get correctLastName => 'enter your correct last name';
+  String get correctLastName => 'Please enter a valid last name';
 
   @override
-  String get lastNameExample => 'islam,mia,roy etc';
+  String get lastNameExample => 'Doe';
 
   @override
   String get productFallback => 'Product';
@@ -573,4 +638,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatTeam => 'Chat instantly with our support team';
+
+  @override
+  String appVersion(String version) {
+    return 'Version $version';
+  }
+
+  @override
+  String appVersionLabel(String version) {
+    return 'CraftyBay v$version';
+  }
 }

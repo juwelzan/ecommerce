@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/auth/widget/i_have_an_account.dart';
 import 'package:ecommerce/shared/path/paths.dart';
 import 'package:lottie/lottie.dart';
 
@@ -15,47 +16,40 @@ class LoginWithCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.only(right: 10.w, left: 10.w),
-        height: 50.h,
-        width: double.maxFinite,
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-          borderRadius: BorderRadius.circular(50.hw(max: 50, min: 50)),
-          border: BoxBorder.all(
-            width: 2.w,
-            style: BorderStyle.solid,
-            color: Colors.black38,
+    return SizedBox(
+      width: double.infinity,
+      height: AuthButtonStyle.height,
+      child: OutlinedButton(
+        onPressed: loding ? null : onTap,
+        style: OutlinedButton.styleFrom(
+          foregroundColor: Colors.black87,
+          minimumSize: Size(double.infinity, AuthButtonStyle.height),
+          side: const BorderSide(width: 1.5, color: Colors.black38),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(100.r),
           ),
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (svgIcon != null)
-              Visibility(
-                visible: svgIcon != null,
-                child: SvgPicture.asset(svgIcon!, width: 30.w),
-              ),
-            Gap(w: 10.w),
+              SvgPicture.asset(svgIcon!, width: 28.w, height: 28.h),
+            if (svgIcon != null) Gap(w: 10.w),
             if (title != null)
-              Visibility(
-                visible: title != null,
+              Flexible(
                 child: Text(
                   title!,
-                  style: context.textTheme.bodySmall?.copyWith(
-                    fontSize: 20.f,
-                    color: Colors.black,
+                  style: context.textTheme.labelLarge?.copyWith(
+                    color: Colors.black87,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-            Gap(w: 10.w),
-            Visibility(
-              visible: loding,
-              child: Lottie.asset(Asset.lottieLoading, width: 25.w),
-            ),
+            if (loding) ...[
+              Gap(w: 10.w),
+              Lottie.asset(Asset.lottieLoading, width: 25.w),
+            ],
           ],
         ),
       ),

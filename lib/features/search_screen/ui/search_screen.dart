@@ -107,7 +107,12 @@ class _SearchScreenState extends State<SearchScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(products.errorMessage!),
+                  Text(
+                    context.localizedError(
+                      products.errorMessage,
+                      'loadProductsError',
+                    ),
+                  ),
                   Gap(h: 12.h),
                   OutlinedButton(
                     onPressed: products.getProduct,
@@ -206,7 +211,10 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               Expanded(
                 child: GridView.builder(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 8.h,
+                  ),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 12,

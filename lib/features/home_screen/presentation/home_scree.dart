@@ -64,27 +64,37 @@ class _HomeScreeState extends State<HomeScreen> {
                       Gap(h: 8.h),
                       Text(
                         l10n.supportDescription,
-                        style: context.textTheme.bodyMedium?.copyWith(color: Colors.grey),
+                        style: context.textTheme.bodyMedium?.copyWith(
+                          color: Colors.grey,
+                        ),
                       ),
                       Gap(h: 20.h),
                       ListTile(
                         leading: CircleAvatar(
-                          backgroundColor: context.theme.primaryColor.withValues(alpha: 0.1),
-                          child: Icon(Icons.phone, color: context.theme.primaryColor),
+                          backgroundColor: context.theme.primaryColor
+                              .withValues(alpha: 0.1),
+                          child: Icon(
+                            Icons.phone,
+                            color: context.theme.primaryColor,
+                          ),
                         ),
                         title: Text(l10n.callUs),
                         subtitle: Text(l10n.supportPhone),
                         onTap: () {
                           Navigator.pop(context);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(l10n.calling)),
-                          );
+                          ScaffoldMessenger.of(
+                            context,
+                          ).showSnackBar(SnackBar(content: Text(l10n.calling)));
                         },
                       ),
                       ListTile(
                         leading: CircleAvatar(
-                          backgroundColor: context.theme.primaryColor.withValues(alpha: 0.1),
-                          child: Icon(Icons.email, color: context.theme.primaryColor),
+                          backgroundColor: context.theme.primaryColor
+                              .withValues(alpha: 0.1),
+                          child: Icon(
+                            Icons.email,
+                            color: context.theme.primaryColor,
+                          ),
                         ),
                         title: Text(l10n.emailSupport),
                         subtitle: Text(l10n.supportEmail),
@@ -97,8 +107,12 @@ class _HomeScreeState extends State<HomeScreen> {
                       ),
                       ListTile(
                         leading: CircleAvatar(
-                          backgroundColor: context.theme.primaryColor.withValues(alpha: 0.1),
-                          child: Icon(Icons.chat, color: context.theme.primaryColor),
+                          backgroundColor: context.theme.primaryColor
+                              .withValues(alpha: 0.1),
+                          child: Icon(
+                            Icons.chat,
+                            color: context.theme.primaryColor,
+                          ),
                         ),
                         title: Text(l10n.liveChat),
                         subtitle: Text(l10n.supportChatAgent),
@@ -149,6 +163,7 @@ class _HomeScreeState extends State<HomeScreen> {
           SliverToBoxAdapter(
             child: RepaintBoundary(
               child: TitleName(
+                title: l10n.categories,
                 onTap: () {
                   context.read<NavbarController>().nextScreen(1);
                 },

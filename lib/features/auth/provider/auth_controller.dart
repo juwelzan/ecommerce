@@ -8,7 +8,7 @@ class AuthController extends ChangeNotifier {
   final NetworkCaller _networkCaller;
 
   AuthController({NetworkCaller? networkCaller})
-      : _networkCaller = networkCaller ?? getIt<NetworkCaller>();
+    : _networkCaller = networkCaller ?? getIt<NetworkCaller>();
 
   UserModel? _user;
   String? _token;
@@ -59,10 +59,8 @@ class AuthController extends ChangeNotifier {
     }
   }
 
-  Future<bool> login({
-    required String email,
-    required String password,
-  }) async {
+  Future<bool> login({required String email, required String password}) async {
+    if (_isLoading) return false;
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
@@ -70,24 +68,29 @@ class AuthController extends ChangeNotifier {
     try {
       final response = await _networkCaller.post(
         url: Urls.postAuthLogin,
-        body: {
-          "email": email.trim(),
-          "password": password,
-        },
+        body: {"email": email.trim(), "password": password},
       );
 
       if (response.isSuccess && response.body != null) {
         final data = response.body['data'];
         if (data != null) {
-          _token = data['token'] as String?;
+          final token = data['token'] as String?;
+          if (token == null || token.trim().isEmpty) {
+            _isLoading = false;
+            _errorMessage =
+                response.errrorM ??
+                "Login failed. Please check your credentials.";
+            notifyListeners();
+            return false;
+          }
+
+          _token = token.trim();
           if (data['user'] != null) {
             _user = UserModel.fromJson(data['user'] as Map<String, dynamic>);
           }
 
           final prefs = await SharedPreferences.getInstance();
-          if (_token != null) {
-            await prefs.setString(Keys.authToken, _token!);
-          }
+          await prefs.setString(Keys.authToken, _token!);
           if (_user != null) {
             await prefs.setString(Keys.authUser, jsonEncode(_user!.toJson()));
           }
@@ -100,18 +103,21 @@ class AuthController extends ChangeNotifier {
       }
 
       _isLoading = false;
-      _errorMessage = response.errrorM ?? "Login failed. Please check your credentials.";
+      _errorMessage =
+          response.errrorM ?? "Login failed. Please check your credentials.";
       notifyListeners();
       return false;
     } catch (e) {
       _isLoading = false;
-      _errorMessage = "An unexpected error occurred: $e";
+      _errorMessage = "Login failed. Please check your credentials.";
+      LoggerLog.logE("login error: $e");
       notifyListeners();
       return false;
     }
   }
 
   Future<bool> signup(SignupModel model) async {
+    if (_isLoading) return false;
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
@@ -134,16 +140,15 @@ class AuthController extends ChangeNotifier {
       }
     } catch (e) {
       _isLoading = false;
-      _errorMessage = "An unexpected error occurred: $e";
+      _errorMessage = "Sign up failed. Please try again.";
+      LoggerLog.logE("signup error: $e");
       notifyListeners();
       return false;
     }
   }
 
-  Future<bool> verifyOtp({
-    required String email,
-    required String otp,
-  }) async {
+  Future<bool> verifyOtp({required String email, required String otp}) async {
+    if (_isLoading) return false;
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
@@ -151,24 +156,27 @@ class AuthController extends ChangeNotifier {
     try {
       final response = await _networkCaller.post(
         url: Urls.postAuthVerifyOtp,
-        body: {
-          "email": email.trim(),
-          "otp": otp.trim(),
-        },
+        body: {"email": email.trim(), "otp": otp.trim()},
       );
 
       if (response.isSuccess && response.body != null) {
         final data = response.body['data'];
         if (data != null) {
-          _token = data['token'] as String?;
+          final token = data['token'] as String?;
+          if (token == null || token.trim().isEmpty) {
+            _isLoading = false;
+            _errorMessage = response.errrorM ?? "OTP verification failed.";
+            notifyListeners();
+            return false;
+          }
+
+          _token = token.trim();
           if (data['user'] != null) {
             _user = UserModel.fromJson(data['user'] as Map<String, dynamic>);
           }
 
           final prefs = await SharedPreferences.getInstance();
-          if (_token != null) {
-            await prefs.setString(Keys.authToken, _token!);
-          }
+          await prefs.setString(Keys.authToken, _token!);
           if (_user != null) {
             await prefs.setString(Keys.authUser, jsonEncode(_user!.toJson()));
           }
@@ -186,7 +194,54 @@ class AuthController extends ChangeNotifier {
       return false;
     } catch (e) {
       _isLoading = false;
-      _errorMessage = "An unexpected error occurred: $e";
+      _errorMessage = "OTP verification failed.";
+      LoggerLog.logE("verifyOtp error: $e");
+      notifyListeners();
+      return false;
+    }
+  }
+
+  Future<bool> resendOtp({required String email}) async {
+    try {
+      final response = await _networkCaller.post(
+        url: Urls.postAuthResendOtp,
+        body: {"email": email.trim()},
+      );
+      if (response.isSuccess) return true;
+      _errorMessage = response.errrorM ?? "Unable to resend the OTP.";
+      notifyListeners();
+      return false;
+    } catch (e) {
+      _errorMessage = "Unable to resend the OTP.";
+      LoggerLog.logE("resendOtp error: $e");
+      notifyListeners();
+      return false;
+    }
+  }
+
+  Future<bool> forgotPassword({required String email}) async {
+    if (_isLoading) return false;
+    _isLoading = true;
+    _errorMessage = null;
+    notifyListeners();
+
+    try {
+      final response = await _networkCaller.post(
+        url: Urls.postAuthForgotPassword,
+        body: {"email": email.trim()},
+      );
+      _isLoading = false;
+      if (response.isSuccess) {
+        notifyListeners();
+        return true;
+      }
+      _errorMessage = response.errrorM ?? "Unable to send reset instructions.";
+      notifyListeners();
+      return false;
+    } catch (e) {
+      _isLoading = false;
+      _errorMessage = "Unable to send reset instructions.";
+      LoggerLog.logE("forgotPassword error: $e");
       notifyListeners();
       return false;
     }
@@ -246,6 +301,9 @@ class AuthController extends ChangeNotifier {
         url: Urls.patchAuthProfileUpdate,
         headers: {"token": _token!},
         body: body,
+        unauthorized: () {
+          logout();
+        },
       );
 
       _isLoading = false;
@@ -274,7 +332,8 @@ class AuthController extends ChangeNotifier {
       }
     } catch (e) {
       _isLoading = false;
-      _errorMessage = "An unexpected error occurred: $e";
+      _errorMessage = "Failed to update profile.";
+      LoggerLog.logE("updateProfile error: $e");
       notifyListeners();
       return false;
     }

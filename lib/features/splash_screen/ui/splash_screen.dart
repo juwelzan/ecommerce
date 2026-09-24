@@ -73,7 +73,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       ),
                     ),
                     Text(
-                      "version 1.0",
+                      context.l10n.appVersion("1.0"),
                       style: TextStyle(
                         fontSize: 13.hw(min: 13, max: 13),
                         fontWeight: FontWeight.w500,

@@ -37,13 +37,18 @@ extension AppLocalizationsContext on BuildContext {
         'Login failed. Please check your credentials.' ||
         'Login failed. Please check credentials.' => localization.loginError,
         'Sign up failed. Please try again.' ||
-        'Registration failed. Please try again.' => localization.registrationError,
+        'Registration failed. Please try again.' =>
+          localization.registrationError,
         'Failed to update profile.' => localization.profileUpdateError,
         'OTP verification failed.' => localization.otpVerificationError,
+        'Unable to send reset instructions.' =>
+          localization.forgotPasswordError,
+        'Unable to resend the OTP.' => localization.otpResendError,
         'This product is out of stock.' => localization.outOfStock,
         'Maximum available quantity already added.' =>
           localization.maxQuantityAdded,
-        'Maximum available quantity reached.' => localization.maxQuantityReached,
+        'Maximum available quantity reached.' =>
+          localization.maxQuantityReached,
         _ => message,
       };
     }
@@ -53,7 +58,12 @@ extension AppLocalizationsContext on BuildContext {
       'loginError' => localization.loginError,
       'registrationError' => localization.registrationError,
       'profileUpdateError' => localization.profileUpdateError,
+      'forgotPasswordError' => localization.forgotPasswordError,
+      'otpResendError' => localization.otpResendError,
       'noProducts' => localization.noProducts,
+      'outOfStock' => localization.outOfStock,
+      'maxQuantityAdded' => localization.maxQuantityAdded,
+      'maxQuantityReached' => localization.maxQuantityReached,
       _ => fallback,
     };
   }

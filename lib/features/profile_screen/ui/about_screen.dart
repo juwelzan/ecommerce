@@ -7,9 +7,7 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.l10n.about),
-      ),
+      appBar: AppBar(title: Text(context.l10n.about)),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -18,7 +16,7 @@ class AboutScreen extends StatelessWidget {
             SvgPicture.asset(Asset.navLogoSVG, width: 160.w),
             Gap(h: 16.h),
             Text(
-              'EasyEcommerce v1.0.0',
+              context.l10n.appVersionLabel("1.0.0"),
               style: context.textTheme.titleMedium,
             ),
             Gap(h: 8.h),

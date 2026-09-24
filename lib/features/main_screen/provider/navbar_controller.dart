@@ -26,7 +26,7 @@ class NavbarController with ChangeNotifier {
   void nextScreen(int pagendex) {
     if (pagendex < 0 || pagendex >= page.length) return;
     pageIndex = pagendex;
-    
+
     if (pagendex == 2) {
       hideNavbar();
     } else {
@@ -38,6 +38,9 @@ class NavbarController with ChangeNotifier {
       pageRoute.add(pagendex);
     } else {
       pageRoute.add(pagendex);
+      if (pageRoute.length > 20) {
+        pageRoute.removeAt(0);
+      }
     }
     lastpage = pagendex;
     LoggerLog.logI("$pageRoute");

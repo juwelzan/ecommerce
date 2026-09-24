@@ -24,17 +24,20 @@ class AuthWidget extends StatelessWidget {
 
         children: [
           if (showIcon!)
-            SvgPicture.asset(Asset.logoSVG, width: logoSize ?? 130.w),
-          Gap(h: 20.h),
+            SvgPicture.asset(Asset.logoSVG, width: logoSize ?? 100.w),
+          Gap(h: 16.h),
           if (title != null)
             Text(
               title!,
-              style: context.textTheme.bodyLarge?.copyWith(fontSize: titleSize),
+              style: context.textTheme.displaySmall?.copyWith(
+                fontSize: titleSize,
+              ),
             ),
           if (subTitle != null)
             Text(
               subTitle!,
-              style: context.textTheme.bodySmall?.copyWith(
+              textAlign: TextAlign.center,
+              style: context.textTheme.bodyMedium?.copyWith(
                 fontSize: subTitleSize,
               ),
             ),

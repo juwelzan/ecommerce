@@ -29,6 +29,7 @@
   "addToCart": "Add to Cart",
   "quantity": "Quantity: {count}",
   "subtotal": "Subtotal",
+  "total": "Total",
   "checkout": "Checkout",
   "orderSummary": "Order Summary",
   "placeOrderUnavailable": "Place order unavailable",
@@ -46,9 +47,9 @@
   "faqsSupport": "FAQs and contact support",
   "appDetails": "App version & details",
   "helpSupport": "Help & Support",
-  "about": "About EasyEcommerce",
+  "about": "About CraftyBay",
   "savedAddresses": "Saved Addresses",
-  "welcome": "Welcome to EasyEcommerce",
+  "welcome": "Welcome to CraftyBay",
   "signInFeatures": "Sign in to enjoy all features, track your orders & manage wishlist.",
   "edit": "Edit",
   "cancel": "Cancel",
@@ -93,6 +94,25 @@
   "loadProductsError": "Unable to load products.",
   "forgotPassword": "Forgot Password",
   "forgotPasswordBody": "Please enter your registered email address to receive password reset instructions.",
+  "sendResetInstructions": "Send reset instructions",
+  "forgotPasswordSuccess": "Reset instructions sent. Check your email.",
+  "forgotPasswordError": "Unable to send reset instructions. Please try again.",
+  "otpSentTo": "A 4-digit OTP code has been sent to {email}",
+  "otpSentToEmail": "A 4-digit OTP code has been sent to your email.",
+  "resendOtp": "Resend",
+  "otpResent": "A new OTP has been sent.",
+  "otpResendError": "Unable to resend the OTP. Please try again.",
+  "back": "Back",
+  "continueAction": "Continue",
+  "createAccount": "Create Account",
+  "createAccountSubtitle": "Create your account to start shopping",
+  "firstNameExample": "John",
+  "enterPhone": "Please enter your phone number",
+  "validPhone": "Please enter a valid Bangladesh phone number",
+  "passwordMinLength": "Password must be at least 6 characters",
+  "showPassword": "Show password",
+  "hidePassword": "Hide password",
+  "haveAccountLogin": "Already have an account? Sign in",
   "close": "Close",
   "welcomeBack": "Welcome Back",
   "loginSubtitle": "Enter your email & password to sign in",
@@ -116,7 +136,7 @@
   "noSearchMatch": "We could not find a match for \"{query}\".\\\nTry another keyword.",
   "searchResultCount": "Found {count} result(s) for \"{query}\"",
   "aboutDescription": "Your ultimate one-stop shopping destination for the best products and deals.",
-  "rightsReserved": "© 2025 EasyEcommerce Inc. All rights reserved.",
+  "rightsReserved": "© 2025 CraftyBay Inc. All rights reserved.",
   "haveAccount": "I have an account",
   "dontHaveAccount": "Don't have an account",
   "signInHere": "Sign in here",
@@ -150,7 +170,7 @@
   "nameExample": "Md juwel",
   "homeAddressValue": "House #12, Road #4, Block C, Dhaka, Bangladesh",
   "workAddressValue": "Level 5, Software Technology Park, Dhaka",
-  "supportEmail": "support@easyecommerce.com",
+  "supportEmail": "support@craftybay.com",
   "supportPhone": "+880 1700-000000 (24/7)",
   "@quantity": {
     "placeholders": {
@@ -190,12 +210,19 @@
       }
     }
   },
+  "@otpSentTo": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
   "helpIntro": "How can we help you today?",
   "faqTitle": "Frequently Asked Questions",
   "trackOrderAnswer": "You can track your orders by going to Profile -> My Orders. Here you will find live status updates for all your purchases.",
   "returnPolicyAnswer": "We offer a 7-day easy return policy for all eligible products. Items must be in their original condition.",
   "promoCodeAnswer": "You can apply promo codes on the Checkout screen before placing your order.",
-  "welcomeTitle": "Welcome to\nEasyEcommerce",
+  "welcomeTitle": "Welcome to\nCraftyBay",
   "welcomeDescription": "Discover products you love, shop easily, and manage everything from one place.",
   "getStarted": "Get Started",
   "welcomeTagline": "Everything you need, all in one place.",
@@ -206,16 +233,32 @@
   "enterBdNumber": "enter BD number",
   "createStrongPassword": "Create strong password",
   "confirmPasswordSubtitle": "Re-enter your password to confirm",
-  "enterFirstName": "enter your first name",
-  "correctFirstName": "enter your correct first name",
-  "enterLastName": "enter your last name",
-  "correctLastName": "enter your correct last name",
-  "lastNameExample": "islam,mia,roy etc",
+  "enterFirstName": "Please enter your first name",
+  "correctFirstName": "Please enter a valid first name",
+  "enterLastName": "Please enter your last name",
+  "correctLastName": "Please enter a valid last name",
+  "lastNameExample": "Doe",
   "productFallback": "Product",
   "outOfStock": "This product is out of stock.",
   "maxQuantityAdded": "Maximum available quantity already added.",
   "maxQuantityReached": "Maximum available quantity reached.",
   "pleaseEnterName": "Please enter your name",
   "otpVerificationError": "OTP verification failed.",
-  "chatTeam": "Chat instantly with our support team"
+  "chatTeam": "Chat instantly with our support team",
+  "appVersion": "Version {version}",
+  "@appVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "appVersionLabel": "CraftyBay v{version}",
+  "@appVersionLabel": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  }
 }

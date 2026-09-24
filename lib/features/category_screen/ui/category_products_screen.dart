@@ -33,9 +33,7 @@ class CategoryProductsScreen extends StatelessWidget {
             category.id ?? category.slug ?? category.title,
           );
           if (items.isEmpty) {
-            return _MessageState(
-              message: context.l10n.noProducts,
-            );
+            return _MessageState(message: context.l10n.noProducts);
           }
           return RefreshIndicator(
             onRefresh: products.getProduct,
@@ -66,11 +64,12 @@ class _MessageState extends StatelessWidget {
   const _MessageState({
     required this.message,
     this.action,
-    this.actionLabel = 'Continue shopping',
+    this.actionLabel = '',
   });
 
   @override
   Widget build(BuildContext context) {
+    final label = actionLabel.isEmpty ? context.l10n.continueShopping : actionLabel;
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -78,11 +77,11 @@ class _MessageState extends StatelessWidget {
           Text(message, textAlign: TextAlign.center),
           if (action != null) ...[
             const SizedBox(height: 12),
-            OutlinedButton(onPressed: action, child: Text(actionLabel)),
+            OutlinedButton(onPressed: action, child: Text(label)),
           ] else
             TextButton(
               onPressed: () => context.pop(),
-              child: Text(actionLabel),
+              child: Text(label),
             ),
         ],
       ),

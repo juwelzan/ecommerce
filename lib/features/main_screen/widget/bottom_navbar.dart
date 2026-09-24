@@ -8,12 +8,17 @@ class BottomNavbar extends StatelessWidget {
     return Consumer<NavbarController>(
       builder: (context, state, child) {
         final l10n = context.l10n;
+        final primary = context.theme.primaryColor;
+        final inactive = context.isThemeMod == Brightness.light
+            ? Colors.grey.shade600
+            : Colors.grey.shade400;
+
         return Container(
-          height: 60.h,
+          height: 68.h,
           width: double.infinity,
           decoration: BoxDecoration(
             color: context.theme.cardColor,
-            borderRadius: BorderRadius.circular(25.r),
+            borderRadius: BorderRadius.circular(24.r),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withValues(alpha: 0.1),
@@ -23,44 +28,52 @@ class BottomNavbar extends StatelessWidget {
             ],
           ),
           child: Container(
-            height: 60.h,
-            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+            padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
             decoration: BoxDecoration(
-              color: context.isThemeMod == Brightness.light
-                  ? Colors.deepPurple.withValues(alpha: 0.08)
-                  : Colors.deepPurple.withValues(alpha: 0.25),
-              borderRadius: BorderRadius.circular(25.r),
+              color: primary.withValues(
+                alpha: context.isThemeMod == Brightness.light ? 0.06 : 0.18,
+              ),
+              borderRadius: BorderRadius.circular(24.r),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                navBarIcon(
-                  context,
-                  img: Asset.navbHome,
+                _NavItem(
+                  icon: Icons.home_outlined,
+                  activeIcon: Icons.home_rounded,
+                  label: l10n.home,
                   isActive: state.pageIndex == 0,
                   screenIndex: 0,
-                  label: l10n.home,
+                  activeColor: primary,
+                  inactiveColor: inactive,
                 ),
-                navBarIcon(
-                  context,
-                  img: Asset.navbCategory,
+                _NavItem(
+                  icon: Icons.grid_view_outlined,
+                  activeIcon: Icons.grid_view_rounded,
+                  label: l10n.categories,
                   isActive: state.pageIndex == 1,
                   screenIndex: 1,
-                  label: l10n.categories,
+                  activeColor: primary,
+                  inactiveColor: inactive,
                 ),
-                navBarIcon(
-                  context,
-                  img: Asset.navbCart,
+                _NavItem(
+                  icon: Icons.shopping_cart_outlined,
+                  activeIcon: Icons.shopping_cart_rounded,
+                  label: l10n.cart,
                   isActive: state.pageIndex == 2,
                   screenIndex: 2,
-                  label: l10n.cart,
+                  activeColor: primary,
+                  inactiveColor: inactive,
+                  showCartBadge: true,
                 ),
-                navBarIcon(
-                  context,
-                  img: Asset.navbWish,
+                _NavItem(
+                  icon: Icons.favorite_border_rounded,
+                  activeIcon: Icons.favorite_rounded,
+                  label: l10n.wishlist,
                   isActive: state.pageIndex == 3,
                   screenIndex: 3,
-                  label: l10n.wishlist,
+                  activeColor: primary,
+                  inactiveColor: inactive,
                 ),
               ],
             ),
@@ -71,58 +84,81 @@ class BottomNavbar extends StatelessWidget {
   }
 }
 
-Widget navBarIcon(
-  BuildContext context, {
-  required bool isActive,
-  required String img,
-  required int screenIndex,
-  required String label,
-}) {
-  final icon = Image.asset(
-    img,
-    height: 30.h,
-    color: isActive
-        ? context.theme.primaryColor
-        : context.theme.primaryColorLight,
-  );
-  return Tooltip(
-    message: label,
-    child: InkWell(
-      onTap: () => context.read<NavbarController>().nextScreen(screenIndex),
-      borderRadius: BorderRadius.circular(20.r),
-      child: Padding(
-      padding: EdgeInsets.all(6.r),
-      child: screenIndex == 2
-          ? Consumer<CartController>(
-              builder: (context, cart, child) => Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  icon,
-                  if (cart.itemCount > 0)
-                    Positioned(
-                      top: -4,
-                      right: -6,
-                      child: Container(
-                        padding: const EdgeInsets.all(3),
-                        decoration: const BoxDecoration(
-                          color: Colors.red,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Text(
-                          '${cart.itemCount}',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 9,
-                            fontWeight: FontWeight.bold,
-                          ),
+class _NavItem extends StatelessWidget {
+  const _NavItem({
+    required this.icon,
+    required this.activeIcon,
+    required this.label,
+    required this.isActive,
+    required this.screenIndex,
+    required this.activeColor,
+    required this.inactiveColor,
+    this.showCartBadge = false,
+  });
+
+  final IconData icon;
+  final IconData activeIcon;
+  final String label;
+  final bool isActive;
+  final int screenIndex;
+  final Color activeColor;
+  final Color inactiveColor;
+  final bool showCartBadge;
+
+  @override
+  Widget build(BuildContext context) {
+    final color = isActive ? activeColor : inactiveColor;
+    final iconWidget = Icon(
+      isActive ? activeIcon : icon,
+      size: 24.r,
+      color: color,
+    );
+
+    return Tooltip(
+      message: label,
+      child: InkWell(
+        onTap: () => context.read<NavbarController>().nextScreen(screenIndex),
+        borderRadius: BorderRadius.circular(16.r),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minWidth: 56.w, minHeight: 48.h),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (showCartBadge)
+                  Consumer<CartController>(
+                    builder: (context, cart, child) => Badge(
+                      isLabelVisible: cart.itemCount > 0,
+                      label: Text(
+                        '${cart.itemCount}',
+                        style: const TextStyle(
+                          fontSize: 9,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
+                      child: iconWidget,
                     ),
-                ],
-              ),
-            )
-          : icon,
+                  )
+                else
+                  iconWidget,
+                Gap(h: 2.h),
+                Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 10.f,
+                    fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
+                    color: color,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
-    ),
-  );
+    );
+  }
 }

@@ -40,9 +40,7 @@ class _CartScreenState extends State<CartScreen>
               ),
               Text(
                 context.l10n.cart,
-                style: context.textTheme.headlineLarge?.copyWith(
-                  fontSize: 20.f,
-                ),
+                style: context.textTheme.headlineLarge,
               ),
             ],
           ),
@@ -57,7 +55,7 @@ class _CartScreenState extends State<CartScreen>
                   SliverPadding(
                     padding: EdgeInsets.only(
                       top: 20.h,
-                      bottom: 200.h,
+                      bottom: 160.h,
                       left: 10.w,
                       right: 10.w,
                     ),

@@ -44,7 +44,7 @@ class ProductDetailsScreen extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            product.title ?? context.l10n.allProducts,
+            product.title ?? context.l10n.productFallback,
             style: context.textTheme.headlineMedium,
           ),
           const SizedBox(height: 8),
@@ -56,10 +56,10 @@ class ProductDetailsScreen extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             product.quantity == 0
-                ? context.l10n.noProducts
+                ? context.l10n.outOfStock
                 : product.quantity == null
-                    ? context.l10n.available
-                    : context.l10n.quantity(product.quantity!),
+                ? context.l10n.available
+                : context.l10n.quantity(product.quantity!),
           ),
           if (product.brand != null) ...[
             const SizedBox(height: 8),
@@ -86,7 +86,7 @@ class ProductDetailsScreen extends StatelessWidget {
                             ? context.l10n.addToCart
                             : context.localizedError(
                                 cart.errorMessage,
-                                'noProducts',
+                                'outOfStock',
                               ),
                       ),
                     ),

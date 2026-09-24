@@ -86,7 +86,7 @@ class WelcomeScreen extends StatelessWidget {
                             child: Text(
                               context.l10n.getStarted,
                               style: TextStyle(
-                                fontSize: 16.f,
+                                fontSize: 15.f,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

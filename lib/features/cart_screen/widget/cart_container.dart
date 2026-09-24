@@ -54,6 +54,7 @@ class CartContainer extends StatelessWidget {
                           line.product.title ?? context.l10n.productFallback,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
+                          style: context.textTheme.titleMedium,
                         ),
                       ),
                       IconButton(
@@ -67,15 +68,25 @@ class CartContainer extends StatelessWidget {
                     ],
                   ),
                   Gap(h: 4.h),
-                  Text(context.l10n.quantityLabel(line.quantity)),
+                  Text(
+                    context.l10n.quantityLabel(line.quantity),
+                    style: context.textTheme.bodySmall,
+                  ),
                   Gap(h: 8.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
                         children: [
-                          SvgPicture.asset(Asset.svgTaka, width: 15),
-                          Text('${line.total}'),
+                          SvgPicture.asset(Asset.svgTaka, width: 13),
+                          Gap(w: 2.w),
+                          Text(
+                            '${line.total}',
+                            style: context.textTheme.titleLarge?.copyWith(
+                              color: context.theme.primaryColor,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
                         ],
                       ),
                       Row(
@@ -86,11 +97,17 @@ class CartContainer extends StatelessWidget {
                             visualDensity: VisualDensity.compact,
                             onPressed: () =>
                                 context.read<CartController>().decrease(line),
-                            icon: const Icon(Icons.remove_circle_outline, size: 20),
+                            icon: const Icon(
+                              Icons.remove_circle_outline,
+                              size: 20,
+                            ),
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 8.w),
-                            child: Text('${line.quantity}'),
+                            child: Text(
+                              '${line.quantity}',
+                              style: context.textTheme.titleMedium,
+                            ),
                           ),
                           IconButton(
                             constraints: const BoxConstraints(),
@@ -98,7 +115,10 @@ class CartContainer extends StatelessWidget {
                             visualDensity: VisualDensity.compact,
                             onPressed: () =>
                                 context.read<CartController>().increase(line),
-                            icon: const Icon(Icons.add_circle_outline, size: 20),
+                            icon: const Icon(
+                              Icons.add_circle_outline,
+                              size: 20,
+                            ),
                           ),
                         ],
                       ),

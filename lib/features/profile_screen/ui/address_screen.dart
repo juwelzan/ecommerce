@@ -7,9 +7,7 @@ class AddressScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.l10n.savedAddresses),
-      ),
+      appBar: AppBar(title: Text(context.l10n.savedAddresses)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -19,8 +17,13 @@ class AddressScreen extends StatelessWidget {
             ),
             child: ListTile(
               leading: CircleAvatar(
-                backgroundColor: context.theme.primaryColor.withValues(alpha: 0.1),
-                child: Icon(Icons.home_outlined, color: context.theme.primaryColor),
+                backgroundColor: context.theme.primaryColor.withValues(
+                  alpha: 0.1,
+                ),
+                child: Icon(
+                  Icons.home_outlined,
+                  color: context.theme.primaryColor,
+                ),
               ),
               title: Text(context.l10n.homeAddress),
               subtitle: Text(context.l10n.homeAddressValue),
@@ -36,9 +39,7 @@ class AddressScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(12.r),
             ),
             child: ListTile(
-              leading: const CircleAvatar(
-                child: Icon(Icons.work_outline),
-              ),
+              leading: const CircleAvatar(child: Icon(Icons.work_outline)),
               title: Text(context.l10n.workAddress),
               subtitle: Text(context.l10n.workAddressValue),
               trailing: IconButton(
@@ -51,9 +52,9 @@ class AddressScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(context.l10n.addressSoon)),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(context.l10n.addressSoon)));
         },
         icon: const Icon(Icons.add),
         label: Text(context.l10n.addAddress),

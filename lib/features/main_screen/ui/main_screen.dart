@@ -10,30 +10,56 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> with RouteAware {
+  bool _routeSubscribed = false;
+  int? _lastBannerPageIndex;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (ModalRoute.of(context) != null) {
-      routeObserver.subscribe(this, ModalRoute.of(context)!);
+    final route = ModalRoute.of(context);
+    if (route != null && !_routeSubscribed) {
+      routeObserver.subscribe(this, route);
+      _routeSubscribed = true;
     }
   }
 
   @override
   void dispose() {
-    routeObserver.unsubscribe(this);
+    if (_routeSubscribed) {
+      routeObserver.unsubscribe(this);
+    }
     super.dispose();
   }
 
   @override
   void didPushNext() {
-    // When navigating to a child/detail screen (e.g., ProductDetailsScreen)
+    // Full-screen child routes (product details, etc.) — hide navbar.
     context.read<NavbarController>().hideNavbar();
   }
 
   @override
   void didPopNext() {
-    // When returning back to MainScreen from a child/detail screen
-    context.read<NavbarController>().showNavbar();
+    // Restore navbar unless Cart tab (index 2) keeps it hidden.
+    final nav = context.read<NavbarController>();
+    if (nav.pageIndex == 2) {
+      nav.hideNavbar();
+    } else {
+      nav.showNavbar();
+    }
+  }
+
+  void _syncBannerScroll(NavbarController state) {
+    if (_lastBannerPageIndex == state.pageIndex) return;
+    _lastBannerPageIndex = state.pageIndex;
+    final banners = context.read<AdsBannerProvider>();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      if (state.pageIndex == 0) {
+        banners.autoScrollBanner();
+      } else {
+        banners.pauseAutoScroll();
+      }
+    });
   }
 
   @override
@@ -42,23 +68,18 @@ class _MainScreenState extends State<MainScreen> with RouteAware {
     return Scaffold(
       body: Consumer<NavbarController>(
         builder: (context, state, child) {
-          final banners = context.read<AdsBannerProvider>();
-          if (state.pageIndex == 0) {
-            banners.autoScrollBanner();
-          } else {
-            banners.pauseAutoScroll();
-          }
+          _syncBannerScroll(state);
           return Stack(
             children: [
               Positioned.fill(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: const Color(0xFFFAFAFA),
+                    color: context.theme.scaffoldBackgroundColor,
                     gradient: LinearGradient(
                       colors: [
-                        Colors.deepPurple.withValues(alpha: 0.7),
-                        Colors.deepPurple.withValues(alpha: 0.4),
-                        Colors.deepPurple.withValues(alpha: 0),
+                        context.theme.primaryColor.withValues(alpha: 0.35),
+                        context.theme.primaryColor.withValues(alpha: 0.12),
+                        context.theme.primaryColor.withValues(alpha: 0),
                       ],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
@@ -66,7 +87,6 @@ class _MainScreenState extends State<MainScreen> with RouteAware {
                   ),
                 ),
               ),
-
               Positioned.fill(
                 child: IndexedStack(
                   index: state.pageIndex,
@@ -79,7 +99,6 @@ class _MainScreenState extends State<MainScreen> with RouteAware {
                   ],
                 ),
               ),
-
               Positioned(
                 left: 10.w,
                 right: 10.w,

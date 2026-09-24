@@ -9,7 +9,9 @@ class ProductListingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final displayTitle = title == 'All Products' ? context.l10n.allProducts : title;
+    final displayTitle = title == 'All Products'
+        ? context.l10n.allProducts
+        : title;
     final products = getIt<GetProductData>();
     return Scaffold(
       appBar: AppBar(title: Text(displayTitle)),

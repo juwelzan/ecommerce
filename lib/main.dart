@@ -4,9 +4,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Init();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
     ScreenUtil(
       builder: (context) => MultiProvider(

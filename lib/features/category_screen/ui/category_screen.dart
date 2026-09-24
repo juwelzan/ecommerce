@@ -17,9 +17,7 @@ class CategoryScreen extends StatelessWidget {
           backgroundColor: Colors.transparent,
           title: Text(
             context.l10n.categories,
-            style: context.textTheme.headlineLarge?.copyWith(
-              fontSize: 20.f,
-            ),
+            style: context.textTheme.headlineLarge,
           ),
         ),
         body: AnimatedBuilder(
