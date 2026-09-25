@@ -56,9 +56,82 @@ Home ─────────────────────────
 
 ---
 
+
+
 ## Screenshots
 
-Screenshots will be added soon.
+CraftyBay's mobile interface and user experience across the main shopping, authentication, product, cart, profile, and settings flows.
+
+<div align="center">
+
+<table>
+<tr>
+<td align="center">
+<img src="https://raw.githubusercontent.com/juwelzan/screenshot/main/craftybay/Screenshot%20iPhone%2018%20Pro%2025-09-2026%20at%204.37.59%E2%80%AFPM.png" width="190" alt="CraftyBay Screenshot 1">
+</td>
+<td align="center">
+<img src="https://raw.githubusercontent.com/juwelzan/screenshot/main/craftybay/Screenshot%20iPhone%2018%20Pro%2025-09-2026%20at%204.38.04%E2%80%AFPM.png" width="190" alt="CraftyBay Screenshot 2">
+</td>
+<td align="center">
+<img src="https://raw.githubusercontent.com/juwelzan/screenshot/main/craftybay/Screenshot%20iPhone%2018%20Pro%2025-09-2026%20at%204.38.46%E2%80%AFPM.png" width="190" alt="CraftyBay Screenshot 3">
+</td>
+<td align="center">
+<img src="https://raw.githubusercontent.com/juwelzan/screenshot/main/craftybay/Screenshot%20iPhone%2018%20Pro%2025-09-2026%20at%204.38.55%E2%80%AFPM.png" width="190" alt="CraftyBay Screenshot 4">
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<img src="https://raw.githubusercontent.com/juwelzan/screenshot/main/craftybay/Screenshot%20iPhone%2018%20Pro%2025-09-2026%20at%204.39.01%E2%80%AFPM.png" width="190" alt="CraftyBay Screenshot 5">
+</td>
+<td align="center">
+<img src="https://raw.githubusercontent.com/juwelzan/screenshot/main/craftybay/Screenshot%20iPhone%2018%20Pro%2025-09-2026%20at%204.39.08%E2%80%AFPM.png" width="190" alt="CraftyBay Screenshot 6">
+</td>
+<td align="center">
+<img src="https://raw.githubusercontent.com/juwelzan/screenshot/main/craftybay/Screenshot%20iPhone%2018%20Pro%2025-09-2026%20at%204.45.23%E2%80%AFPM.png" width="190" alt="CraftyBay Screenshot 7">
+</td>
+<td align="center">
+<img src="https://raw.githubusercontent.com/juwelzan/screenshot/main/craftybay/Screenshot%20iPhone%2018%20Pro%2025-09-2026%20at%204.45.53%E2%80%AFPM.png" width="190" alt="CraftyBay Screenshot 8">
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<img src="https://raw.githubusercontent.com/juwelzan/screenshot/main/craftybay/Screenshot%20iPhone%2018%20Pro%2025-09-2026%20at%204.46.03%E2%80%AFPM.png" width="190" alt="CraftyBay Screenshot 9">
+</td>
+<td align="center">
+<img src="https://raw.githubusercontent.com/juwelzan/screenshot/main/craftybay/Screenshot%20iPhone%2018%20Pro%2025-09-2026%20at%204.46.13%E2%80%AFPM.png" width="190" alt="CraftyBay Screenshot 10">
+</td>
+<td align="center">
+<img src="https://raw.githubusercontent.com/juwelzan/screenshot/main/craftybay/Screenshot%20iPhone%2018%20Pro%2025-09-2026%20at%204.46.19%E2%80%AFPM.png" width="190" alt="CraftyBay Screenshot 11">
+</td>
+<td align="center">
+<img src="https://raw.githubusercontent.com/juwelzan/screenshot/main/craftybay/Screenshot%20iPhone%2018%20Pro%2025-09-2026%20at%204.46.31%E2%80%AFPM.png" width="190" alt="CraftyBay Screenshot 12">
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<img src="https://raw.githubusercontent.com/juwelzan/screenshot/main/craftybay/Screenshot%20iPhone%2018%20Pro%2025-09-2026%20at%204.46.39%E2%80%AFPM.png" width="190" alt="CraftyBay Screenshot 13">
+</td>
+<td align="center">
+<img src="https://raw.githubusercontent.com/juwelzan/screenshot/main/craftybay/Screenshot%20iPhone%2018%20Pro%2025-09-2026%20at%204.47.04%E2%80%AFPM.png" width="190" alt="CraftyBay Screenshot 14">
+</td>
+<td align="center">
+<img src="https://raw.githubusercontent.com/juwelzan/screenshot/main/craftybay/Screenshot%20iPhone%2018%20Pro%2025-09-2026%20at%204.47.09%E2%80%AFPM.png" width="190" alt="CraftyBay Screenshot 15">
+</td>
+<td align="center">
+<img src="https://raw.githubusercontent.com/juwelzan/screenshot/main/craftybay/Screenshot%20iPhone%2018%20Pro%2025-09-2026%20at%204.47.15%E2%80%AFPM.png" width="190" alt="CraftyBay Screenshot 16">
+</td>
+</tr>
+</table>
+
+<br>
+
+**16 Screens • iPhone 18 Pro**
+
+</div>
+
 
 ---
 
