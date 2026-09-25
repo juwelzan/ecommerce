@@ -34,18 +34,26 @@ class _MainScreenState extends State<MainScreen> with RouteAware {
   @override
   void didPushNext() {
     // Full-screen child routes (product details, etc.) — hide navbar.
-    context.read<NavbarController>().hideNavbar();
+    // RouteObserver callbacks can run while Navigator is building its new
+    // route. Defer the Provider notification until that build has finished.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      context.read<NavbarController>().hideNavbar();
+    });
   }
 
   @override
   void didPopNext() {
     // Restore navbar unless Cart tab (index 2) keeps it hidden.
-    final nav = context.read<NavbarController>();
-    if (nav.pageIndex == 2) {
-      nav.hideNavbar();
-    } else {
-      nav.showNavbar();
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final nav = context.read<NavbarController>();
+      if (nav.pageIndex == 2) {
+        nav.hideNavbar();
+      } else {
+        nav.showNavbar();
+      }
+    });
   }
 
   void _syncBannerScroll(NavbarController state) {
